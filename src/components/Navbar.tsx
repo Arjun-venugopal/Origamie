@@ -6,12 +6,27 @@ import { Menu, X } from 'lucide-react';
 import styles from '@/app/page.module.css';
 
 const navItems = [
-  { label: 'About', href: '#about' },
+  { label: 'Home', href: '#home' },
+  { label: 'About Us', href: '#about' },
+  { label: 'Works', href: '#works' },
   { label: 'Service', href: '#services' },
-  { label: 'Project', href: '#projects' },
-  { label: 'Team', href: '#team' },
-  { label: 'Reviews', href: '#reviews' },
+  { label: 'Contact Us', href: '#contact' },
 ];
+
+const CraneIcon = () => (
+  <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{marginRight: '8px'}}>
+    <g stroke="black" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round">
+      <polygon points="55,20 95,15 75,50" fill="white" />
+      <polygon points="30,65 70,45 75,50" fill="white" />
+      <polygon points="30,65 75,50 72,70" fill="black" />
+      <polygon points="75,50 90,95 70,85" fill="white" />
+      <polygon points="15,30 40,40 30,65" fill="white" />
+      <polygon points="5,45 15,30 20,42" fill="white" />
+      <polygon points="30,65 48,15 55,20" fill="#5B6EF2" />
+      <polygon points="30,65 55,20 70,45" fill="#5B6EF2" />
+    </g>
+  </svg>
+);
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -20,20 +35,22 @@ export default function Navbar() {
     <>
       <nav className={styles.navbar}>
         <div className={styles.navbarLeft}>
-          <div className={styles.logo}>Boulevard™</div>
-          <div style={{ opacity: 0.8, fontSize: '0.8rem' }}>France, +33 47 796 (GMT+2)</div>
+          <div className={styles.logo}>
+            <CraneIcon />
+            <span style={{ fontWeight: 400, fontSize: '1.5rem', color: '#1E3A8A' }}>Origamie</span>
+          </div>
         </div>
 
         <div className={styles.navLinks}>
-          {navItems.map((item, i) => (
+          {navItems.map((item) => (
             <a key={item.label} href={item.href}>
-              {item.label}{i < navItems.length - 1 ? ',' : ''}
+              {item.label}
             </a>
           ))}
         </div>
 
-        <a href="#contact" className={styles.navConnect}>
-          Let&apos;s Connect ↗
+        <a href="#call" className={styles.navButton}>
+          Book a free call
         </a>
 
         <button
@@ -56,7 +73,7 @@ export default function Navbar() {
           >
             <button
               onClick={() => setMobileOpen(false)}
-              style={{ position: 'absolute', top: 24, right: 24, color: 'white' }}
+              style={{ position: 'absolute', top: 24, right: 24, color: 'black' }}
               aria-label="Close menu"
             >
               <X size={28} />
@@ -66,8 +83,8 @@ export default function Navbar() {
                 {item.label}
               </a>
             ))}
-            <a href="#contact" className="btn btn-primary" onClick={() => setMobileOpen(false)}>
-              Let&apos;s Connect ↗
+            <a href="#call" className={styles.navButton} onClick={() => setMobileOpen(false)}>
+              Book a free call
             </a>
           </motion.div>
         )}

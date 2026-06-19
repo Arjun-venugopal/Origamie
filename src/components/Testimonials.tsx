@@ -14,7 +14,7 @@ const fadeInUp = {
   }),
 };
 
-const brandLogos = ['coinbase', 'slack', 'dropbox', 'Spotify', 'coinbase', 'slack', 'dropbox', 'Spotify'];
+
 
 export default function Testimonials() {
   return (
@@ -74,23 +74,6 @@ export default function Testimonials() {
           </span>
         </motion.div>
       </motion.div>
-
-      <div className={styles.marquee}>
-        <p style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.05em', opacity: 0.5 }}>A FEW BRANDS WE&apos;VE WORKED WITH</p>
-        <div style={{ overflow: 'hidden', marginTop: '48px' }}>
-          <div className="marquee-track">
-            {brandLogos.map((logo, i) => (
-              <span key={`${logo}-${i}`} className={styles.marqueeItem} style={{ marginRight: '120px' }}>
-                {logo === 'slack' ? (
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ color: '#E01E5A' }}>#</span> {logo}
-                  </span>
-                ) : logo}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
     </section>
   );
 }

@@ -113,7 +113,7 @@ export default function Services() {
           variants={fadeInUp}
         >
           <Image
-            src="https://images.unsplash.com/photo-1597484661643-2f5fef640df1?q=80&w=2000&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop"
             alt="Tote bag showcasing brand identity design"
             fill
             sizes="(max-width: 1024px) 100vw, 40vw"

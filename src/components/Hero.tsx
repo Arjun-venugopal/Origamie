@@ -1,11 +1,10 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import styles from '@/app/page.module.css';
 
-const fadeInUp = {
+const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
@@ -14,115 +13,87 @@ const fadeInUp = {
   }),
 };
 
+const FloatingCrane = ({ style, delay, scale = 1 }: { style: React.CSSProperties, delay: number, scale?: number }) => (
+  <motion.div
+    style={{ position: 'absolute', zIndex: 1, ...style }}
+    animate={{ y: [0, -20, 0], rotate: [-5, 5, -5] }}
+    transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay }}
+  >
+    <svg width={80 * scale} height={80 * scale} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="currentColor" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round">
+        <polygon points="55,20 95,15 75,50" fill="transparent" />
+        <polygon points="30,65 70,45 75,50" fill="transparent" />
+        <polygon points="30,65 75,50 72,70" fill="currentColor" />
+        <polygon points="75,50 90,95 70,85" fill="transparent" />
+        <polygon points="15,30 40,40 30,65" fill="transparent" />
+        <polygon points="5,45 15,30 20,42" fill="transparent" />
+        <polygon points="30,65 48,15 55,20" fill="currentColor" opacity="0.5" />
+        <polygon points="30,65 55,20 70,45" fill="currentColor" opacity="0.5" />
+      </g>
+    </svg>
+  </motion.div>
+);
+
 export default function Hero() {
   return (
-    <div style={{ backgroundColor: 'white' }}>
-      <section className={styles.hero}>
-        <motion.div
-          className={styles.heroTopRow}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <div className={styles.heroContent}>
-            <p className={styles.heroLabel}>AGENCY THAT MOVES CULTURE</p>
-            <h2>Design studio that not only creates digital products but also experiences.</h2>
-            <a href="#contact" className="btn btn-primary" style={{ alignSelf: 'flex-start', marginTop: '16px' }}>
-              Let&apos;s Collaborate ↗
-            </a>
-          </div>
-          <div className={styles.heroScrollText}>Scroll for more</div>
-        </motion.div>
+    <div className={styles.heroWrapper}>
+      {/* Background Cranes */}
+      <FloatingCrane style={{ top: '35%', left: '10%', color: '#2563EB', opacity: 0.9 }} delay={0} scale={1.2} />
+      <FloatingCrane style={{ top: '18%', right: '22%', color: '#1D4ED8', opacity: 0.8 }} delay={1} scale={0.6} />
+      <FloatingCrane style={{ top: '55%', left: '2%', color: '#1E3A8A', opacity: 0.8 }} delay={2} scale={0.7} />
+      <FloatingCrane style={{ top: '30%', right: '8%', color: '#1E3A8A', opacity: 0.9 }} delay={3} scale={0.8} />
+      <FloatingCrane style={{ bottom: '45%', left: '42%', color: '#2563EB', opacity: 0.6 }} delay={1.5} scale={0.5} />
+      <FloatingCrane style={{ bottom: '40%', right: '28%', color: '#1E40AF', opacity: 0.8 }} delay={2.5} scale={0.6} />
+      <FloatingCrane style={{ top: '48%', right: '-2%', color: '#1E3A8A', opacity: 0.6 }} delay={0.5} scale={1.5} />
 
+      <div className={styles.heroBgText}>Origamie</div>
+
+      <section className={styles.heroContentMain}>
         <motion.h1
-          className={styles.heroTitle}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          className={styles.mainTitle}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          custom={0}
         >
-          Boulevard
+          Websites & brands<br />
+          engineered to <span className={styles.italicHighlight}>#convert.</span>
         </motion.h1>
-      </section>
 
-      <section className={styles.heroWhiteSection}>
-        <motion.div
-          className={styles.heroMidRow}
+        <motion.p
+          className={styles.mainSubtitle}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+          animate="visible"
+          variants={fadeUp}
+          custom={1}
         >
-          <motion.h2
-            className={styles.heroSubtitle}
-            variants={fadeInUp}
-            custom={0}
-          >
-            Reshaping what exists, we&apos;re here to help you stand out
-            <span className={styles.heroSubtitleFade}>—with clarity, creativity, and edge.</span>
-          </motion.h2>
-          <motion.a
-            href="#services"
-            className={styles.scrollBtn}
-            variants={fadeInUp}
-            custom={1}
-            whileHover={{ y: 4 }}
-            aria-label="Scroll to services"
-          >
-            ↓
-          </motion.a>
-        </motion.div>
+          Origame is a creative studio for founders and marketing teams who want a <strong>beautiful site that actually sells</strong>. We design, build and grow it — typically <strong>2–4x more qualified leads within 90 days</strong>.
+        </motion.p>
 
         <motion.div
-          className={styles.heroCards}
+          className={styles.heroButtons}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
+          animate="visible"
+          variants={fadeUp}
+          custom={2}
         >
-          <motion.div className={`${styles.card} ${styles.cardBlue}`} variants={fadeInUp} custom={0}>
-            <div style={{ color: 'var(--color-accent-yellow)', fontSize: '1.5rem', fontWeight: 700 }}>✖</div>
-            <div>
-              <p style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.05em', opacity: 0.8, marginBottom: '16px' }}>MADE FOR THE BOLD</p>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 500, lineHeight: 1.3, fontFamily: 'var(--font-outfit)' }}>Design experiences, not just screens. Tell stories, not just taglines.</h3>
-            </div>
-          </motion.div>
-
-          <motion.div className={`${styles.card} ${styles.cardBlack}`} variants={fadeInUp} custom={1}>
-            <Image
-              src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
-              alt="Abstract art"
-              fill
-              sizes="(max-width: 768px) 100vw, 33vw"
-              style={{ objectFit: 'cover', opacity: 0.5 }}
-            />
-            <div style={{ position: 'relative', zIndex: 1, marginTop: 'auto' }}>
-              <p style={{ fontSize: '0.875rem', opacity: 0.6 }}>Est. 2018</p>
-            </div>
-          </motion.div>
-
-          <motion.div className={`${styles.card} ${styles.cardWhite}`} variants={fadeInUp} custom={2}>
-            <div className="flex-between">
-              <p style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.05em', opacity: 0.5 }}>GROWTH</p>
-              <h2 className={styles.textGradient} style={{ fontSize: '3.5rem', margin: 0, lineHeight: 1 }}>+32%</h2>
-            </div>
-            <div className="flex-between" style={{ marginTop: 'auto' }}>
-              <p style={{ fontSize: '0.875rem', maxWidth: '140px', opacity: 0.8 }}>Design experiences, not just screens.</p>
-              <div style={{ display: 'flex' }}>
-                <Image src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop" width={36} height={36} style={{ borderRadius: '50%', marginLeft: '-12px', border: '2px solid white' }} alt="Team member" />
-                <Image src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=100&auto=format&fit=crop" width={36} height={36} style={{ borderRadius: '50%', marginLeft: '-12px', border: '2px solid white' }} alt="Team member" />
-                <Image src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" width={36} height={36} style={{ borderRadius: '50%', marginLeft: '-12px', border: '2px solid white' }} alt="Team member" />
-              </div>
-            </div>
-          </motion.div>
+          <a href="#strategy" className={styles.primaryBtn}>
+            Book a free strategy call
+          </a>
+          <a href="#works" className={styles.secondaryBtn}>
+            View Our Works
+          </a>
         </motion.div>
 
-        <div className={styles.heroBottomRow}>
-          <div>ABOUT — 01</div>
-          <div className={styles.heroBottomText}>
-            We help you to dream and ideas into visuals that currently disrupt spaces.
-          </div>
-          <a href="#contact" className={styles.bookCallLink}>Book a Call Now</a>
-        </div>
+        <motion.p
+          className={styles.heroMicroCopy}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          custom={3}
+        >
+          No pitch deck. No pressure. Fixed <strong>quote within 24 hours</strong>.
+        </motion.p>
       </section>
     </div>
   );

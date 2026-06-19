@@ -9,9 +9,6 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] as const } },
 };
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
 
 export default function Footer() {
   return (
@@ -70,7 +67,6 @@ export default function Footer() {
 
       <div className={styles.footerBrand}>
         <div>Boulevard™</div>
-        <button className={styles.scrollTopBtn} onClick={scrollToTop} aria-label="Scroll to top">↑</button>
       </div>
     </footer>
   );
