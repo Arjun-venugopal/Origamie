@@ -843,6 +843,18 @@
     padding: 140px 32px 40px;
   }
 
+  .heroWrapper {
+    padding: 120px 32px 60px;
+  }
+
+  .mainTitle {
+    font-size: 4.5rem;
+  }
+
+  .heroBgText {
+    font-size: 25vw;
+  }
+
   .heroWhiteSection {
     padding: 48px 32px;
   }
@@ -875,11 +887,7 @@
     display: none;
   }
 
-  .navbarLeft>div:last-child {
-    display: none;
-  }
-
-  .navConnect {
+  .navButton {
     display: none;
   }
 
@@ -913,6 +921,33 @@
   .hero {
     padding: 110px 20px 32px;
     min-height: auto;
+  }
+
+  .heroWrapper {
+    padding: 100px 20px 40px;
+  }
+
+  .mainTitle {
+    font-size: 3.5rem;
+  }
+
+  .mainSubtitle {
+    font-size: 1.05rem;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primaryBtn, .secondaryBtn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .heroBgText {
+    font-size: 28vw;
+    bottom: -2vw;
   }
 
   .heroTopRow {
@@ -1198,6 +1233,23 @@
 @media (max-width: 480px) {
   .heroTitle {
     font-size: 22vw;
+  }
+
+  .heroWrapper {
+    padding: 90px 16px 30px;
+  }
+
+  .mainTitle {
+    font-size: 2.8rem;
+  }
+
+  .mainSubtitle {
+    font-size: 0.95rem;
+  }
+
+  .heroBgText {
+    font-size: 32vw;
+    bottom: 0;
   }
 
   .heroContent h2 {
