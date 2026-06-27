@@ -35,6 +35,7 @@ export default function Navbar() {
               width={42}
               height={42}
               style={{ marginRight: '6px' }}
+              priority
             />
             <Wordmark />
           </a>
