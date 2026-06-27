@@ -39,8 +39,8 @@
 .navLinks {
   display: flex;
   gap: 32px;
-  font-weight: 400;
-  color: #333;
+  font-weight: 500;
+  color: #111827;
 }
 
 .navLinks a {
@@ -53,16 +53,29 @@
 }
 
 .navButton {
-  background-color: #5671EF;
-  color: white;
+  background-color: transparent;
+  color: #3B82F6;
   padding: 10px 24px;
   border-radius: 999px;
   font-weight: 500;
   transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
 }
 
-.navButton:hover {
-  background-color: #3B5BDB;
+.navButtonPrimary {
+  background-color: #5773FF;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.navButtonPrimary:hover {
+  background-color: #435be0;
 }
 
 /* Mobile menu */
@@ -73,32 +86,45 @@
 }
 
 .mobileMenu {
-  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: white;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 /* ========== HERO ========== */
 .heroWrapper {
   position: relative;
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 40%, rgba(165, 180, 252, 0.8) 70%, rgba(13, 56, 183, 1) 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 30%, #D4E2FF 50%, #5773FF 75%, #0A1F6D 100%);
   color: black;
   overflow: hidden;
   text-align: center;
-  padding: 120px 24px 80px;
+  padding: 180px 24px 140px;
 }
 
 .heroBgText {
   position: absolute;
-  bottom: -4vw;
+  top: 40%;
   left: 0;
   width: 100%;
-  font-size: 23vw;
+  font-size: 22vw;
   line-height: 1;
-  font-weight: 450;
+  font-weight: 500;
   color: rgba(255, 255, 255, 0.05);
   font-family: var(--font-outfit), sans-serif;
   text-align: center;
@@ -114,1279 +140,838 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .mainTitle {
   font-size: 5.5rem;
-  line-height: 1.05;
-  font-weight: 400;
+  line-height: 1.1;
+  font-weight: 300;
   letter-spacing: -0.02em;
   margin-bottom: 24px;
-  font-family: var(--font-outfit), sans-serif;
+  color: #111827;
 }
 
 .italicHighlight {
+  color: #5773FF;
   font-style: italic;
   font-weight: 600;
-  color: #3B82F6;
+  font-family: "Georgia", serif;
 }
 
 .mainSubtitle {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   line-height: 1.6;
-  max-width: 650px;
-  color: #4B5563;
+  max-width: 500px;
+  color: #374151;
   margin-bottom: 40px;
-}
-
-.mainSubtitle strong {
-  color: #111827;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .heroButtons {
   display: flex;
   gap: 16px;
-  margin-bottom: 24px;
 }
 
 .primaryBtn {
-  background-color: #030712;
+  background-color: #071550;
   color: white;
-  padding: 14px 28px;
+  padding: 16px 36px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 1.05rem;
+  transition: transform 0.2s, background-color 0.2s;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.primaryBtn:hover {
+  background-color: #040d36;
+  transform: translateY(-2px);
+}
+
+.secondaryBtn {
+  background-color: white;
+  color: #5773FF;
+  border: 1px solid #5773FF;
+  padding: 16px 36px;
   border-radius: 999px;
   font-weight: 500;
   font-size: 1.05rem;
   transition: transform 0.2s, background-color 0.2s;
 }
 
-.primaryBtn:hover {
-  background-color: #1F2937;
-  transform: translateY(-2px);
-}
-
-.secondaryBtn {
-  background-color: white;
-  color: #5671EF;
-  border: 1px solid #BFDBFE;
-  padding: 14px 28px;
-  border-radius: 999px;
-  font-weight: 500;
-  font-size: 1.05rem;
-  transition: transform 0.2s, border-color 0.2s;
-}
-
 .secondaryBtn:hover {
-  border-color: #93C5FD;
+  background-color: #F8FAFC;
   transform: translateY(-2px);
 }
 
 .heroMicroCopy {
+  margin-top: 24px;
   font-size: 0.85rem;
   color: #4B5563;
 }
 
-.heroMicroCopy strong {
-  color: #111827;
-  font-weight: 600;
+/* ========== ABOUT (PILLS) SECTION ========== */
+.aboutSection {
+  background: linear-gradient(180deg, #071550 0%, #050E38 40%, #6B8DF5 90%, #FFFFFF 100%);
+  padding: 120px 0 80px;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* ========== COMMON SECTION ========== */
-.sectionLabel {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  opacity: 0.5;
-}
-
-.sectionTitle {
-  font-size: 7rem;
-  line-height: 1;
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  margin-bottom: 64px;
-}
-
-/* ========== SERVICES ========== */
-.services {
-  padding: 120px 48px;
-}
-
-.servicesTop {
+.aboutHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 64px;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 80px;
+  padding: 0 48px;
+  color: white;
 }
 
-.servicesSubtitle {
-  font-size: 2.5rem;
+.aboutTitle {
+  font-size: 4rem;
   line-height: 1.2;
-  max-width: 450px;
-  font-weight: 500;
+  font-weight: 400;
+  max-width: 600px;
   letter-spacing: -0.02em;
-  font-family: var(--font-outfit);
 }
 
-.servicesContent {
+.aboutTitle span {
+  font-style: italic;
+  color: #93C5FD;
+}
+
+.aboutDesc {
+  max-width: 350px;
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.pillsSection {
   display: flex;
-  gap: 64px;
+  flex-wrap: nowrap;
+  gap: 24px;
+  width: 100%;
+  overflow-x: auto;
+  padding-top: 0;
+  padding-bottom: 24px;
+  padding-left: max(48px, calc((100% - 1200px) / 2 + 48px));
+  padding-right: max(48px, calc((100% - 1200px) / 2 + 48px));
+  /* Hide scrollbar for a cleaner look, or style it */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
 }
 
-.servicesList {
-  flex: 1.5;
+.pillsSection::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+.pillCard {
+  background: white;
+  border-radius: 999px;
+  padding: 60px 24px;
   display: flex;
   flex-direction: column;
-}
-
-.serviceItem {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 40px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  font-size: 2.5rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  cursor: pointer;
-  transition: color 0.2s;
-  font-family: var(--font-outfit);
+  text-align: center;
+  width: 250px;
+  height: 450px;
+  flex-shrink: 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
-.serviceItem:hover {
-  color: var(--color-primary-blue);
-}
-
-.serviceItemLeft {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.serviceItemLeft span {
-  font-size: 1rem;
-  opacity: 0.5;
-  font-weight: 500;
-  font-family: var(--font-inter);
-}
-
-.serviceToggle {
-  font-size: 1.5rem;
-  font-weight: 300;
-  transition: transform 0.3s ease;
-  width: 32px;
-  height: 32px;
+.pillIconWrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 32px;
+  color: #2563EB;
 }
 
-.serviceDetails {
-  overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.3s ease;
-}
-
-.serviceDetailsInner {
-  padding: 0 0 40px 64px;
-  font-size: 1.1rem;
-  opacity: 0.7;
-  line-height: 1.6;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.serviceTags {
-  display: flex;
-  gap: 8px;
-  margin-top: 32px;
-  flex-wrap: wrap;
-}
-
-.serviceTag {
-  padding: 8px 16px;
-  border-radius: 99px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  font-size: 0.75rem;
-  font-weight: 600;
-  transition: all 0.2s;
-  cursor: default;
-}
-
-.serviceTag:hover {
-  background-color: var(--color-dark);
-  color: white;
-  border-color: var(--color-dark);
-}
-
-.servicesImage {
-  flex: 1;
-  height: 600px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--color-light-gray);
-  position: relative;
-}
-
-/* ========== WORK ========== */
-.work {
-  padding: 120px 48px;
-}
-
-.workTop {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 64px;
-}
-
-.workGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 80px;
-}
-
-.workCard {
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.workCard:hover .workImage img,
-.workCard:hover .workImageWrapper img {
-  transform: scale(1.05);
-}
-
-.workImage {
-  height: 500px;
-  background: var(--color-light-gray);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  margin-bottom: 24px;
-  position: relative;
-}
-
-.workImage img {
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.workImageWrapper {
-  position: relative;
-  height: 500px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  margin-bottom: 24px;
-}
-
-.workImageWrapper img {
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.workInfo {
-  padding: 0 8px;
-}
-
-.workInfoRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.workInfoRow h3 {
+.pillTitle {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 400;
+  margin-bottom: 16px;
+  color: #111827;
 }
 
-.workTags {
-  font-size: 0.875rem;
-  opacity: 0.5;
-  display: flex;
-  gap: 16px;
+.pillTitle span {
+  color: #3B82F6;
 }
 
-.workDate {
-  font-size: 0.875rem;
-  opacity: 0.5;
+.pillDesc {
+  font-size: 0.85rem;
+  color: #6B7280;
+  margin-bottom: 32px;
+  line-height: 1.6;
 }
 
-.workBanner {
-  background: #f5f5f5;
-  border-radius: var(--radius-xl);
-  padding: 64px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 64px;
-}
-
-.workBannerLeft {
-  display: flex;
-  gap: 48px;
-  align-items: center;
-  flex: 1;
-}
-
-.workBannerImageWrapper {
-  width: 250px;
-  height: 180px;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.workBannerText {
-  font-size: 2.5rem;
-  line-height: 1.2;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  flex: 1;
-  font-family: var(--font-outfit);
-}
-
-.workBannerText span {
-  font-weight: 700;
-}
-
-/* ========== STATS ========== */
-.statsContainer {
-  margin-top: 80px;
-}
-
-.statsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.statItem {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.statNumber {
-  font-size: 4rem;
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  font-family: var(--font-outfit);
-}
-
-.statLabel {
-  font-size: 0.875rem;
-  opacity: 0.5;
-}
-
-/* ========== ABOUT ========== */
-.about {
-  padding: 120px 48px;
-}
-
-.aboutTop {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 64px;
-}
-
-.aboutQuote {
-  max-width: 350px;
-}
-
-.aboutGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 24px;
-}
-
-.aboutPhoto {
-  border-radius: var(--radius-xl);
-  height: 450px;
-  background: var(--color-light-gray);
-  overflow: hidden;
-  position: relative;
-}
-
-.reviewCard {
-  border-radius: var(--radius-xl);
-  padding: 40px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  transition: box-shadow 0.3s ease;
-}
-
-.reviewCard:hover {
-  box-shadow: var(--shadow-md);
-}
-
-.aboutBottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 64px;
-  padding: 32px 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* ========== TESTIMONIALS ========== */
-.testimonials {
-  padding: 120px 48px;
-}
-
-.testimonialsHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 80px;
-}
-
-.testimonialsNav {
-  display: flex;
-  gap: 16px;
-}
-
-.testimonialsNavBtn {
+.pillButton {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #0d288a;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
-  font-size: 1.2rem;
+  margin-top: auto;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
 }
 
-.testimonialsNavBtn:hover {
-  background-color: var(--color-dark);
-  color: white;
-  border-color: var(--color-dark);
+.pillButton:hover {
+  background: #1E3A8A;
+  transform: translateY(-2px);
 }
 
-.testimonialsGrid {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 48px;
-  align-items: flex-start;
+
+/* ========== VISION SECTION ========== */
+.visionSection {
+  padding: 120px 40px 80px;
+  text-align: center;
+  background: linear-gradient(180deg, #E6F0FF 0%, #FFFFFF 30%);
 }
 
-.testiQuote {
-  font-size: 3rem;
-  line-height: 1.2;
-  font-weight: 500;
+.visionHeader {
+  margin-bottom: 24px;
+}
+
+.visionPreTitle {
+  font-size: 1.25rem;
+  color: #4B5563;
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+
+.visionPreTitle span {
+  color: #5773FF;
+  font-weight: 600;
+}
+
+.visionTitle {
+  font-size: 5.5rem;
+  font-weight: 400;
+  margin: 0;
+  color: #111827;
   letter-spacing: -0.02em;
-  margin-bottom: 48px;
-  font-family: var(--font-outfit);
 }
 
-.marquee {
-  margin-top: 120px;
-  padding-top: 48px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+.visionTitle span {
+  color: #5773FF;
+  font-style: italic;
+  font-weight: 600;
+  font-family: "Georgia", serif;
+}
+
+.visionSubtitle {
+  max-width: 600px;
+  margin: 0 auto 60px;
+  color: #4B5563;
+  line-height: 1.6;
+}
+
+.visionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 450px 300px;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cardLeft {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(180deg, #3B82F6 0%, #1D4ED8 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  text-align: left;
+}
+
+.cardTopMiddle {
+  grid-column: 2;
+  grid-row: 1;
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px;
+  text-align: left;
+}
+
+.cardTopRight {
+  grid-column: 3;
+  grid-row: 1;
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+  background: #F8FAFC;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.cardBottomRight {
+  grid-column: 2 / 4;
+  grid-row: 2;
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px;
+  text-align: left;
+}
+
+.cardLabel {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  opacity: 0.9;
+}
+
+.cardTitle {
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.cardTitle span {
+  font-style: italic;
+  font-weight: 600;
+}
+
+.cardDesc {
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.enquireBtn {
+  background-color: #071550;
+  color: white;
+  padding: 16px 40px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: transform 0.2s;
+}
+
+.enquireBtn:hover {
+  transform: translateY(-2px);
+}
+
+.enquireSub {
+  font-size: 0.75rem;
+  color: #4B5563;
+}
+
+.cardImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.cardOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+  z-index: 1;
+}
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+}
+
+/* ========== GRID FOOTER ========== */
+.gridFooter {
+  background: #0F172A;
+  position: relative;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
-.marqueeLogos {
+.gridFooter::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center;
+}
+
+.centerSquare {
+  width: 400px;
+  height: 400px;
+  background: #1E40AF;
+  box-shadow: 0 0 150px rgba(37, 99, 235, 0.6);
+  position: relative;
+  z-index: 10;
+  border-radius: 8px;
   display: flex;
-  gap: 120px;
   align-items: center;
-  opacity: 0.4;
-  margin-top: 48px;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
 }
 
-.marqueeItem {
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: opacity 0.3s;
+.centerSquareInner {
+  width: 98%;
+  height: 98%;
+  background: rgba(30, 64, 175, 0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
 }
 
-.marqueeItem:hover {
-  opacity: 0.8;
-}
-
-/* ========== FOOTER ========== */
-.footer {
-  background-color: var(--color-dark);
+.gridFooterContent {
+  position: absolute;
+  z-index: 20;
+  text-align: center;
   color: white;
-  padding: 120px 48px 48px;
-}
-
-.footerTop {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 120px;
-  padding-bottom: 120px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-direction: column;
+  align-items: center;
 }
 
-.footerEmail {
-  font-size: 7rem;
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  font-family: var(--font-outfit);
-  background: linear-gradient(135deg, #4466ff, #aa44ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transition: filter 0.3s;
+.gridFooterContent h2 {
+  font-size: 5rem;
+  font-weight: 300;
+  margin-bottom: 32px;
 }
 
-.footerEmail:hover {
-  filter: brightness(1.2);
-}
+/* ========== RESPONSIVE ========== */
 
-.footerLinksRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 80px;
-}
-
-.footerLinkGroup a {
-  display: block;
-  opacity: 0.7;
-  transition: opacity 0.2s, transform 0.2s;
-}
-
-.footerLinkGroup a:hover {
-  opacity: 1;
-  transform: translateX(4px);
-}
-
-.footerBrand {
-  font-size: 14vw;
-  line-height: 0.8;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  font-family: var(--font-outfit);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 40px;
-}
-
-.scrollTopBtn {
-  font-size: 2rem;
-  padding-bottom: 2vw;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.scrollTopBtn:hover {
-  transform: translateY(-8px);
-}
-
-/* ========== TABLET (max-width: 1200px) ========== */
-@media (max-width: 1200px) {
-  .sectionTitle {
-    font-size: 5.5rem;
-    margin-bottom: 48px;
+/* --- Small Laptop / Large Tablet Landscape (≤1280px) --- */
+@media (max-width: 1280px) {
+  .navbar {
+    padding: 20px 32px;
   }
-
-  .heroSubtitle {
-    font-size: 2.8rem;
-  }
-
-  .footerEmail {
-    font-size: 5rem;
-  }
-
-  .servicesSubtitle {
-    font-size: 2rem;
-  }
-
-  .testiQuote {
-    font-size: 2.5rem;
-  }
-
-  .workBannerText {
-    font-size: 2rem;
-  }
-
-  .statNumber {
-    font-size: 3.5rem;
-  }
-
-  .servicesContent {
-    gap: 40px;
-  }
-
-  .servicesImage {
-    height: 500px;
-  }
-
-  .workImage,
-  .workImageWrapper {
-    height: 400px;
-  }
-}
-
-/* ========== SMALL TABLET (max-width: 1024px) ========== */
-@media (max-width: 1024px) {
-  .sectionTitle {
-    font-size: 4.5rem;
-    margin-bottom: 40px;
-  }
-
-  .heroSubtitle {
-    font-size: 2.2rem;
-  }
-
-  .heroCards {
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  .card {
-    min-height: 220px;
-    padding: 24px;
-  }
-
-  .servicesContent {
-    flex-direction: column;
-  }
-
-  .servicesImage {
-    height: 350px;
-    width: 100%;
-  }
-
-  .serviceItem {
-    font-size: 2rem;
-    padding: 32px 0;
-  }
-
-  .workGrid {
-    grid-template-columns: 1fr 1fr;
+  .navLinks {
     gap: 24px;
   }
-
-  .workImage,
-  .workImageWrapper {
-    height: 320px;
-  }
-
-  .aboutGrid {
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  .aboutPhoto {
-    height: 380px;
-  }
-
-  .reviewCard {
-    padding: 32px;
-  }
-
-  .testimonialsGrid {
-    grid-template-columns: 1fr 2fr;
-    gap: 32px;
-  }
-
-  .testimonialsGrid>div:last-child {
-    display: none;
-  }
-
-  .statsGrid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-  }
-
-  .statNumber {
-    font-size: 3rem;
-  }
-
-  .workBanner {
-    flex-direction: column;
-    padding: 40px;
-    gap: 32px;
-    text-align: center;
-  }
-
-  .workBannerLeft {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footerTop {
-    flex-direction: column;
-    gap: 32px;
-    margin-bottom: 80px;
-    padding-bottom: 80px;
-  }
-
-  .footerEmail {
-    font-size: 3.5rem;
-  }
-
-  .footerLinksRow {
-    flex-direction: column;
-    gap: 48px;
-    align-items: flex-start;
-  }
-
-  .hero {
-    padding: 140px 32px 40px;
-  }
-
   .heroWrapper {
-    padding: 120px 32px 60px;
+    padding: 160px 32px 120px;
   }
-
   .mainTitle {
+    font-size: 4.2rem;
+  }
+  .aboutHeader {
+    padding: 0 32px;
+  }
+  .pillsSection {
+    padding-left: max(32px, calc((100% - 1100px) / 2 + 32px));
+    padding-right: max(32px, calc((100% - 1100px) / 2 + 32px));
+  }
+  .visionSection {
+    padding: 100px 32px 70px;
+  }
+  .visionTitle {
     font-size: 4.5rem;
   }
-
-  .heroBgText {
-    font-size: 25vw;
-  }
-
-  .heroWhiteSection {
-    padding: 48px 32px;
-  }
-
-  .services,
-  .work,
-  .about,
-  .testimonials {
-    padding: 80px 32px;
-  }
-
-  .footer {
-    padding: 80px 32px 40px;
-  }
-
-  .marqueeLogos {
-    gap: 80px;
+  .visionGrid {
+    max-width: 1000px;
+    gap: 20px;
   }
 }
 
-/* ========== TABLET PORTRAIT / LARGE PHONE (max-width: 768px) ========== */
+/* --- Tablet Landscape (≤1024px) --- */
+@media (max-width: 1024px) {
+  .heroBgText {
+    font-size: 25vw;
+    top: 50%;
+  }
+  .mainTitle {
+    font-size: 3.5rem;
+  }
+  .mainSubtitle {
+    max-width: 450px;
+  }
+  .aboutSection {
+    padding: 100px 0 60px;
+  }
+  .aboutHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+  .aboutTitle {
+    font-size: 2.8rem;
+  }
+  .aboutDesc {
+    max-width: 100%;
+  }
+  .pillCard {
+    width: 220px;
+    height: 420px;
+    padding: 48px 20px;
+  }
+  .visionTitle {
+    font-size: 3.5rem;
+  }
+  .visionGrid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 380px 380px;
+  }
+  .cardLeft {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+  .cardTopMiddle {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .cardTopRight {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .cardBottomRight {
+    grid-column: 1 / 3;
+    grid-row: 3;
+    height: 300px;
+  }
+  .gridFooter {
+    height: 500px;
+  }
+  .centerSquare {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+/* --- Tablet Portrait (≤768px) --- */
 @media (max-width: 768px) {
-
-  /* Navbar */
   .navbar {
-    padding: 16px 20px;
+    padding: 16px 24px;
   }
-
-  .navLinks {
+  .navLinks, .navButton, .navButtonPrimary {
     display: none;
   }
-
-  .navButton {
-    display: none;
-  }
-
   .mobileMenuBtn {
     display: block;
   }
-
-  .mobileMenu {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100dvh;
-    background: linear-gradient(145deg, #0011ff, #7a00ff);
-    z-index: 150;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 28px;
-  }
-
-  .mobileMenu a {
-    color: white;
-    font-size: 1.75rem;
-    font-weight: 600;
-    font-family: var(--font-outfit);
-  }
-
-  /* Hero */
-  .hero {
-    padding: 110px 20px 32px;
+  .heroWrapper {
+    padding: 130px 20px 100px;
     min-height: auto;
   }
-
-  .heroWrapper {
-    padding: 100px 20px 40px;
-  }
-
-  .mainTitle {
-    font-size: 3.5rem;
-  }
-
-  .mainSubtitle {
-    font-size: 1.05rem;
-  }
-
-  .heroButtons {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .primaryBtn, .secondaryBtn {
-    width: 100%;
-    text-align: center;
-  }
-
   .heroBgText {
-    font-size: 28vw;
-    bottom: -2vw;
+    font-size: 30vw;
   }
-
-  .heroTopRow {
-    flex-direction: column;
-    gap: 20px;
-    margin-bottom: 40px;
-  }
-
-  .heroContent h2 {
-    font-size: 1.5rem;
-  }
-
-  .heroScrollText {
-    display: none;
-  }
-
-  .heroTitle {
-    font-size: 18vw;
-    margin-bottom: 32px;
-  }
-
-  .heroWhiteSection {
-    padding: 32px 20px;
-  }
-
-  .heroSubtitle {
-    font-size: 1.75rem;
-  }
-
-  .heroMidRow {
-    flex-direction: column;
-    gap: 24px;
-    align-items: flex-start;
-    margin-bottom: 40px;
-  }
-
-  .heroCards {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .card {
-    min-height: 200px;
-    padding: 24px;
-  }
-
-  .heroBottomRow {
-    flex-direction: column;
-    gap: 16px;
-    align-items: flex-start;
-  }
-
-  .heroBottomText {
-    max-width: 100%;
-  }
-
-  /* Section Titles */
-  .sectionTitle {
-    font-size: 3rem;
-    margin-bottom: 32px;
-  }
-
-  /* Sections Padding */
-  .services,
-  .work,
-  .about,
-  .testimonials {
-    padding: 64px 20px;
-  }
-
-  /* Services */
-  .servicesTop {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
-    margin-bottom: 40px;
-  }
-
-  .servicesSubtitle {
-    font-size: 1.4rem;
-    max-width: 100%;
-  }
-
-  .serviceItem {
-    font-size: 1.4rem;
-    padding: 24px 0;
-  }
-
-  .serviceItemLeft {
-    gap: 16px;
-  }
-
-  .serviceItemLeft span {
-    font-size: 0.875rem;
-  }
-
-  .serviceDetailsInner {
-    padding: 0 0 32px 32px;
-    font-size: 1rem;
-  }
-
-  .serviceTags {
-    gap: 6px;
-  }
-
-  .serviceTag {
-    padding: 6px 12px;
-    font-size: 0.7rem;
-  }
-
-  .servicesImage {
-    height: 280px;
-  }
-
-  /* Work */
-  .workGrid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .workImage,
-  .workImageWrapper {
-    height: 240px;
-  }
-
-  .workInfoRow {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  .workInfoRow h3 {
-    font-size: 1.25rem;
-  }
-
-  .workTags {
-    gap: 8px;
-    font-size: 0.8rem;
-  }
-
-  .workBanner {
-    padding: 32px 24px;
-    gap: 24px;
-    text-align: center;
-  }
-
-  .workBannerLeft {
-    flex-direction: column;
-    gap: 24px;
-    align-items: center;
-  }
-
-  .workBannerImageWrapper {
-    width: 100%;
-    height: 160px;
-  }
-
-  .workBannerText {
-    font-size: 1.35rem;
-    text-align: left;
-  }
-
-  /* Stats */
-  .statsContainer {
-    margin-top: 48px;
-  }
-
-  .statsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px 16px;
-  }
-
-  .statNumber {
-    font-size: 2.5rem;
-  }
-
-  /* About */
-  .aboutTop {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
-    margin-bottom: 40px;
-  }
-
-  .aboutQuote {
-    max-width: 100%;
-  }
-
-  .aboutGrid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .aboutPhoto {
-    height: 280px;
-  }
-
-  .cardBlue {
-    padding: 32px !important;
-  }
-
-  .reviewCard {
-    padding: 32px;
-  }
-
-  .aboutBottom {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
-    margin-top: 40px;
-  }
-
-  /* Testimonials */
-  .testimonialsHeader {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
-    margin-bottom: 48px;
-  }
-
-  .testimonialsGrid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .testimonialsGrid>div:last-child {
-    display: none;
-  }
-
-  .testiQuote {
-    font-size: 1.5rem;
-    margin-bottom: 32px;
-  }
-
-  .marquee {
-    margin-top: 64px;
-    padding-top: 32px;
-  }
-
-  .marqueeLogos {
-    gap: 48px;
-    margin-top: 32px;
-  }
-
-  .marqueeItem {
-    font-size: 1.4rem;
-  }
-
-  /* Footer */
-  .footer {
-    padding: 64px 20px 32px;
-  }
-
-  .footerTop {
-    margin-bottom: 64px;
-    padding-bottom: 64px;
-  }
-
-  .footerEmail {
-    font-size: 2rem;
-    word-break: break-all;
-  }
-
-  .footerLinksRow {
-    gap: 40px;
-  }
-
-  .footerLinksRow>div:last-child {
-    gap: 48px;
-  }
-
-  .footerBrand {
-    font-size: 16vw;
-    padding-top: 32px;
-  }
-
-  .scrollTopBtn {
-    font-size: 1.5rem;
-  }
-}
-
-/* ========== SMALL PHONE (max-width: 480px) ========== */
-@media (max-width: 480px) {
-  .heroTitle {
-    font-size: 22vw;
-  }
-
-  .heroWrapper {
-    padding: 90px 16px 30px;
-  }
-
   .mainTitle {
     font-size: 2.8rem;
   }
-
   .mainSubtitle {
-    font-size: 0.95rem;
+    font-size: 1rem;
+    max-width: 100%;
+    padding: 0 8px;
   }
-
-  .heroBgText {
-    font-size: 32vw;
-    bottom: 0;
+  .heroButtons {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 12px;
   }
-
-  .heroContent h2 {
-    font-size: 1.25rem;
+  .primaryBtn, .secondaryBtn {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    justify-content: center;
+    padding: 14px 28px;
   }
-
-  .heroSubtitle {
-    font-size: 1.4rem;
+  .heroMicroCopy {
+    font-size: 0.8rem;
   }
-
-  .sectionTitle {
-    font-size: 2.5rem;
-    margin-bottom: 24px;
+  .aboutSection {
+    padding: 80px 0 60px;
   }
-
-  .card {
-    min-height: 180px;
-    padding: 20px;
+  .aboutHeader {
+    padding: 0 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 40px;
   }
-
-  .serviceItem {
-    font-size: 1.2rem;
-    padding: 20px 0;
+  .aboutTitle {
+    font-size: 2.2rem;
   }
-
-  .serviceDetailsInner {
-    padding-left: 20px;
+  .aboutDesc {
     font-size: 0.9rem;
   }
-
-  .workImage,
-  .workImageWrapper {
-    height: 200px;
+  .pillsSection {
+    padding-left: 24px;
+    padding-right: 24px;
+    gap: 16px;
   }
-
-  .workBannerText {
-    font-size: 1.15rem;
+  .pillCard {
+    width: 200px;
+    height: 380px;
+    padding: 40px 18px;
   }
-
-  .statsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px 12px;
+  .pillIconWrapper {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 24px;
   }
-
-  .statNumber {
-    font-size: 2rem;
+  .pillTitle {
+    font-size: 1.3rem;
   }
-
-  .statLabel {
-    font-size: 0.75rem;
+  .pillDesc {
+    font-size: 0.8rem;
   }
-
-  .aboutPhoto {
-    height: 240px;
+  .visionSection {
+    padding: 80px 24px 60px;
   }
-
-  .testiQuote {
-    font-size: 1.25rem;
+  .visionHeader {
+    margin-bottom: 16px;
   }
-
-  .footerEmail {
-    font-size: 1.5rem;
+  .visionPreTitle {
+    font-size: 1rem;
   }
-
-  .footerBrand {
-    font-size: 18vw;
+  .visionTitle {
+    font-size: 2.5rem;
   }
-
-  .marqueeItem {
-    font-size: 1.1rem;
+  .visionSubtitle {
+    font-size: 0.95rem;
+    margin: 0 auto 40px;
   }
-
-  .marqueeLogos {
-    gap: 32px;
+  .visionGrid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 16px;
   }
-
-  .mobileMenu a {
-    font-size: 1.5rem;
+  .cardLeft, .cardTopMiddle, .cardTopRight, .cardBottomRight {
+    grid-column: 1;
+    grid-row: auto;
+    height: 350px;
+    padding: 28px;
+    border-radius: 24px;
   }
-
-  .servicesImage {
+  .cardLeft {
+    height: 500px;
+  }
+  .cardTitle {
+    font-size: 1.6rem;
+  }
+  .cardLabel {
+    font-size: 0.85rem;
+  }
+  .enquireBtn {
+    padding: 14px 32px;
+    font-size: 1rem;
+  }
+  .gridFooter {
+    height: 350px;
+  }
+  .centerSquare {
+    width: 220px;
     height: 220px;
-  }
-
-  .workBannerImageWrapper {
-    height: 140px;
-  }
-
-  .reviewCard {
-    padding: 24px;
   }
 }
 
-/* ========== TOUCH DEVICE OPTIMIZATIONS ========== */
-@media (hover: none) {
-  .card:hover {
-    transform: none;
+/* --- Mobile (≤480px) --- */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 12px 16px;
   }
-
-  .cardWhite:hover {
-    box-shadow: none;
+  .logo svg {
+    width: 32px;
+    height: 32px;
   }
-
-  .serviceItem:hover {
-    color: inherit;
+  .heroWrapper {
+    padding: 120px 16px 80px;
   }
-
-  .serviceTag:hover {
-    background-color: transparent;
-    color: inherit;
-    border-color: rgba(0, 0, 0, 0.1);
+  .heroContentMain {
+    margin-top: 10px;
   }
-
-  .workCard:hover .workImage img,
-  .workCard:hover .workImageWrapper img {
-    transform: none;
+  .mainTitle {
+    font-size: 2rem;
+    margin-bottom: 16px;
   }
-
-  .reviewCard:hover {
-    box-shadow: none;
+  .mainSubtitle {
+    font-size: 0.9rem;
+    margin-bottom: 28px;
   }
-
-  .testimonialsNavBtn:hover {
-    background-color: transparent;
-    color: inherit;
-    border-color: rgba(0, 0, 0, 0.1);
+  .heroButtons {
+    gap: 10px;
   }
-
-  .footerLinkGroup a:hover {
-    transform: none;
+  .primaryBtn, .secondaryBtn {
+    padding: 12px 24px;
+    font-size: 0.95rem;
   }
-
-  .scrollTopBtn:hover {
-    transform: none;
+  .heroMicroCopy {
+    margin-top: 16px;
+    font-size: 0.75rem;
   }
+  .aboutSection {
+    padding: 60px 0 48px;
+  }
+  .aboutHeader {
+    padding: 0 16px;
+    margin-bottom: 32px;
+  }
+  .aboutTitle {
+    font-size: 1.75rem;
+  }
+  .aboutDesc {
+    font-size: 0.85rem;
+  }
+  .pillsSection {
+    padding-left: 16px;
+    padding-right: 16px;
+    gap: 12px;
+  }
+  .pillCard {
+    width: 170px;
+    height: 340px;
+    padding: 32px 14px;
+  }
+  .pillIconWrapper {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+  }
+  .pillTitle {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+  }
+  .pillDesc {
+    font-size: 0.75rem;
+    margin-bottom: 20px;
+  }
+  .pillButton {
+    width: 40px;
+    height: 40px;
+  }
+  .visionSection {
+    padding: 60px 16px 48px;
+  }
+  .visionPreTitle {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  .visionTitle {
+    font-size: 1.8rem;
+  }
+  .visionSubtitle {
+    font-size: 0.85rem;
+    margin: 0 auto 32px;
+  }
+  .visionGrid {
+    gap: 12px;
+  }
+  .cardLeft, .cardTopMiddle, .cardTopRight, .cardBottomRight {
+    height: 300px;
+    padding: 24px;
+    border-radius: 20px;
+  }
+  .cardLeft {
+    height: 420px;
+  }
+  .cardTitle {
+    font-size: 1.3rem;
+  }
+  .cardDesc {
+    font-size: 0.85rem;
+  }
+  .cardLabel {
+    font-size: 0.8rem;
+  }
+  .enquireBtn {
+    padding: 12px 28px;
+    font-size: 0.95rem;
+  }
+  .enquireSub {
+    font-size: 0.65rem;
+  }
+  .gridFooter {
+    height: 280px;
+  }
+  .centerSquare {
+    width: 180px;
+    height: 180px;
+  }
+  .centerSquareInner {
+    width: 85%;
+    height: 85%;
+  }
+}
 
-  .bookCallLink:hover {
-    opacity: 1;
+/* --- Very Small Mobile (≤360px) --- */
+@media (max-width: 360px) {
+  .mainTitle {
+    font-size: 1.7rem;
+  }
+  .heroWrapper {
+    padding: 110px 12px 70px;
+  }
+  .primaryBtn, .secondaryBtn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+  .aboutTitle {
+    font-size: 1.5rem;
+  }
+  .pillCard {
+    width: 155px;
+    height: 310px;
+    padding: 28px 12px;
+  }
+  .pillTitle {
+    font-size: 1rem;
+  }
+  .visionTitle {
+    font-size: 1.5rem;
+  }
+  .cardLeft, .cardTopMiddle, .cardTopRight, .cardBottomRight {
+    height: 260px;
+    padding: 20px;
+  }
+  .cardLeft {
+    height: 380px;
+  }
+  .cardTitle {
+    font-size: 1.1rem;
   }
 }

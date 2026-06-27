@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import styles from '@/app/page.module.css';
@@ -13,19 +14,11 @@ const navItems = [
   { label: 'Contact Us', href: '#contact' },
 ];
 
-const CraneIcon = () => (
-  <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{marginRight: '8px'}}>
-    <g stroke="black" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round">
-      <polygon points="55,20 95,15 75,50" fill="white" />
-      <polygon points="30,65 70,45 75,50" fill="white" />
-      <polygon points="30,65 75,50 72,70" fill="black" />
-      <polygon points="75,50 90,95 70,85" fill="white" />
-      <polygon points="15,30 40,40 30,65" fill="white" />
-      <polygon points="5,45 15,30 20,42" fill="white" />
-      <polygon points="30,65 48,15 55,20" fill="#5B6EF2" />
-      <polygon points="30,65 55,20 70,45" fill="#5B6EF2" />
-    </g>
-  </svg>
+/* Origamie wordmark */
+const Wordmark = () => (
+  <span style={{ fontWeight: 400, fontSize: '1.75rem', color: '#111827', letterSpacing: '-0.03em', display: 'inline-flex', alignItems: 'center' }}>
+    Origam<span style={{ color: '#5773FF' }}>ie</span>
+  </span>
 );
 
 export default function Navbar() {
@@ -35,10 +28,16 @@ export default function Navbar() {
     <>
       <nav className={styles.navbar}>
         <div className={styles.navbarLeft}>
-          <div className={styles.logo}>
-            <CraneIcon />
-            <span style={{ fontWeight: 400, fontSize: '1.5rem', color: '#1E3A8A' }}>Origamie</span>
-          </div>
+          <a href="#home" className={styles.logo}>
+            <Image
+              src="/crane-logo.png"
+              alt="Origamie crane logo"
+              width={42}
+              height={42}
+              style={{ marginRight: '6px' }}
+            />
+            <Wordmark />
+          </a>
         </div>
 
         <div className={styles.navLinks}>
@@ -49,7 +48,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        <a href="#call" className={styles.navButton}>
+        <a href="#call" className={styles.navButtonPrimary}>
           Book a free call
         </a>
 
@@ -78,12 +77,22 @@ export default function Navbar() {
             >
               <X size={28} />
             </button>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '24px' }}>
+              <Image
+                src="/crane-logo.png"
+                alt="Origamie crane logo"
+                width={52}
+                height={52}
+                style={{ marginRight: '8px' }}
+              />
+              <Wordmark />
+            </div>
             {navItems.map((item) => (
               <a key={item.label} href={item.href} onClick={() => setMobileOpen(false)}>
                 {item.label}
               </a>
             ))}
-            <a href="#call" className={styles.navButton} onClick={() => setMobileOpen(false)}>
+            <a href="#call" className={styles.navButtonPrimary} onClick={() => setMobileOpen(false)}>
               Book a free call
             </a>
           </motion.div>
