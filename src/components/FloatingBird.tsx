@@ -16,18 +16,32 @@ export default function FloatingBird({ style, delay = 0, scale = 1 }: FloatingBi
       animate={{ y: [0, -20, 0], rotate: [-5, 5, -5] }}
       transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay }}
     >
-      <svg width={80 * scale} height={80 * scale} viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        {/* Blue wing */}
-        <polygon points="55,15 95,35 75,70 45,55" fill="#5773FF" opacity="0.9" />
-        <polygon points="55,15 75,25 75,70 45,55" fill="#4060E0" opacity="0.9" />
-        {/* Outline */}
-        <polyline points="55,15 95,35 75,70 55,105 25,80 45,55 55,15" fill="none" stroke="#1a1a1a" strokeWidth="2.5" strokeLinejoin="round" />
-        <line x1="45" y1="55" x2="75" y2="70" stroke="#1a1a1a" strokeWidth="2" />
-        {/* Head */}
-        <polyline points="25,80 10,75 5,65" fill="none" stroke="#1a1a1a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        {/* Tail */}
-        <polyline points="55,105 40,115 30,110" fill="none" stroke="#1a1a1a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        <polyline points="55,105 50,118 38,118" fill="none" stroke="#1a1a1a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <svg width={80 * scale} height={80 * scale} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="black" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round">
+          {/* Back wing */}
+          <polygon points="55,20 95,15 75,50" fill="white" />
+          
+          {/* White strip between blue wing and black shadow */}
+          <polygon points="30,65 70,45 75,50" fill="white" />
+          
+          {/* Black shadow */}
+          <polygon points="30,65 75,50 72,70" fill="black" />
+          
+          {/* Tail */}
+          <polygon points="75,50 90,95 70,85" fill="white" />
+          
+          {/* Neck */}
+          <polygon points="15,30 40,40 30,65" fill="white" />
+          
+          {/* Beak */}
+          <polygon points="5,45 15,30 20,42" fill="white" />
+          
+          {/* Front blue wing left */}
+          <polygon points="30,65 48,15 55,20" fill="#5B6EF2" />
+          
+          {/* Front blue wing right */}
+          <polygon points="30,65 55,20 70,45" fill="#5B6EF2" />
+        </g>
       </svg>
     </motion.div>
   );

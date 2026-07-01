@@ -37,8 +37,10 @@ export default function Hero() {
           variants={fadeUp}
           custom={0}
         >
-          Websites & brands<br />
-          engineered to <span className={styles.italicHighlight}>#convert.</span>
+          Websites &amp; brands<br />
+          engineered to{' '}
+          <span className={styles.convertHash}>#</span>
+          <span className={styles.convertWord}>convert.</span>
         </motion.h1>
 
         <motion.p

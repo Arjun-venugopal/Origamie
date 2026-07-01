@@ -75,8 +75,9 @@ export default function Vision() {
             alt="Running person blur"
             fill
             className={styles.cardImage}
+            style={{ mixBlendMode: 'overlay' }}
           />
-          <div className={styles.cardOverlay} />
+          <div className={styles.cardOverlay} style={{ background: 'linear-gradient(to top, rgba(0,23,141,0.9) 0%, rgba(0,23,141,0.4) 60%, rgba(0,23,141,0) 100%)' }} />
           
           <div className={styles.cardContent}>
             <div className={styles.cardLabel}>Promise</div>
@@ -114,8 +115,9 @@ export default function Vision() {
             alt="People walking"
             fill
             className={styles.cardImage}
+            style={{ mixBlendMode: 'overlay' }}
           />
-          <div className={styles.cardOverlay} />
+          <div className={styles.cardOverlay} style={{ background: 'linear-gradient(90deg, rgba(0,23,141,0.95) 0%, rgba(0,23,141,0.5) 100%)' }} />
           
           <div className={styles.cardContent}>
             <div className={styles.cardLabel}>Strategy that ships</div>

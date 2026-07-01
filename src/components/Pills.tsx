@@ -84,17 +84,17 @@ export default function Pills() {
   return (
     <section id="services" className={styles.aboutSection}>
       <div className={styles.aboutHeader}>
-        <motion.h2 
+        <motion.h2
           className={styles.aboutTitle}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
           What we craft, fold,<br />
-          and ship for <span>#you.</span>
+          and ship for <span style={{ color: '#ffffffff' }}>#you.</span>
         </motion.h2>
-        
-        <motion.p 
+
+        <motion.p
           className={styles.aboutDesc}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

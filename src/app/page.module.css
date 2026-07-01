@@ -13,17 +13,21 @@
 
 /* ========== NAVBAR ========== */
 .navbar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 48px;
+  padding: 16px 48px;
   z-index: 100;
   color: black;
   font-size: 0.95rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .navbarLeft {
@@ -52,16 +56,6 @@
   color: #2563EB;
 }
 
-.navButton {
-  background-color: transparent;
-  color: #3B82F6;
-  padding: 10px 24px;
-  border-radius: 999px;
-  font-weight: 500;
-  transition: background-color 0.2s;
-  display: flex;
-  align-items: center;
-}
 
 .navButtonPrimary {
   background-color: #5773FF;
@@ -105,12 +99,12 @@
 /* ========== HERO ========== */
 .heroWrapper {
   position: relative;
-  min-height: 80vh;
+  min-height: 130vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 30%, #D4E2FF 50%, #5773FF 75%, #0A1F6D 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 30%, #D4E2FF 50%, #5773FF 65%, #0A1F6D 100%);
   color: black;
   overflow: hidden;
   text-align: center;
@@ -123,8 +117,8 @@
   left: 0;
   width: 100%;
   font-size: 22vw;
-  line-height: 1;
-  font-weight: 500;
+  line-height: 2;
+  font-weight: 300;
   color: rgba(255, 255, 255, 0.05);
   font-family: var(--font-outfit), sans-serif;
   text-align: center;
@@ -140,29 +134,45 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-top: -190px;
 }
 
 .mainTitle {
-  font-size: 5.5rem;
-  line-height: 1.1;
-  font-weight: 300;
-  letter-spacing: -0.02em;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 76px;
+  line-height: 76px;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0%;
+  text-align: center;
   margin-bottom: 24px;
   color: #111827;
 }
 
-.italicHighlight {
-  color: #5773FF;
+.convertHash {
+  font-family: var(--font-playfair), serif;
+  font-size: 76px;
+  line-height: 76px;
+  font-weight: 500;
   font-style: italic;
-  font-weight: 600;
-  font-family: "Georgia", serif;
+  letter-spacing: -0.02em;
+  color: #5773FF;
+}
+
+.convertWord {
+  font-family: var(--font-playfair), serif;
+  font-size: 76px;
+  line-height: 76px;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: #5773FF;
 }
 
 .mainSubtitle {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.6;
-  max-width: 500px;
+  max-width: 1000px;
   color: #374151;
   margin-bottom: 40px;
   font-weight: 500;
@@ -181,7 +191,7 @@
   font-weight: 500;
   font-size: 1.05rem;
   transition: transform 0.2s, background-color 0.2s;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .primaryBtn:hover {
@@ -213,78 +223,92 @@
 
 /* ========== ABOUT (PILLS) SECTION ========== */
 .aboutSection {
-  background: linear-gradient(180deg, #071550 0%, #050E38 40%, #6B8DF5 90%, #FFFFFF 100%);
-  padding: 120px 0 80px;
+  background: linear-gradient(180deg, #0A1F6D 45%, #ffffff 75%);
+  padding: 100px 0 80px;
   position: relative;
   z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 }
 
 .aboutHeader {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
   width: 100%;
-  max-width: 1200px;
-  margin-bottom: 80px;
+  max-width: 1280px;
+  margin-bottom: 60px;
   padding: 0 48px;
-  color: white;
+  color: #111827;
 }
 
 .aboutTitle {
-  font-size: 4rem;
-  line-height: 1.2;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 3.5rem;
+  line-height: 1.15;
   font-weight: 400;
-  max-width: 600px;
-  letter-spacing: -0.02em;
+  max-width: 520px;
+  letter-spacing: -0.01em;
+  color: #ffffff;
 }
 
 .aboutTitle span {
+  font-family: var(--font-playfair), serif;
   font-style: italic;
-  color: #93C5FD;
+  font-weight: 600;
+  color: #051D96;
 }
 
 .aboutDesc {
-  max-width: 350px;
-  font-size: 1rem;
+  max-width: 420px;
+  font-size: 0.95rem;
   line-height: 1.6;
-  opacity: 0.9;
-  font-weight: 300;
+  color: #ffffff;
+  font-weight: 400;
+  padding-top: 12px;
 }
 
 .pillsSection {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: nowrap;
   gap: 24px;
   width: 100%;
   overflow-x: auto;
   padding-top: 0;
-  padding-bottom: 24px;
-  padding-left: max(48px, calc((100% - 1200px) / 2 + 48px));
-  padding-right: max(48px, calc((100% - 1200px) / 2 + 48px));
-  /* Hide scrollbar for a cleaner look, or style it */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
+  padding-bottom: 40px;
+  padding-left: max(48px, calc((100% - 1280px) / 2 + 48px));
+  padding-right: max(48px, calc((100% - 1280px) / 2 + 48px));
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .pillsSection::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  display: none;
 }
 
 .pillCard {
   background: white;
   border-radius: 999px;
-  padding: 60px 24px;
+  padding: 48px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 250px;
-  height: 450px;
+  width: 240px;
+  min-width: 240px;
+  height: 420px;
   flex-shrink: 0;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pillCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
 }
 
 .pillIconWrapper {
@@ -294,33 +318,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 32px;
-  color: #2563EB;
+  margin-bottom: 24px;
+  color: #051D96;
 }
 
 .pillTitle {
-  font-size: 1.5rem;
-  font-weight: 400;
-  margin-bottom: 16px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 12px;
   color: #111827;
 }
 
 .pillTitle span {
-  color: #3B82F6;
+  color: #051D96;
 }
 
 .pillDesc {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: #6B7280;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   line-height: 1.6;
+  padding: 0 8px;
 }
 
 .pillButton {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: #0d288a;
+  background: #051D96;
   color: white;
   display: flex;
   align-items: center;
@@ -332,36 +358,40 @@
 }
 
 .pillButton:hover {
-  background: #1E3A8A;
+  background: #0A2BBF;
   transform: translateY(-2px);
 }
 
 
 /* ========== VISION SECTION ========== */
 .visionSection {
-  padding: 120px 40px 80px;
+  padding: 40px 40px 100px;
   text-align: center;
-  background: linear-gradient(180deg, #E6F0FF 0%, #FFFFFF 30%);
+  background: #ffffff;
 }
 
 .visionHeader {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .visionPreTitle {
-  font-size: 1.25rem;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.1rem;
   color: #4B5563;
-  margin-bottom: 16px;
-  font-weight: 400;
+  margin-bottom: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .visionPreTitle span {
-  color: #5773FF;
-  font-weight: 600;
+  color: #00178D;
+  font-weight: 700;
 }
 
 .visionTitle {
-  font-size: 5.5rem;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 3.5rem;
   font-weight: 400;
   margin: 0;
   color: #111827;
@@ -369,14 +399,16 @@
 }
 
 .visionTitle span {
-  color: #5773FF;
+  color: #00178D;
+  font-family: var(--font-playfair), serif;
   font-style: italic;
-  font-weight: 600;
-  font-family: "Georgia", serif;
+  font-weight: 500;
 }
 
 .visionSubtitle {
-  max-width: 600px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.05rem;
+  max-width: 680px;
   margin: 0 auto 60px;
   color: #4B5563;
   line-height: 1.6;
@@ -384,115 +416,134 @@
 
 .visionGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 450px 300px;
-  gap: 24px;
-  max-width: 1200px;
+  grid-template-columns: 389fr 384fr 455fr;
+  grid-template-rows: 371px 226px;
+  gap: 16px;
+  max-width: 1259px;
   margin: 0 auto;
 }
 
 .cardLeft {
   grid-column: 1;
   grid-row: 1 / 3;
-  border-radius: 32px;
+  border-radius: 40px;
   overflow: hidden;
   position: relative;
-  background: linear-gradient(180deg, #3B82F6 0%, #1D4ED8 100%);
+  background: linear-gradient(180deg, #2563EB 0%, #00178D 100%);
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 40px;
   text-align: left;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
 
 .cardTopMiddle {
   grid-column: 2;
   grid-row: 1;
-  border-radius: 32px;
+  border-radius: 40px;
   overflow: hidden;
   position: relative;
+  background: linear-gradient(180deg, #1E3A8A 0%, #00178D 100%);
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 40px;
   text-align: left;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
 
 .cardTopRight {
   grid-column: 3;
   grid-row: 1;
-  border-radius: 32px;
+  border-radius: 22px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   overflow: hidden;
   position: relative;
-  background: #F8FAFC;
+  background: #F4F6FF;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
 
 .cardBottomRight {
   grid-column: 2 / 4;
   grid-row: 2;
-  border-radius: 32px;
+  border-radius: 40px;
   overflow: hidden;
   position: relative;
+  background: linear-gradient(90deg, #00178D 0%, #1E40AF 100%);
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 40px;
   text-align: left;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
 
 .cardLabel {
-  font-size: 0.9rem;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.85rem;
   font-weight: 500;
   margin-bottom: 12px;
-  opacity: 0.9;
+  opacity: 0.8;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .cardTitle {
-  font-size: 2rem;
-  font-weight: 400;
-  line-height: 1.2;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.85rem;
+  font-weight: 500;
+  line-height: 1.3;
 }
 
 .cardTitle span {
+  font-family: var(--font-playfair), serif;
   font-style: italic;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .cardDesc {
-  font-size: 1rem;
-  line-height: 1.5;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
   opacity: 0.9;
 }
 
 .enquireBtn {
-  background-color: #071550;
+  background-color: #00178D;
   color: white;
-  padding: 16px 40px;
-  border-radius: 999px;
-  font-weight: 500;
-  font-size: 1.1rem;
+  padding: 16px 44px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 1rem;
   border: none;
   cursor: pointer;
-  margin-bottom: 16px;
-  transition: transform 0.2s;
+  margin-bottom: 20px;
+  transition: transform 0.2s, background-color 0.2s;
+  z-index: 10;
+  box-shadow: 0 8px 20px rgba(0, 23, 141, 0.2);
 }
 
 .enquireBtn:hover {
+  background-color: #051D96;
   transform: translateY(-2px);
 }
 
 .enquireSub {
-  font-size: 0.75rem;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.72rem;
   color: #4B5563;
+  font-weight: 500;
+  z-index: 10;
 }
 
 .cardImage {
@@ -511,7 +562,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
   z-index: 1;
 }
 
@@ -522,63 +573,456 @@
 
 /* ========== GRID FOOTER ========== */
 .gridFooter {
-  background: #0F172A;
   position: relative;
-  height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.gridFooter::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  background-position: center;
-}
-
-.centerSquare {
-  width: 400px;
-  height: 400px;
-  background: #1E40AF;
-  box-shadow: 0 0 150px rgba(37, 99, 235, 0.6);
-  position: relative;
-  z-index: 10;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-}
-
-.centerSquareInner {
-  width: 98%;
-  height: 98%;
-  background: rgba(30, 64, 175, 0.5);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 6px;
-}
-
-.gridFooterContent {
-  position: absolute;
-  z-index: 20;
-  text-align: center;
-  color: white;
+  padding: 120px 24px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  width: 100%;
+  height: 918px;
+  background-color: #0A1F6D;
 }
 
-.gridFooterContent h2 {
-  font-size: 5rem;
-  font-weight: 300;
+.footerGradientBg {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1475px;
+  height: 918px;
+  background: linear-gradient(180deg, #0A1F6D 0%, #00178D 100%);
+  opacity: 1;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.footerBgText {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 22vw;
+  line-height: 1;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.04);
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+  user-select: none;
+}
+
+.footerContent {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+}
+
+.footerLogoWrapper {
+  width: 68px;
+  height: 68px;
   margin-bottom: 32px;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.15));
+}
+
+.footerLogoIcon {
+  width: 100%;
+  height: 100%;
+}
+
+.footerTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 3.8rem;
+  line-height: 1.15;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.footerTitle span {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-weight: 500;
+  color: #B7C3FF;
+}
+
+.footerSubtitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #ffffff;
+  opacity: 0.8;
+  margin-bottom: 40px;
+  max-width: 680px;
+}
+
+.footerCtaRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.footerPrimaryBtn {
+  background-color: #5773FF;
+  color: #ffffff;
+  padding: 16px 36px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform 0.2s, background-color 0.2s;
+  box-shadow: 0 8px 24px rgba(87, 115, 255, 0.25);
+}
+
+.footerPrimaryBtn:hover {
+  background-color: #435be0;
+  transform: translateY(-2px);
+}
+
+.footerEmailLink {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1rem;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.footerEmailLink a {
+  color: #ffffff;
+  text-decoration: underline;
+  transition: opacity 0.2s;
+}
+
+.footerEmailLink a:hover {
+  opacity: 0.8;
+}
+
+.footerMicroCopy {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.8rem;
+  color: #ffffff;
+  opacity: 0.45;
+}
+
+.footerBottomBar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1280px;
+  margin-top: auto;
+  padding: 24px 48px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  opacity: 0.6;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.85rem;
+}
+
+/* ========== PROCESS (HOW WE WORK) SECTION ========== */
+.processSection {
+  padding: 120px 0 0;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.processContainer {
+  display: flex;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 48px 100px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+}
+
+.processLeft {
+  flex: 1;
+  max-width: 720px;
+}
+
+.processPreTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.1rem;
+  color: #4B5563;
+  margin-bottom: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.processTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 3.5rem;
+  font-weight: 400;
+  margin: 0 0 20px;
+  color: #111827;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.processTitle span {
+  color: #00178D;
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.processSubtitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.05rem;
+  color: #4B5563;
+  line-height: 1.6;
+  margin-bottom: 60px;
+  max-width: 600px;
+}
+
+.processSteps {
+  display: flex;
+  gap: 32px;
+}
+
+.stepItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.stepNumber {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #00178D;
+  margin-bottom: 16px;
+}
+
+.stepTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.stepTitle span {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-weight: 500;
+  color: #00178D;
+}
+
+.stepDesc {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.88rem;
+  color: #4B5563;
+  line-height: 1.6;
+}
+
+.processRight {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+}
+
+.largeCraneWrapper {
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  /* Add drop shadow for a clean offset soft shadow effect */
+  filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.12));
+}
+
+.largeCraneSvg {
+  width: 100%;
+  height: auto;
+}
+
+/* Full-width Marquee Bar */
+.marqueeBar {
+  background-color: #00178D;
+  overflow: hidden;
+  display: flex;
+  padding: 24px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.marqueeTrack {
+  display: flex;
+  white-space: nowrap;
+  animation: marqueeScroll 30s linear infinite;
+  width: max-content;
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marqueeItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 32px;
+  color: #ffffff;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 2.2rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-right: 32px;
+  white-space: nowrap;
+}
+
+.marqueeIcon {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  opacity: 0.9;
+}
+
+/* ========== FAQ SECTION ========== */
+.faqSection {
+  padding: 120px 0;
+  background: linear-gradient(180deg, #ffffff 60%, #D4E2FF 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+.faqContainer {
+  display: flex;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 48px;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 80px;
+}
+
+.faqLeft {
+  flex: 1;
+  max-width: 480px;
+  position: sticky;
+  top: 100px;
+}
+
+.faqPreTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.1rem;
+  color: #4B5563;
+  margin-bottom: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.faqTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 3.5rem;
+  font-weight: 400;
+  margin: 0 0 20px;
+  color: #111827;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.faqTitle span {
+  color: #00178D;
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.faqSubtitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.05rem;
+  color: #4B5563;
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.faqRight {
+  flex: 1.3;
+  width: 100%;
+}
+
+.faqItem {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.faqItem:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.faqQuestionBtn {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  padding: 28px 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.faqQuestionText {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.65rem;
+  font-weight: 500;
+  color: #111827;
+  line-height: 1.3;
+}
+
+.faqQuestionText span {
+  color: #00178D;
+  font-style: italic;
+}
+
+.faqIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00178D;
+  margin-left: 24px;
+  flex-shrink: 0;
+}
+
+.faqAnswerContainer {
+  overflow: hidden;
+}
+
+.faqAnswerText {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.92rem;
+  color: #4B5563;
+  line-height: 1.65;
+  padding-bottom: 28px;
+  max-width: 640px;
 }
 
 /* ========== RESPONSIVE ========== */
@@ -588,28 +1032,43 @@
   .navbar {
     padding: 20px 32px;
   }
+
   .navLinks {
     gap: 24px;
   }
+
   .heroWrapper {
     padding: 160px 32px 120px;
   }
+
   .mainTitle {
-    font-size: 4.2rem;
+    font-size: 60px;
+    line-height: 62px;
   }
+
+  .convertHash,
+  .convertWord {
+    font-size: 60px;
+    line-height: 62px;
+  }
+
   .aboutHeader {
     padding: 0 32px;
   }
+
   .pillsSection {
     padding-left: max(32px, calc((100% - 1100px) / 2 + 32px));
     padding-right: max(32px, calc((100% - 1100px) / 2 + 32px));
   }
+
   .visionSection {
     padding: 100px 32px 70px;
   }
+
   .visionTitle {
     font-size: 4.5rem;
   }
+
   .visionGrid {
     max-width: 1000px;
     gap: 20px;
@@ -622,62 +1081,145 @@
     font-size: 25vw;
     top: 50%;
   }
+
   .mainTitle {
-    font-size: 3.5rem;
+    font-size: 48px;
+    line-height: 52px;
   }
+
+  .convertHash,
+  .convertWord {
+    font-size: 48px;
+    line-height: 52px;
+  }
+
   .mainSubtitle {
     max-width: 450px;
   }
+
   .aboutSection {
     padding: 100px 0 60px;
   }
+
   .aboutHeader {
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
     margin-bottom: 60px;
   }
+
   .aboutTitle {
     font-size: 2.8rem;
   }
+
   .aboutDesc {
     max-width: 100%;
   }
+
   .pillCard {
     width: 220px;
-    height: 420px;
-    padding: 48px 20px;
+    min-width: 220px;
+    height: 400px;
+    padding: 44px 20px;
   }
+
   .visionTitle {
     font-size: 3.5rem;
   }
+
   .visionGrid {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 380px 380px;
   }
+
   .cardLeft {
     grid-column: 1;
     grid-row: 1 / 3;
   }
+
   .cardTopMiddle {
     grid-column: 2;
     grid-row: 1;
   }
+
   .cardTopRight {
     grid-column: 2;
     grid-row: 2;
   }
+
   .cardBottomRight {
     grid-column: 1 / 3;
     grid-row: 3;
     height: 300px;
   }
+
   .gridFooter {
-    height: 500px;
+    height: auto;
+    padding: 80px 32px 40px;
   }
+
+  .footerGradientBg {
+    height: 100%;
+    width: 100%;
+    max-width: 1475px;
+  }
+
+  .footerTitle {
+    font-size: 3rem;
+  }
+
   .centerSquare {
     width: 320px;
     height: 320px;
+  }
+
+  /* Process Section */
+  .processContainer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 48px;
+    padding: 0 32px;
+  }
+
+  .processLeft {
+    max-width: 100%;
+  }
+
+  .processSubtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .processRight {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .largeCraneWrapper {
+    margin: 0 auto;
+  }
+
+  /* FAQ Section */
+  .faqContainer {
+    flex-direction: column;
+    gap: 48px;
+    padding: 0 32px;
+  }
+
+  .faqLeft {
+    position: static;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .faqSubtitle {
+    margin: 0 auto;
+    max-width: 600px;
+  }
+
+  .faqRight {
+    width: 100%;
   }
 }
 
@@ -686,46 +1228,66 @@
   .navbar {
     padding: 16px 24px;
   }
-  .navLinks, .navButton, .navButtonPrimary {
+
+  .navLinks,
+  .navButtonPrimary {
     display: none;
   }
+
   .mobileMenuBtn {
     display: block;
   }
+
   .heroWrapper {
     padding: 130px 20px 100px;
     min-height: auto;
   }
+
   .heroBgText {
     font-size: 30vw;
   }
+
   .mainTitle {
-    font-size: 2.8rem;
+    font-size: 36px;
+    line-height: 40px;
   }
+
+  .convertHash,
+  .convertWord {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
   .mainSubtitle {
     font-size: 1rem;
     max-width: 100%;
     padding: 0 8px;
   }
+
   .heroButtons {
     flex-direction: column;
     width: 100%;
     align-items: center;
     gap: 12px;
   }
-  .primaryBtn, .secondaryBtn {
+
+  .primaryBtn,
+  .secondaryBtn {
     width: 100%;
     max-width: 320px;
     text-align: center;
     justify-content: center;
     padding: 14px 28px;
   }
+
   .heroMicroCopy {
     font-size: 0.8rem;
   }
+
   .aboutSection {
     padding: 80px 0 60px;
   }
+
   .aboutHeader {
     padding: 0 24px;
     flex-direction: column;
@@ -733,77 +1295,149 @@
     gap: 16px;
     margin-bottom: 40px;
   }
+
   .aboutTitle {
     font-size: 2.2rem;
   }
+
   .aboutDesc {
     font-size: 0.9rem;
   }
+
   .pillsSection {
     padding-left: 24px;
     padding-right: 24px;
     gap: 16px;
   }
+
   .pillCard {
     width: 200px;
+    min-width: 200px;
     height: 380px;
     padding: 40px 18px;
   }
+
   .pillIconWrapper {
     width: 80px;
     height: 80px;
     margin-bottom: 24px;
   }
+
   .pillTitle {
     font-size: 1.3rem;
   }
+
   .pillDesc {
     font-size: 0.8rem;
   }
+
   .visionSection {
     padding: 80px 24px 60px;
   }
+
   .visionHeader {
     margin-bottom: 16px;
   }
+
   .visionPreTitle {
     font-size: 1rem;
   }
+
   .visionTitle {
     font-size: 2.5rem;
   }
+
   .visionSubtitle {
     font-size: 0.95rem;
     margin: 0 auto 40px;
   }
+
   .visionGrid {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     gap: 16px;
   }
-  .cardLeft, .cardTopMiddle, .cardTopRight, .cardBottomRight {
+
+  .cardLeft,
+  .cardTopMiddle,
+  .cardTopRight,
+  .cardBottomRight {
     grid-column: 1;
     grid-row: auto;
     height: 350px;
     padding: 28px;
     border-radius: 24px;
   }
+
   .cardLeft {
     height: 500px;
   }
+
   .cardTitle {
     font-size: 1.6rem;
   }
+
   .cardLabel {
     font-size: 0.85rem;
   }
+
   .enquireBtn {
     padding: 14px 32px;
     font-size: 1rem;
   }
+
   .gridFooter {
-    height: 350px;
+    height: auto;
+    padding: 80px 24px 40px;
   }
+
+  .footerCtaRow {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .footerTitle {
+    font-size: 2.2rem;
+  }
+
+  .footerSubtitle {
+    font-size: 0.95rem;
+    margin-bottom: 32px;
+  }
+
+  .footerBottomBar {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    padding: 20px 16px 0;
+  }
+
+  /* Process Section */
+  .processContainer {
+    padding: 0 24px;
+  }
+
+  .processSteps {
+    flex-direction: column;
+    gap: 28px;
+    text-align: left;
+  }
+
+  /* FAQ Section */
+  .faqContainer {
+    padding: 0 24px;
+  }
+
+  .faqTitle {
+    font-size: 2.5rem;
+  }
+
+  .faqQuestionText {
+    font-size: 1.3rem;
+  }
+
   .centerSquare {
     width: 220px;
     height: 220px;
@@ -815,123 +1449,254 @@
   .navbar {
     padding: 12px 16px;
   }
+
   .logo svg {
     width: 32px;
     height: 32px;
   }
+
   .heroWrapper {
     padding: 120px 16px 80px;
   }
+
   .heroContentMain {
-    margin-top: 10px;
+    margin-top: -30px;
   }
+
   .mainTitle {
     font-size: 2rem;
     margin-bottom: 16px;
   }
+
   .mainSubtitle {
     font-size: 0.9rem;
     margin-bottom: 28px;
   }
+
   .heroButtons {
     gap: 10px;
   }
-  .primaryBtn, .secondaryBtn {
+
+  .primaryBtn,
+  .secondaryBtn {
     padding: 12px 24px;
     font-size: 0.95rem;
   }
+
   .heroMicroCopy {
     margin-top: 16px;
     font-size: 0.75rem;
   }
+
   .aboutSection {
     padding: 60px 0 48px;
   }
+
   .aboutHeader {
     padding: 0 16px;
     margin-bottom: 32px;
   }
+
   .aboutTitle {
     font-size: 1.75rem;
   }
+
   .aboutDesc {
     font-size: 0.85rem;
   }
+
   .pillsSection {
     padding-left: 16px;
     padding-right: 16px;
     gap: 12px;
   }
+
   .pillCard {
     width: 170px;
+    min-width: 170px;
     height: 340px;
     padding: 32px 14px;
   }
+
   .pillIconWrapper {
     width: 64px;
     height: 64px;
     margin-bottom: 16px;
   }
+
   .pillTitle {
     font-size: 1.15rem;
     margin-bottom: 10px;
   }
+
   .pillDesc {
     font-size: 0.75rem;
     margin-bottom: 20px;
   }
+
   .pillButton {
     width: 40px;
     height: 40px;
   }
+
   .visionSection {
     padding: 60px 16px 48px;
   }
+
   .visionPreTitle {
     font-size: 0.9rem;
     margin-bottom: 10px;
   }
+
   .visionTitle {
     font-size: 1.8rem;
   }
+
   .visionSubtitle {
     font-size: 0.85rem;
     margin: 0 auto 32px;
   }
+
   .visionGrid {
     gap: 12px;
   }
-  .cardLeft, .cardTopMiddle, .cardTopRight, .cardBottomRight {
+
+  .cardLeft,
+  .cardTopMiddle,
+  .cardTopRight,
+  .cardBottomRight {
     height: 300px;
     padding: 24px;
     border-radius: 20px;
   }
+
   .cardLeft {
     height: 420px;
   }
+
   .cardTitle {
     font-size: 1.3rem;
   }
+
   .cardDesc {
     font-size: 0.85rem;
   }
+
   .cardLabel {
     font-size: 0.8rem;
   }
+
   .enquireBtn {
     padding: 12px 28px;
     font-size: 0.95rem;
   }
+
   .enquireSub {
     font-size: 0.65rem;
   }
+
   .gridFooter {
-    height: 280px;
+    height: auto;
+    padding: 60px 16px 32px;
   }
+
+  .footerTitle {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+
+  .footerSubtitle {
+    font-size: 0.88rem;
+    margin-bottom: 24px;
+  }
+
+  .footerMicroCopy {
+    font-size: 0.75rem;
+    margin-top: 16px;
+  }
+
+  .footerBgText {
+    font-size: 32vw;
+    bottom: -10px;
+  }
+
+  /* Process Section */
+  .processContainer {
+    padding: 0 16px;
+    gap: 32px;
+  }
+
+  .processTitle {
+    font-size: 2.2rem;
+  }
+
+  .processSubtitle {
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+  }
+
+  .stepNumber {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+  }
+
+  .stepTitle {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+  }
+
+  .stepDesc {
+    font-size: 0.85rem;
+  }
+
+  .marqueeBar {
+    padding: 16px 0;
+  }
+
+  .marqueeItem {
+    font-size: 1.5rem;
+    gap: 20px;
+    margin-right: 20px;
+  }
+
+  .marqueeIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* FAQ Section */
+  .faqContainer {
+    padding: 0 16px;
+    gap: 32px;
+  }
+
+  .faqTitle {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .faqSubtitle {
+    font-size: 0.95rem;
+  }
+
+  .faqQuestionBtn {
+    padding: 20px 0;
+  }
+
+  .faqQuestionText {
+    font-size: 1.15rem;
+  }
+
+  .faqAnswerText {
+    font-size: 0.85rem;
+    padding-bottom: 20px;
+  }
+
   .centerSquare {
     width: 180px;
     height: 180px;
   }
+
   .centerSquareInner {
     width: 85%;
     height: 85%;
@@ -943,34 +1708,47 @@
   .mainTitle {
     font-size: 1.7rem;
   }
+
   .heroWrapper {
     padding: 110px 12px 70px;
   }
-  .primaryBtn, .secondaryBtn {
+
+  .primaryBtn,
+  .secondaryBtn {
     padding: 10px 20px;
     font-size: 0.85rem;
   }
+
   .aboutTitle {
     font-size: 1.5rem;
   }
+
   .pillCard {
     width: 155px;
     height: 310px;
     padding: 28px 12px;
   }
+
   .pillTitle {
     font-size: 1rem;
   }
+
   .visionTitle {
     font-size: 1.5rem;
   }
-  .cardLeft, .cardTopMiddle, .cardTopRight, .cardBottomRight {
+
+  .cardLeft,
+  .cardTopMiddle,
+  .cardTopRight,
+  .cardBottomRight {
     height: 260px;
     padding: 20px;
   }
+
   .cardLeft {
     height: 380px;
   }
+
   .cardTitle {
     font-size: 1.1rem;
   }
