@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -21,8 +21,51 @@ const Wordmark = () => (
   </span>
 );
 
+const menuVariants = {
+  hidden: {
+    opacity: 0,
+    y: '-100%',
+    transition: {
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+      when: 'afterChildren',
+    }
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+      when: 'beforeChildren',
+      staggerChildren: 0.08,
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }
+  }
+};
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Prevent scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
 
   return (
     <>
@@ -66,36 +109,68 @@ export default function Navbar() {
         {mobileOpen && (
           <motion.div
             className={styles.mobileMenu}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={menuVariants}
           >
-            <button
-              onClick={() => setMobileOpen(false)}
-              style={{ position: 'absolute', top: 24, right: 24, color: 'black' }}
-              aria-label="Close menu"
-            >
-              <X size={28} />
-            </button>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '24px' }}>
-              <Image
-                src="/crane-logo.png"
-                alt="Origamie crane logo"
-                width={52}
-                height={52}
-                style={{ marginRight: '8px' }}
-              />
-              <Wordmark />
-            </div>
-            {navItems.map((item) => (
-              <a key={item.label} href={item.href} onClick={() => setMobileOpen(false)}>
-                {item.label}
+            <div className={styles.mobileMenuHeader}>
+              <a href="#home" className={styles.logo} onClick={() => setMobileOpen(false)}>
+                <Image
+                  src="/crane-logo.png"
+                  alt="Origamie crane logo"
+                  width={42}
+                  height={42}
+                  style={{ marginRight: '6px' }}
+                  priority
+                />
+                <Wordmark />
               </a>
-            ))}
-            <a href="#call" className={styles.navButtonPrimary} onClick={() => setMobileOpen(false)}>
-              Book a free call
-            </a>
+              <button
+                className={styles.mobileCloseBtn}
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close menu"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            <div className={styles.mobileMenuContent}>
+              <div className={styles.mobileLinks}>
+                {navItems.map((item, index) => (
+                  <motion.div key={item.label} variants={itemVariants}>
+                    <a
+                      href={item.href}
+                      className={styles.mobileNavLink}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <span className={styles.mobileNavLinkNum}>0{index + 1}</span>
+                      <span className={styles.mobileNavLinkText}>{item.label}</span>
+                    </a>
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.div variants={itemVariants} className={styles.mobileCTAWrapper}>
+                <a href="#call" className={styles.mobileNavCTA} onClick={() => setMobileOpen(false)}>
+                  Book a free call
+                </a>
+              </motion.div>
+            </div>
+
+            <motion.div variants={itemVariants} className={styles.mobileMenuFooter}>
+              <div className={styles.mobileContactItem}>
+                <span className={styles.mobileContactLabel}>Get in touch</span>
+                <a href="mailto:hello@origamie.co" className={styles.mobileContactValue}>
+                  hello@origamie.co
+                </a>
+              </div>
+              <div className={styles.mobileSocials}>
+                <a href="#" className={styles.mobileSocialLink}>LN</a>
+                <a href="#" className={styles.mobileSocialLink}>TW</a>
+                <a href="#" className={styles.mobileSocialLink}>IG</a>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
