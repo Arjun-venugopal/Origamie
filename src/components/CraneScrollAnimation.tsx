@@ -77,16 +77,30 @@ export default function CraneScrollAnimation() {
     let drawX = 0;
     let drawY = 0;
 
-    if (imgRatio > canvasRatio) {
-      // Image is wider than canvas ratio, match canvas height
-      drawHeight = canvas.height;
-      drawWidth = canvas.height * imgRatio;
-      drawX = (canvas.width - drawWidth) / 2;
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      // CONTAIN logic (fit image entirely inside canvas)
+      if (imgRatio > canvasRatio) {
+        drawWidth = canvas.width;
+        drawHeight = canvas.width / imgRatio;
+        drawY = (canvas.height - drawHeight) / 2;
+      } else {
+        drawHeight = canvas.height;
+        drawWidth = canvas.height * imgRatio;
+        drawX = (canvas.width - drawWidth) / 2;
+      }
     } else {
-      // Image is taller than canvas ratio, match canvas width
-      drawWidth = canvas.width;
-      drawHeight = canvas.width / imgRatio;
-      drawY = (canvas.height - drawHeight) / 2;
+      // COVER logic (fill entire canvas, crop edges)
+      if (imgRatio > canvasRatio) {
+        drawHeight = canvas.height;
+        drawWidth = canvas.height * imgRatio;
+        drawX = (canvas.width - drawWidth) / 2;
+      } else {
+        drawWidth = canvas.width;
+        drawHeight = canvas.width / imgRatio;
+        drawY = (canvas.height - drawHeight) / 2;
+      }
     }
 
     ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
