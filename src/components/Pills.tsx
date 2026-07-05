@@ -15,8 +15,8 @@ const services = [
   },
   {
     id: 2,
-    titleBlack: 'Se',
-    titleBlue: 'o',
+    titleBlack: 'Search Engine',
+    titleBlue: 'Optimization',
     desc: 'Improve Google rankings, website visibility, organic traffic, and business enquiries.',
     icon: <Search size={48} strokeWidth={1.5} />
   },
