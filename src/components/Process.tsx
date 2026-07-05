@@ -60,7 +60,7 @@ export default function Process() {
                 Discover <span>& strategize</span>
               </h3>
               <p className={styles.stepDesc}>
-                A 60-min deep-dive into your audience, offer and brand. You leave with a clear creative direction, even if we don't work together.
+                A 60-min deep-dive into your audience, offer and brand. You leave with a clear creative direction, even if we don&apos;t work together.
               </p>
             </motion.div>
 

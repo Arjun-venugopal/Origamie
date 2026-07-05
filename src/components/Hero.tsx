@@ -19,13 +19,13 @@ export default function Hero() {
   return (
     <div id="home" className={styles.heroWrapper}>
       {/* Background elements */}
-      <FloatingBird style={{ top: '15%', left: '15%', opacity: 0.8 }} delay={0} scale={0.4} />
-      <FloatingBird style={{ top: '25%', right: '15%', opacity: 0.9 }} delay={2} scale={0.4} />
-      <FloatingBird style={{ top: '35%', right: '5%', opacity: 0.8 }} delay={1.5} scale={0.4} />
-      <FloatingBird style={{ top: '55%', left: '5%', opacity: 0.9 }} delay={3} scale={0.4} />
-      <FloatingBird style={{ top: '50%', left: '45%', opacity: 0.6 }} delay={4} scale={0.3} />
-      <FloatingBird style={{ top: '60%', right: '25%', opacity: 0.7 }} delay={5} scale={0.4} />
-      <FloatingBird style={{ top: '55%', right: '5%', opacity: 0.9 }} delay={1} scale={0.8} />
+      <FloatingBird style={{ top: '15%', left: '15%', opacity: 0.6 }} delay={0} scale={0.3} />
+      <FloatingBird style={{ top: '25%', right: '15%', opacity: 0.85 }} delay={2} scale={0.55} />
+      <FloatingBird style={{ top: '35%', right: '5%', opacity: 0.7 }} delay={1.5} scale={0.4} />
+      <FloatingBird style={{ top: '55%', left: '5%', opacity: 0.9 }} delay={3} scale={0.65} />
+      <FloatingBird style={{ top: '50%', left: '45%', opacity: 0.4 }} delay={4} scale={0.25} />
+      <FloatingBird style={{ top: '60%', right: '25%', opacity: 0.75 }} delay={5} scale={0.48} />
+      <FloatingBird style={{ top: '55%', right: '5%', opacity: 0.95 }} delay={1} scale={0.85} />
 
       <div className={styles.heroBgText}>Origamie</div>
 

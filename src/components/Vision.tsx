@@ -32,7 +32,7 @@ export default function Vision() {
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
       >
-        Pretty isn't a strategy. We pair editorial design with conversion science so every scroll, click and form move the revenue needle.
+        Pretty isn&apos;t a strategy. We pair editorial design with conversion science so every scroll, click and form move the revenue needle.
       </motion.p>
 
       <div className={styles.visionGrid}>

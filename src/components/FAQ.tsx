@@ -14,7 +14,7 @@ const faqs: FAQItem[] = [
   {
     question: (
       <>
-        You're a new studio — <span>why work with Origame?</span>
+        You&apos;re a new studio — <span>why work with Origame?</span>
       </>
     ),
     answer: "Because you get senior, founder-led craft without the layered agency overhead. We take on a small number of projects, obsess over every detail, and price transparently. As one of our first clients you also get founding-partner pricing.",
@@ -32,7 +32,7 @@ const faqs: FAQItem[] = [
     answer: "Most marketing sites go live in 2 to 6 weeks. Discover & strategy takes 1 week, design takes 1–2 weeks, and Webflow/custom development is completed in another 2-3 weeks.",
   },
   {
-    question: <>What if I don't love the design?</>,
+    question: <>What if I don&apos;t love the design?</>,
     answer: "We offer weekly demos and live Figma access, meaning you are aligned at every single step. We design collaboratively and iterate on the layout until you are absolutely thrilled with it.",
   },
 ];

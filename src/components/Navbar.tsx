@@ -166,9 +166,9 @@ export default function Navbar() {
                 </a>
               </div>
               <div className={styles.mobileSocials}>
-                <a href="#" className={styles.mobileSocialLink}>LN</a>
-                <a href="#" className={styles.mobileSocialLink}>TW</a>
-                <a href="#" className={styles.mobileSocialLink}>IG</a>
+                <a href="#" aria-label="LinkedIn" className={styles.mobileSocialLink}>LN</a>
+                <a href="#" aria-label="Twitter" className={styles.mobileSocialLink}>TW</a>
+                <a href="#" aria-label="Instagram" className={styles.mobileSocialLink}>IG</a>
               </div>
             </motion.div>
           </motion.div>
