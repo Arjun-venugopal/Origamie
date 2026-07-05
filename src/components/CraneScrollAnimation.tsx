@@ -179,24 +179,28 @@ export default function CraneScrollAnimation() {
   // Normalize progress to value between 0 and 1
   const progressRatio = activeFrame / (TOTAL_FRAMES - 1);
 
-  // Animation variants - FIXED: Added Variants type to resolve TS errors
+  // Animation variants - Framer motion variants for the text box
   const containerVariants: Variants = {
     hidden: {
       opacity: 0,
-      x: stepDirection === 'left' ? -100 : 100
+      y: 80
     },
     visible: {
       opacity: 1,
-      x: 0,
+      y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.34, 1.56, 0.64, 1]
+        ease: [0.16, 1, 0.3, 1], // Custom smooth ease out
+        staggerChildren: 0.1
       }
     },
     exit: {
       opacity: 0,
-      x: stepDirection === 'left' ? 60 : -60,
-      transition: { duration: 0.4, ease: "easeIn" }
+      y: -40,
+      transition: {
+        duration: 0.4,
+        ease: "easeIn"
+      }
     }
   };
 
@@ -245,6 +249,10 @@ export default function CraneScrollAnimation() {
                 exit="exit"
                 variants={containerVariants}
                 className={styles.animationCaption}
+                style={{
+                  left: stepDirection === 'left' ? '10%' : 'auto',
+                  right: stepDirection === 'right' ? '10%' : 'auto',
+                }}
               >
                 <motion.span
                   className={styles.captionTag}
