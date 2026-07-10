@@ -2,16 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import styles from '@/app/page.module.css';
+import styles from './layout.module.css';
 
 const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'About Us', href: '#about' },
-  { label: 'Works', href: '#works' },
-  { label: 'Service', href: '#services' },
-  { label: 'Contact Us', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Works', href: '/works' },
+  { label: 'Services', href: '/services' },
+  { label: 'Contact Us', href: '/contact' },
 ];
 
 /* Origamie wordmark */
@@ -54,6 +56,7 @@ const itemVariants = {
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   // Prevent scroll when mobile menu is open
   useEffect(() => {
@@ -71,28 +74,36 @@ export default function Navbar() {
     <>
       <nav className={styles.navbar}>
         <div className={styles.navbarLeft}>
-          <a href="#home" className={styles.logo}>
+          <Link href="/" className={styles.logo}>
             <Image
               src="/crane-logo.png"
               alt="Origamie crane logo"
-              width={42}
-              height={42}
-              style={{ marginRight: '6px' }}
+              width={40}
+              height={40}
+              style={{ width: 'auto', height: 'auto' }}
+              className={styles.navbarIcon}
               priority
             />
             <Wordmark />
-          </a>
+          </Link>
         </div>
 
         <div className={styles.navLinks}>
-          {navItems.map((item) => (
-            <a key={item.label} href={item.href}>
-              {item.label}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link 
+                key={item.label} 
+                href={item.href}
+                className={isActive ? styles.activeNavLink : ''}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
 
-        <a href="#call" className={styles.navButtonPrimary}>
+        <a href="/contact" className={styles.navButtonPrimary}>
           Book a free call
         </a>
 
@@ -115,17 +126,18 @@ export default function Navbar() {
             variants={menuVariants}
           >
             <div className={styles.mobileMenuHeader}>
-              <a href="#home" className={styles.logo} onClick={() => setMobileOpen(false)}>
+              <Link href="/" className={styles.logo} onClick={() => setMobileOpen(false)}>
                 <Image
                   src="/crane-logo.png"
                   alt="Origamie crane logo"
-                  width={42}
-                  height={42}
-                  style={{ marginRight: '6px' }}
+                  width={32}
+                  height={32}
+                  style={{ width: 'auto', height: 'auto' }}
+                  className={styles.mobileNavIcon}
                   priority
                 />
                 <Wordmark />
-              </a>
+              </Link>
               <button
                 className={styles.mobileCloseBtn}
                 onClick={() => setMobileOpen(false)}
@@ -137,22 +149,25 @@ export default function Navbar() {
 
             <div className={styles.mobileMenuContent}>
               <div className={styles.mobileLinks}>
-                {navItems.map((item, index) => (
-                  <motion.div key={item.label} variants={itemVariants}>
-                    <a
-                      href={item.href}
-                      className={styles.mobileNavLink}
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <span className={styles.mobileNavLinkNum}>0{index + 1}</span>
-                      <span className={styles.mobileNavLinkText}>{item.label}</span>
-                    </a>
-                  </motion.div>
-                ))}
+                {navItems.map((item, index) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <motion.div key={item.label} variants={itemVariants}>
+                      <Link
+                        href={item.href}
+                        className={`${styles.mobileNavLink} ${isActive ? styles.activeMobileNavLink : ''}`}
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        <span className={styles.mobileNavLinkNum}>0{index + 1}</span>
+                        <span className={styles.mobileNavLinkText}>{item.label}</span>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </div>
 
               <motion.div variants={itemVariants} className={styles.mobileCTAWrapper}>
-                <a href="#call" className={styles.mobileNavCTA} onClick={() => setMobileOpen(false)}>
+                <a href="/contact" className={styles.mobileNavCTA} onClick={() => setMobileOpen(false)}>
                   Book a free call
                 </a>
               </motion.div>
@@ -166,6 +181,7 @@ export default function Navbar() {
                 </a>
               </div>
               <div className={styles.mobileSocials}>
+                {/* TODO: Replace with real social media URLs */}
                 <a href="#" aria-label="LinkedIn" className={styles.mobileSocialLink}>LN</a>
                 <a href="#" aria-label="Twitter" className={styles.mobileSocialLink}>TW</a>
                 <a href="#" aria-label="Instagram" className={styles.mobileSocialLink}>IG</a>

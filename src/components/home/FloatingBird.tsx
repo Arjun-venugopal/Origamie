@@ -20,9 +20,13 @@ export default function FloatingBird({ style, delay = 0, scale = 1 }: FloatingBi
       <Image
         src="/crane-logo.png"
         alt="Origamie crane logo"
-        width={80 * scale}
-        height={80 * scale}
-        style={{ pointerEvents: 'none' }}
+        width={120}
+        height={120}
+        style={{ 
+          width: `calc(clamp(30px, 8vw, 100px) * ${scale})`, 
+          height: 'auto', 
+          pointerEvents: 'none' 
+        }}
       />
     </motion.div>
   );

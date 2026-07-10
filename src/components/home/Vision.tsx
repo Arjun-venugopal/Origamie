@@ -1,16 +1,31 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import styles from '@/app/page.module.css';
 import FloatingBird from './FloatingBird';
 
-
-
 export default function Vision() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  // Asymmetric parallax: outer columns move up faster, inner columns move slower
+  const yFast = useTransform(smoothProgress, [0, 1], [80, -80]);
+  const ySlow = useTransform(smoothProgress, [0, 1], [30, -30]);
+
   return (
-    <section id="about" className={styles.visionSection}>
+    <section id="about" className={styles.visionSection} ref={containerRef}>
       <motion.div 
         className={styles.visionHeader}
         initial={{ opacity: 0, y: 20 }}
@@ -36,17 +51,21 @@ export default function Vision() {
       </motion.p>
 
       <div className={styles.visionGrid}>
-        {/* Card 1 (Left) */}
+        {/* Card 1 (Left) - Fast Parallax */}
         <motion.div 
           className={styles.cardLeft}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          style={{ y: yFast }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          viewport={{ once: true, margin: "-100px" }}
         >
           <Image 
             src="/hand.jpg" 
             alt="Hand pointing"
             fill
+            sizes="(max-width: 768px) 100vw, 33vw"
             className={styles.cardImage}
             style={{ mixBlendMode: 'overlay' }}
           />
@@ -62,18 +81,21 @@ export default function Vision() {
           </div>
         </motion.div>
         
-        {/* Card 2 (Top Middle) */}
+        {/* Card 2 (Top Middle) - Slow Parallax */}
         <motion.div 
           className={styles.cardTopMiddle}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
+          style={{ y: ySlow }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.02 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
         >
           <Image 
             src="/runner.jpg" 
             alt="Running person blur"
             fill
+            sizes="(max-width: 768px) 100vw, 33vw"
             className={styles.cardImage}
             style={{ mixBlendMode: 'overlay' }}
           />
@@ -85,13 +107,15 @@ export default function Vision() {
           </div>
         </motion.div>
 
-        {/* Card 3 (Top Right) */}
+        {/* Card 3 (Top Right) - Slow Parallax */}
         <motion.div 
           className={styles.cardTopRight}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
+          style={{ y: ySlow }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.02 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
         >
           <FloatingBird style={{ top: '20%', left: '10%' }} delay={0} scale={0.4} />
           <FloatingBird style={{ top: '15%', right: '15%' }} delay={1} scale={0.6} />
@@ -102,18 +126,21 @@ export default function Vision() {
           <span className={styles.enquireSub}>Replies within 24 hours · Fixed quote · No pressure</span>
         </motion.div>
         
-        {/* Card 4 (Bottom Right - Wide) */}
+        {/* Card 4 (Bottom Right - Wide) - Fast Parallax */}
         <motion.div 
           className={styles.cardBottomRight}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
+          style={{ y: yFast }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.02 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.3 }}
         >
           <Image 
             src="/people.jpg" 
             alt="People walking"
             fill
+            sizes="(max-width: 768px) 100vw, 66vw"
             className={styles.cardImage}
             style={{ mixBlendMode: 'overlay' }}
           />

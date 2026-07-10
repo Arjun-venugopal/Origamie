@@ -1,39 +1,32 @@
 'use client';
 
 import { useState } from 'react';
-import styles from './page.module.css';
+import styles from './works.module.css';
 import Navbar from '@/components/layout/Navbar';
-import Hero from '@/components/home/Hero';
-import Pills from '@/components/home/Pills';
-import Vision from '@/components/home/Vision';
-import CraneScrollAnimation from '@/components/home/CraneScrollAnimation';
-import Process from '@/components/home/Process';
-import FAQ from '@/components/home/FAQ';
 import GridFooter from '@/components/layout/GridFooter';
 import SmoothScroll from '@/components/layout/SmoothScroll';
 import PageLoader from '@/components/layout/PageLoader';
 
-export default function Home() {
+import WorksHero from '@/components/works/WorksHero';
+import WorksGrid from '@/components/works/WorksGrid';
+
+export default function WorksPage() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className="page-wrapper">
+    <>
       <PageLoader onComplete={() => setIsLoaded(true)} />
       
       {isLoaded && (
         <SmoothScroll>
           <main className={styles.main}>
             <Navbar />
-            <Hero />
-            <Pills />
-            <Vision />
-            <CraneScrollAnimation />
-            <Process />
-            <FAQ />
+            <WorksHero />
+            <WorksGrid />
             <GridFooter />
           </main>
         </SmoothScroll>
       )}
-    </div>
+    </>
   );
 }

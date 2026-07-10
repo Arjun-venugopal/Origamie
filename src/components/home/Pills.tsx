@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDownRight, Megaphone, Search, Infinity, MousePointer2, PenTool, Video, Globe, Smartphone, Wrench } from 'lucide-react';
+import { ArrowDownRight, Megaphone, Search, Infinity as InfinityIcon, MousePointer2, PenTool, Video, Globe, Smartphone, Wrench } from 'lucide-react';
 import styles from '@/app/page.module.css';
 
 const services = [
@@ -25,7 +25,7 @@ const services = [
     titleBlack: 'Meta',
     titleBlue: 'ads',
     desc: 'Reach customers through Facebook and Instagram ads that generate quality leads.',
-    icon: <Infinity size={48} strokeWidth={1.5} />
+    icon: <InfinityIcon size={48} strokeWidth={1.5} />
   },
   {
     id: 4,
@@ -71,12 +71,32 @@ const services = [
   }
 ];
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
+const springScaleIn = {
+  hidden: { opacity: 0, scale: 0.8, y: 40 },
   visible: (i: number) => ({
     opacity: 1,
+    scale: 1,
     y: 0,
-    transition: { delay: i * 0.1 + 0.2, duration: 0.6, ease: [0.4, 0, 0.2, 1] as const }
+    transition: { 
+      delay: i * 0.1, 
+      type: "spring" as const, 
+      stiffness: 100, 
+      damping: 15,
+      mass: 0.8
+    }
+  })
+};
+
+const floatingIcon = {
+  animate: (i: number) => ({
+    y: [0, -10, 0],
+    rotate: [-2, 2, -2],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut" as const,
+      delay: i * 0.2
+    }
   })
 };
 
@@ -91,7 +111,7 @@ export default function Pills() {
           viewport={{ once: true }}
         >
           What we craft, fold,<br />
-          and ship for <span style={{ color: '#ffffffff' }}>#you.</span>
+          and ship for <span style={{ color: '#ffffff' }}>#you.</span>
         </motion.h2>
 
         <motion.p
@@ -113,12 +133,17 @@ export default function Pills() {
             custom={i}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeInUp}
+            viewport={{ once: true, margin: "-50px" }}
+            variants={springScaleIn}
           >
-            <div className={styles.pillIconWrapper}>
+            <motion.div 
+              className={styles.pillIconWrapper}
+              custom={i}
+              animate="animate"
+              variants={floatingIcon}
+            >
               {s.icon}
-            </div>
+            </motion.div>
             <h3 className={styles.pillTitle}>
               {s.titleBlack} <span>{s.titleBlue}</span>
             </h3>
