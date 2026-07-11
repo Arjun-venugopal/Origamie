@@ -1,0 +1,229 @@
+/* ========== HERO ========== */
+.heroWrapper {
+  position: relative;
+  min-height: 130vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 30%, #D4E2FF 50%, #5773FF 65%, #0A1F6D 100%);
+  color: black;
+  overflow: hidden;
+  text-align: center;
+  padding: 180px 24px 140px;
+}
+
+.heroBgText {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  font-size: 22vw;
+  line-height: 2;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.05);
+  font-family: var(--font-outfit), sans-serif;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroContentMain {
+  position: relative;
+  z-index: 10;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -190px;
+}
+
+.mainTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(2.5rem, 5vw + 1rem, 76px);
+  line-height: 1.1;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0%;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #111827;
+}
+
+.convertHash {
+  font-family: var(--font-playfair), serif;
+  font-size: clamp(2.5rem, 5vw + 1rem, 76px);
+  line-height: 1.1;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: #5773FF;
+}
+
+.convertWord {
+  font-family: var(--font-playfair), serif;
+  font-size: clamp(2.5rem, 5vw + 1rem, 76px);
+  line-height: 1.1;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: #5773FF;
+}
+
+.mainSubtitle {
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 1000px;
+  color: #374151;
+  margin-bottom: 40px;
+  font-weight: 500;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 16px;
+}
+
+.primaryBtn {
+  background-color: #071550;
+  color: white;
+  padding: 16px 36px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 1.05rem;
+  transition: transform 0.2s, background-color 0.2s;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.primaryBtn:hover {
+  background-color: #040d36;
+  transform: translateY(-2px);
+}
+
+.secondaryBtn {
+  background-color: white;
+  color: #5773FF;
+  border: 1px solid #5773FF;
+  padding: 16px 36px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 1.05rem;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.secondaryBtn:hover {
+  background-color: #F8FAFC;
+  transform: translateY(-2px);
+}
+
+.heroMicroCopy {
+  margin-top: 24px;
+  font-size: 0.85rem;
+  color: #4B5563;
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 1280px) {
+  .heroWrapper {
+    padding: 160px 32px 120px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .heroBgText {
+    font-size: 25vw;
+    top: 50%;
+  }
+  .mainSubtitle {
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroWrapper {
+    min-height: 100vh;
+    padding: 140px 16px 80px;
+  }
+  .heroContentMain {
+    margin-top: 0;
+  }
+  .heroBgText {
+    font-size: 32vw;
+    top: 25%;
+  }
+  .mainTitle {
+    margin-bottom: 16px;
+  }
+  .mainSubtitle {
+    font-size: 1.05rem;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 32px;
+    padding: 0 16px;
+  }
+  .heroButtons {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 16px;
+  }
+  .primaryBtn,
+  .secondaryBtn {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    justify-content: center;
+    padding: 16px 28px;
+    font-size: 1rem;
+  }
+  .heroMicroCopy {
+    font-size: 0.85rem;
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroWrapper {
+    padding: 120px 16px 60px;
+  }
+  .heroContentMain {
+    margin-top: -20px;
+  }
+  .mainTitle {
+    margin-bottom: 12px;
+  }
+  .mainSubtitle {
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+    padding: 0 8px;
+  }
+  .heroButtons {
+    gap: 12px;
+    padding: 0 16px;
+  }
+  .primaryBtn,
+  .secondaryBtn {
+    padding: 14px 24px;
+    max-width: 100%;
+  }
+  .heroMicroCopy {
+    margin-top: 12px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .heroWrapper {
+    padding: 100px 12px 50px;
+  }
+  .heroButtons {
+    padding: 0 8px;
+  }
+  .primaryBtn,
+  .secondaryBtn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}

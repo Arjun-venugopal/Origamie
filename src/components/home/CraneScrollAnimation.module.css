@@ -1,0 +1,181 @@
+/* ========== HORIZONTAL JOURNEY - AWWWARDS UI ========== */
+
+.scrollAnimationSection {
+  position: relative;
+  height: 100vh; /* The section itself will be pinned by GSAP, scrolling height is defined by end value */
+  background-color: #030510; /* Ultra-deep cinematic background */
+  color: #ffffff;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.scrollAnimationSticky {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Loader */
+.loaderContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #030510;
+  z-index: 50;
+}
+
+.loaderTypography {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(4rem, 15vw, 12rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.loaderLabel {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 16px;
+}
+
+/* Canvas Layer */
+.canvasContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scrollCanvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fill the screen completely */
+  opacity: 0.7; /* Dim the crane slightly so text pops */
+  filter: saturate(0) contrast(1.2); /* Make the crane feel metallic/dramatic */
+}
+
+/* Dark cinematic overlay */
+.canvasOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, #030510 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Horizontal Scrolling Track */
+.horizontalTrack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300vw; /* 3 panels * 100vw */
+  height: 100vh;
+  display: flex;
+  z-index: 10;
+  /* GSAP will translate this track X: -200vw */
+}
+
+/* Individual Text Panels */
+.textPanel {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 5vw;
+}
+
+/* Typography */
+.captionTag {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.captionTag::before,
+.captionTag::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.captionTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(3rem, 7vw, 7rem); /* Massive */
+  font-weight: 300;
+  line-height: 1.05;
+  color: #ffffff;
+  margin: 0 0 40px 0;
+  letter-spacing: -0.02em;
+  max-width: 90vw;
+  text-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.captionTitle span {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #5773FF; /* Signature blue */
+  display: block; /* New line */
+}
+
+.captionDesc {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0;
+  font-weight: 300;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ========== RESPONSIVE OVERRIDES ========== */
+@media (max-width: 768px) {
+  .captionTag::before,
+  .captionTag::after {
+    width: 20px;
+  }
+  
+  .captionTitle {
+    font-size: clamp(2.5rem, 9vw, 4rem);
+    margin-bottom: 24px;
+  }
+  
+  .captionTitle span {
+    display: block;
+  }
+
+  .scrollCanvas {
+    object-fit: contain; /* Don't crop the crane on mobile */
+    opacity: 0.5;
+  }
+}

@@ -1,10 +1,9 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import styles from '@/app/page.module.css';
+import styles from './CraneScrollAnimation.module.css';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -12,24 +11,16 @@ if (typeof window !== 'undefined') {
 
 const TOTAL_FRAMES = 30;
 
-// Helper function to get step from frame
-function getStepFromFrame(frame: number): number {
-  if (frame < 10) return 1;
-  if (frame < 20) return 2;
-  return 3;
-}
-
 export default function CraneScrollAnimation() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
-  const [activeFrame, setActiveFrame] = useState(0);
-  const [stepDirection, setStepDirection] = useState<'left' | 'right'>('left');
 
-  // Refs for scroll locking and drawing without re-binding listeners
+  // Ref for drawing without re-binding listeners
   const activeFrameRef = useRef(0);
 
   // Preload all 30 frames
@@ -57,7 +48,7 @@ export default function CraneScrollAnimation() {
     imagesRef.current = loadedImages;
   }, []);
 
-  // Main canvas drawing logic (cover sizing)
+  // Main canvas drawing logic
   const drawFrame = (index: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -80,7 +71,7 @@ export default function CraneScrollAnimation() {
     const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
-      // CONTAIN logic (fit image entirely inside canvas)
+      // Contain on mobile so crane isn't wildly cropped
       if (imgRatio > canvasRatio) {
         drawWidth = canvas.width;
         drawHeight = canvas.width / imgRatio;
@@ -91,7 +82,7 @@ export default function CraneScrollAnimation() {
         drawX = (canvas.width - drawWidth) / 2;
       }
     } else {
-      // COVER logic (fill entire canvas, crop edges)
+      // Cover on desktop for cinematic background
       if (imgRatio > canvasRatio) {
         drawHeight = canvas.height;
         drawWidth = canvas.height * imgRatio;
@@ -129,204 +120,104 @@ export default function CraneScrollAnimation() {
     return () => window.removeEventListener('resize', handleResize);
   }, [isLoaded]);
 
-  // Handle scroll to draw the corresponding frame using GSAP
+  // Handle GSAP Horizontal Scroll & Frame Scrubbing
   useEffect(() => {
-    if (!isLoaded || !containerRef.current) return;
+    if (!isLoaded || !containerRef.current || !trackRef.current) return;
 
     const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: 'top top',
-        end: '+=250%', // Amount of scroll distance the animation spans
-        pin: true,
-        pinSpacing: true, // Wait until animation completes before next section scrolls in
-        onUpdate: (self) => {
-          // Progress goes from 0 to 1 over the duration of the pin
-          const targetFrame = Math.min(
-            Math.floor(self.progress * TOTAL_FRAMES),
-            TOTAL_FRAMES - 1
-          );
-          
-          activeFrameRef.current = targetFrame;
-          setActiveFrame(targetFrame);
-          
-          const currentStep = getStepFromFrame(targetFrame);
-          const newDirection = currentStep % 2 === 0 ? 'right' : 'left';
-          setStepDirection(newDirection);
-
-          drawFrame(targetFrame);
+      
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: '+=300%', // 300% scroll distance for 3 panels
+          pin: true,
+          scrub: 1, // Smooth scrub
+          onUpdate: (self) => {
+            // Scrub canvas frames based on progress
+            const targetFrame = Math.min(
+              Math.floor(self.progress * TOTAL_FRAMES),
+              TOTAL_FRAMES - 1
+            );
+            
+            if (activeFrameRef.current !== targetFrame) {
+              activeFrameRef.current = targetFrame;
+              drawFrame(targetFrame);
+            }
+          }
         }
       });
+
+      // Move the track horizontally by exactly 2 screen widths
+      // (from Panel 1 [0%] to Panel 3 [66.66%])
+      tl.to(trackRef.current, {
+        xPercent: -66.666,
+        ease: 'none'
+      });
+
     }, containerRef);
 
     return () => ctx.revert();
   }, [isLoaded]);
 
-
-  // Define steps copy mapping based on the frame index
-  const getStepInfo = (frame: number) => {
-    const step = getStepFromFrame(frame);
-
-    const stepsData = {
-      1: {
-        tag: "01 / Precision",
-        title: <>Crafted with <span>surgical precision.</span></>,
-        desc: "We align every folding line of the creative layout to lead your user's eyes to the core message."
-      },
-      2: {
-        tag: "02 / Alignment",
-        title: <>Where art meets <span>conversion science.</span></>,
-        desc: "Not just aesthetic grids, but layout hierarchies optimized for engagement, retention and conversion."
-      },
-      3: {
-        tag: "03 / Unfold",
-        title: <>Your digital presence, <span>fully realized.</span></>,
-        desc: "Watch your brand unfold seamlessly into high-performance web pages that drive growth."
-      }
-    };
-
-    return { step, ...stepsData[step as keyof typeof stepsData] };
-  };
-
-  const stepInfo = getStepInfo(activeFrame);
-
-  // Normalize progress to value between 0 and 1
-  const progressRatio = activeFrame / (TOTAL_FRAMES - 1);
-
-  // Animation variants - Framer motion variants for the text box
-  const containerVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 80
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1], // Custom smooth ease out
-        staggerChildren: 0.1
-      }
-    },
-    exit: {
-      opacity: 0,
-      y: -40,
-      transition: {
-        duration: 0.4,
-        ease: "easeIn"
-      }
-    }
-  };
-
-  // Child element variants - FIXED: Added Variants type
-  const childVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: (delay: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-        delay: delay
-      }
-    }),
-    exit: { opacity: 0, y: -10, transition: { duration: 0.3 } }
-  };
-
   return (
     <div ref={containerRef} className={styles.scrollAnimationSection}>
       <div className={styles.scrollAnimationSticky}>
-        {/* Subtle background design grid */}
-        <div className={styles.scrollBgGrid} />
-
-        {/* Loading Spinner */}
+        
+        {/* Loader */}
         {!isLoaded && (
           <div className={styles.loaderContainer}>
-            <div className={styles.loaderSpinner} />
-            <span className={styles.loaderText}>Loading Experience {loadProgress}%</span>
+            <div className={styles.loaderTypography}>{loadProgress}%</div>
+            <div className={styles.loaderLabel}>Loading Cinematic Experience</div>
           </div>
         )}
 
-        {/* Canvas viewport background */}
+        {/* Cinematic Canvas Background */}
         <div className={styles.canvasContainer} style={{ opacity: isLoaded ? 1 : 0 }}>
           <canvas ref={canvasRef} className={styles.scrollCanvas} />
+          <div className={styles.canvasOverlay} />
         </div>
 
-        {/* Centered Glassmorphic Text Overlay */}
+        {/* Horizontal Scrolling Track */}
         {isLoaded && (
-          <div className={styles.animationTextContainer}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={stepInfo.step}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={containerVariants}
-                className={styles.animationCaption}
-                style={{
-                  left: stepDirection === 'left' ? '10%' : 'auto',
-                  right: stepDirection === 'right' ? '10%' : 'auto',
-                }}
-              >
-                <motion.span
-                  className={styles.captionTag}
-                  variants={childVariants}
-                  custom={0.05}
-                >
-                  {stepInfo.tag}
-                </motion.span>
+          <div ref={trackRef} className={styles.horizontalTrack}>
+            
+            {/* Panel 1 */}
+            <div className={styles.textPanel}>
+              <span className={styles.captionTag}>01 &mdash; Precision</span>
+              <h2 className={styles.captionTitle}>
+                Crafted with <span>surgical precision.</span>
+              </h2>
+              <p className={styles.captionDesc}>
+                We align every folding line of the creative layout to lead your user's eyes directly to the core message.
+              </p>
+            </div>
 
-                <motion.h2
-                  className={styles.captionTitle}
-                  variants={childVariants}
-                  custom={0.15}
-                >
-                  {stepInfo.title}
-                </motion.h2>
+            {/* Panel 2 */}
+            <div className={styles.textPanel}>
+              <span className={styles.captionTag}>02 &mdash; Alignment</span>
+              <h2 className={styles.captionTitle}>
+                Where art meets <span>conversion science.</span>
+              </h2>
+              <p className={styles.captionDesc}>
+                Not just aesthetic grids, but layout hierarchies optimized for deep engagement, retention and conversion.
+              </p>
+            </div>
 
-                <motion.p
-                  className={styles.captionDesc}
-                  variants={childVariants}
-                  custom={0.25}
-                >
-                  {stepInfo.desc}
-                </motion.p>
-              </motion.div>
-            </AnimatePresence>
+            {/* Panel 3 */}
+            <div className={styles.textPanel}>
+              <span className={styles.captionTag}>03 &mdash; Unfold</span>
+              <h2 className={styles.captionTitle}>
+                Your digital presence, <span>fully realized.</span>
+              </h2>
+              <p className={styles.captionDesc}>
+                Watch your brand unfold seamlessly into high-performance web pages that drive exponential growth.
+              </p>
+            </div>
+
           </div>
         )}
 
-        {/* Scroll Progress Indicator on Left */}
-        {isLoaded && (
-          <div className={styles.scrollProgressIndicator}>
-            <div className={styles.progressTrack}>
-              <div
-                className={styles.progressFill}
-                style={{ height: `${progressRatio * 100}%` }}
-              />
-            </div>
-            <div className={styles.indicatorSteps}>
-              <div
-                className={styles.indicatorStep}
-                style={{ opacity: stepInfo.step === 1 ? 1 : 0.35 }}
-              >
-                01
-              </div>
-              <div
-                className={styles.indicatorStep}
-                style={{ opacity: stepInfo.step === 2 ? 1 : 0.35 }}
-              >
-                02
-              </div>
-              <div
-                className={styles.indicatorStep}
-                style={{ opacity: stepInfo.step === 3 ? 1 : 0.35 }}
-              >
-                03
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

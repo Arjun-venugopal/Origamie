@@ -1,0 +1,276 @@
+/* ========== ABOUT (PILLS) SECTION ========== */
+.aboutSection {
+  background: linear-gradient(180deg, #0A1F6D 45%, #ffffff 75%);
+  padding: 100px 0 80px;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.aboutHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1280px;
+  margin-bottom: 60px;
+  padding: 0 48px;
+  color: #111827;
+}
+
+.aboutTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 3.5rem;
+  line-height: 1.15;
+  font-weight: 400;
+  max-width: 520px;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.aboutTitle span {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-weight: 600;
+  color: #051D96;
+}
+
+.aboutDesc {
+  max-width: 420px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #ffffff;
+  font-weight: 400;
+  padding-top: 12px;
+}
+
+.pillsSection {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 24px;
+  width: 100%;
+  overflow-x: auto;
+  padding-top: 0;
+  padding-bottom: 40px;
+  padding-left: max(48px, calc((100% - 1280px) / 2 + 48px));
+  padding-right: max(48px, calc((100% - 1280px) / 2 + 48px));
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.pillsSection::-webkit-scrollbar {
+  display: none;
+}
+
+.pillCard {
+  background: white;
+  border-radius: 999px;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 240px;
+  min-width: 240px;
+  height: 420px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pillCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+}
+
+.pillIconWrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  color: #051D96;
+}
+
+.pillTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.pillTitle span {
+  color: #051D96;
+}
+
+.pillDesc {
+  font-size: 0.82rem;
+  color: #6B7280;
+  margin-bottom: 24px;
+  line-height: 1.6;
+  padding: 0 8px;
+}
+
+.pillButton {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #051D96;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.pillButton:hover {
+  background: #0A2BBF;
+  transform: translateY(-2px);
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 1280px) {
+  .aboutHeader {
+    padding: 0 32px;
+  }
+  .pillsSection {
+    padding-left: max(32px, calc((100% - 1100px) / 2 + 32px));
+    padding-right: max(32px, calc((100% - 1100px) / 2 + 32px));
+  }
+}
+
+@media (max-width: 1024px) {
+  .aboutSection {
+    padding: 100px 0 60px;
+  }
+  .aboutHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+  .aboutTitle {
+    font-size: 2.8rem;
+  }
+  .aboutDesc {
+    max-width: 100%;
+  }
+  .pillCard {
+    width: 220px;
+    min-width: 220px;
+    height: 400px;
+    padding: 44px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutSection {
+    padding: 80px 0 60px;
+  }
+  .aboutHeader {
+    padding: 0 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .aboutTitle {
+    font-size: 2.2rem;
+  }
+  .aboutDesc {
+    font-size: 0.9rem;
+  }
+  .pillsSection {
+    padding-left: 24px;
+    padding-right: 24px;
+    gap: 16px;
+  }
+  .pillCard {
+    width: 200px;
+    min-width: 200px;
+    height: 380px;
+    padding: 40px 18px;
+  }
+  .pillIconWrapper {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 24px;
+  }
+  .pillTitle {
+    font-size: 1.3rem;
+  }
+  .pillDesc {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutSection {
+    padding: 60px 0 48px;
+  }
+  .aboutHeader {
+    padding: 0 16px;
+    margin-bottom: 32px;
+  }
+  .aboutTitle {
+    font-size: 1.75rem;
+  }
+  .aboutDesc {
+    font-size: 0.85rem;
+  }
+  .pillsSection {
+    padding-left: 16px;
+    padding-right: 16px;
+    gap: 12px;
+  }
+  .pillCard {
+    width: 170px;
+    min-width: 170px;
+    height: 340px;
+    padding: 32px 14px;
+  }
+  .pillIconWrapper {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+  }
+  .pillTitle {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+  }
+  .pillDesc {
+    font-size: 0.75rem;
+    margin-bottom: 20px;
+  }
+  .pillButton {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 360px) {
+  .aboutTitle {
+    font-size: 1.5rem;
+  }
+  .pillCard {
+    width: 155px;
+    min-width: 155px;
+    height: 310px;
+    padding: 28px 12px;
+  }
+  .pillTitle {
+    font-size: 1rem;
+  }
+}

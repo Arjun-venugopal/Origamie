@@ -299,3 +299,37 @@
     padding: 32px 24px;
   }
 }
+
+@media (max-width: 480px) {
+  .heroWrapper {
+    padding: 100px 16px 60px;
+  }
+  .mainTitle {
+    font-size: clamp(2rem, 12vw, 14vw);
+  }
+  .mainSubtitle {
+    font-size: 1rem;
+  }
+  .storySection, .valuesSection {
+    padding: 60px 16px;
+  }
+  .storyTitle {
+    font-size: 2.5rem;
+  }
+  .storyParagraph {
+    font-size: 1.1rem;
+  }
+  .storyContent {
+    gap: 40px;
+  }
+  .valuesHeader {
+    margin-bottom: 60px;
+  }
+  .valueTitle {
+    font-size: 1.6rem;
+  }
+  .valueDesc {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+}

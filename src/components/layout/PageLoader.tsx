@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import styles from './layout.module.css';
+import styles from './PageLoader.module.css';
 
 // Custom Easing function for organic convergence
 function cubicBezier(t: number) {

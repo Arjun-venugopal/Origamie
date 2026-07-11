@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, User, MessageSquare } from 'lucide-react';
 import styles from '@/app/contact/contact.module.css';
 
 const fadeUpVariant = {
@@ -88,20 +88,36 @@ export default function ContactForm() {
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeUpVariant}
         >
+          <div className={styles.formHeader}>
+            <h3>Send a Message</h3>
+            <p>Fill out the form below and we&apos;ll get back to you shortly.</p>
+          </div>
+
           <form onSubmit={handleSubmit}>
-            <div className={styles.formGroup}>
-              <label htmlFor="name" className={styles.formLabel}>Your Name</label>
-              <input type="text" id="name" required className={styles.formInput} placeholder="John Doe" />
+            <div className={styles.formRow}>
+              <div className={styles.formGroup}>
+                <User className={styles.inputIcon} size={20} />
+                <input type="text" id="firstName" required className={styles.formInput} placeholder=" " />
+                <label htmlFor="firstName" className={styles.formLabel}>First Name</label>
+              </div>
+              
+              <div className={styles.formGroup}>
+                <User className={styles.inputIcon} size={20} />
+                <input type="text" id="lastName" required className={styles.formInput} placeholder=" " />
+                <label htmlFor="lastName" className={styles.formLabel}>Last Name</label>
+              </div>
             </div>
             
             <div className={styles.formGroup}>
+              <Mail className={styles.inputIcon} size={20} />
+              <input type="email" id="email" required className={styles.formInput} placeholder=" " />
               <label htmlFor="email" className={styles.formLabel}>Email Address</label>
-              <input type="email" id="email" required className={styles.formInput} placeholder="john@example.com" />
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="message" className={styles.formLabel}>How can we help?</label>
-              <textarea id="message" required className={styles.formTextarea} placeholder="Tell us about your project..."></textarea>
+              <MessageSquare className={styles.inputIcon} size={20} style={{ top: '24px', transform: 'none' }} />
+              <textarea id="message" required className={styles.formTextarea} placeholder=" "></textarea>
+              <label htmlFor="message" className={styles.formLabel} style={{ top: '24px', transform: 'translateY(-50%)' }}>How can we help?</label>
             </div>
 
             <button 

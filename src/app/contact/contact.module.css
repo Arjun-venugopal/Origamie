@@ -348,19 +348,20 @@
 .contactMethodIcon {
   width: 56px;
   height: 56px;
-  background-color: #F8FAFC;
+  background-color: rgba(0, 23, 141, 0.04);
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #5773FF;
+  color: #00178D;
   flex-shrink: 0;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .contactMethod:hover .contactMethodIcon {
-  transform: translateY(-4px);
-  background-color: #EEF2FF;
+  transform: translateY(-4px) scale(1.05);
+  background-color: rgba(0, 23, 141, 0.08);
+  box-shadow: 0 10px 20px -10px rgba(0, 23, 141, 0.15);
 }
 
 .contactMethodTitle {
@@ -380,79 +381,181 @@
 }
 
 a.contactMethodValue:hover {
-  color: #5773FF;
+  color: #00178D;
 }
 
-/* Form Styling */
+/* Form Styling - Dark Premium & Floating Labels */
 .contactFormWrapper {
-  background: #F8FAFC;
+  background: #00178D;
   padding: 64px;
   border-radius: 32px;
-  border: 1px solid rgba(0,0,0,0.04);
+  box-shadow: 0 40px 80px -20px rgba(0, 23, 141, 0.2), 0 0 0 1px rgba(0, 23, 141, 0.1);
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.contactFormWrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 100% 0%, rgba(87, 115, 255, 0.3) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.formHeader {
+  margin-bottom: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.formHeader h3 {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.formHeader p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
 }
 
 .formGroup {
-  margin-bottom: 32px;
+  position: relative;
+  margin-bottom: 24px;
+  z-index: 1;
 }
 
-.formLabel {
-  display: block;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 12px;
+.inputIcon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .formInput, .formTextarea {
   width: 100%;
-  background: #ffffff;
-  border: 1px solid #E5E7EB;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  padding: 18px 24px;
+  /* Top padding makes room for floating label */
+  padding: 26px 20px 10px 52px;
   font-family: inherit;
   font-size: 1rem;
-  color: #111827;
-  transition: all 0.3s ease;
+  color: #ffffff;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   outline: none;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.01);
-}
-
-.formInput:focus, .formTextarea:focus {
-  border-color: #5773FF;
-  box-shadow: 0 0 0 4px rgba(87, 115, 255, 0.1);
-  background: #ffffff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .formTextarea {
-  min-height: 160px;
+  min-height: 140px;
   resize: vertical;
+  /* Override padding and icon positioning for textarea specifically */
+  padding: 34px 20px 16px 52px;
+}
+
+/* Hide the placeholder so only the label shows when empty */
+.formInput::placeholder, .formTextarea::placeholder {
+  color: transparent;
+}
+
+.formInput:hover, .formTextarea:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.formInput:focus, .formTextarea:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #5773FF;
+  box-shadow: 0 0 0 4px rgba(87, 115, 255, 0.15);
+}
+
+/* Base Label State */
+.formLabel {
+  position: absolute;
+  left: 52px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+  transform-origin: left top;
+  z-index: 2;
+}
+
+/* Floating Action on Focus OR Has Value (not placeholder-shown) */
+.formInput:focus ~ .formLabel,
+.formInput:not(:placeholder-shown) ~ .formLabel {
+  transform: translateY(-130%) scale(0.75);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Textarea Floating Action */
+.formTextarea:focus ~ .formLabel,
+.formTextarea:not(:placeholder-shown) ~ .formLabel {
+  transform: translateY(-16px) scale(0.75);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Icon Highlight on Focus */
+.formInput:focus ~ .inputIcon,
+.formTextarea:focus ~ .inputIcon {
+  color: #5773FF;
 }
 
 .submitBtn {
   width: 100%;
-  background: #111827;
-  color: #ffffff;
+  background: #ffffff;
+  color: #00178D;
   border: none;
   padding: 20px;
   border-radius: 16px;
   font-family: var(--font-urbanist), sans-serif;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 16px;
+  z-index: 1;
 }
 
 .submitBtn:hover:not(:disabled) {
-  background: #0F1B3C;
+  background: #EEF2FF;
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(15, 27, 60, 0.2);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.submitBtn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .submitBtn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Responsive Styles */
@@ -503,5 +606,75 @@ a.contactMethodValue:hover {
   
   .contactFormWrapper {
     padding: 32px 24px;
+  }
+  
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroWrapper {
+    padding: 100px 16px 60px;
+  }
+  .gridSection, .contactSection {
+    padding: 60px 16px;
+  }
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+  .sectionPreTitle {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+  .gridSectionHeader {
+    margin-bottom: 60px;
+  }
+  .card {
+    padding: 32px 24px;
+  }
+  .cardTitle {
+    font-size: 1.6rem;
+  }
+  .cardDesc {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+  .worksContent {
+    padding: 24px;
+  }
+  .worksImageContainer {
+    height: 220px;
+  }
+  .worksTitle {
+    font-size: 1.5rem;
+  }
+  .contactFormWrapper {
+    padding: 24px 16px;
+  }
+  .contactMethodIcon {
+    width: 48px;
+    height: 48px;
+  }
+  .contactMethodTitle {
+    font-size: 1.1rem;
+  }
+  .contactMethodValue {
+    font-size: 1rem;
+  }
+  .formInput, .formTextarea {
+    min-height: 44px;
+    font-size: 16px;
+  }
+  .submitBtn {
+    min-height: 48px;
+    font-size: 1rem;
+  }
+  .formHeader h3 {
+    font-size: 1.6rem;
+  }
+  .formHeader p {
+    font-size: 0.95rem;
   }
 }

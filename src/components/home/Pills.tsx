@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDownRight, Megaphone, Search, Infinity as InfinityIcon, MousePointer2, PenTool, Video, Globe, Smartphone, Wrench } from 'lucide-react';
-import styles from '@/app/page.module.css';
+import styles from './Pills.module.css';
 
 const services = [
   {

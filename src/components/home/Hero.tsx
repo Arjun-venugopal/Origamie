@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import styles from '@/app/page.module.css';
+import styles from './Hero.module.css';
 import FloatingBird from './FloatingBird';
 
 const lineReveal = {

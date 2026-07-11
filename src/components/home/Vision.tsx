@@ -3,7 +3,7 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import styles from '@/app/page.module.css';
+import styles from './Vision.module.css';
 import FloatingBird from './FloatingBird';
 
 export default function Vision() {

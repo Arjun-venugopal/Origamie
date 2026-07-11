@@ -1,0 +1,20 @@
+/* ========== PARTICLE "BOOM" TEXT PRELOADER ========== */
+.loaderScreenParticle {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  pointer-events: none;
+}
+
+.particleCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
