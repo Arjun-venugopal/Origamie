@@ -19,6 +19,15 @@ export default function CraneScrollAnimation() {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check mobile state
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile(); // Check immediately on mount
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Ref for drawing without re-binding listeners
   const activeFrameRef = useRef(0);
@@ -122,6 +131,9 @@ export default function CraneScrollAnimation() {
 
   // Handle GSAP Horizontal Scroll & Frame Scrubbing
   useEffect(() => {
+    // Skip GSAP entirely if we are on mobile to prevent scroll-jacking bugs
+    if (isMobile) return;
+    
     if (!isLoaded || !containerRef.current || !trackRef.current) return;
 
     const ctx = gsap.context(() => {
@@ -159,6 +171,57 @@ export default function CraneScrollAnimation() {
 
     return () => ctx.revert();
   }, [isLoaded]);
+
+  if (isMobile) {
+    return (
+      <section className={styles.mobileBentoSection}>
+        <div className={styles.bentoHeader}>
+          <h2 className={styles.bentoMainTitle}>
+            Your digital presence,<br />
+            <span>fully realized.</span>
+          </h2>
+          <p className={styles.bentoMainDesc}>
+            A cinematic experience distilled into a high-performance, conversion-focused grid.
+          </p>
+        </div>
+        
+        <div className={styles.bentoGrid}>
+          {/* Card 1 - Large */}
+          <div className={`${styles.bentoCard} ${styles.bentoCardLarge}`}>
+            <span className={styles.captionTag}>01 &mdash; Precision</span>
+            <h3 className={styles.bentoTitle}>
+              Crafted with <span>surgical precision.</span>
+            </h3>
+            <p className={styles.bentoDesc}>
+              We align every folding line of the creative layout to lead your user's eyes directly to the core message.
+            </p>
+          </div>
+
+          {/* Card 2 - Half */}
+          <div className={styles.bentoCard}>
+            <span className={styles.captionTag}>02 &mdash; Alignment</span>
+            <h3 className={styles.bentoTitle}>
+              Where art meets <span>science.</span>
+            </h3>
+            <p className={styles.bentoDesc}>
+              Layout hierarchies optimized for engagement.
+            </p>
+          </div>
+
+          {/* Card 3 - Half */}
+          <div className={styles.bentoCard}>
+            <span className={styles.captionTag}>03 &mdash; Unfold</span>
+            <h3 className={styles.bentoTitle}>
+              Exponential <span>growth.</span>
+            </h3>
+            <p className={styles.bentoDesc}>
+              High-performance web pages that drive conversion.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <div ref={containerRef} className={styles.scrollAnimationSection}>

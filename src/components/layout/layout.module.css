@@ -339,7 +339,7 @@
 }
 
 .auroraBlob1 {
-  background: #3558FF;
+  background: #051D96; /* Brand Deep Blue */
   width: 600px;
   height: 600px;
   top: -200px;
@@ -348,7 +348,7 @@
 }
 
 .auroraBlob2 {
-  background: #051D96;
+  background: #5773FF; /* Brand Vibrant Blue */
   width: 800px;
   height: 800px;
   bottom: -300px;
@@ -358,7 +358,7 @@
 }
 
 .auroraBlob3 {
-  background: #A5C6F7;
+  background: #00178D; /* Brand Navy */
   width: 500px;
   height: 500px;
   top: 20%;
@@ -394,7 +394,7 @@
   left: 0;
   width: 100%;
   height: 120px;
-  background: linear-gradient(to top, #020617, transparent);
+  background: linear-gradient(to top, #000000, transparent);
   z-index: 0;
   pointer-events: none;
 }
@@ -409,7 +409,7 @@
   overflow: hidden;
   width: 100%;
   min-height: 720px;
-  background: radial-gradient(120% 100% at 50% 0%, #0A1F6D 0%, #020617 80%);
+  background: linear-gradient(to bottom, #000000 0%, #020826 40%, #051D96 100%);
   isolation: isolate;
 }
 
@@ -488,7 +488,7 @@
   font-family: var(--font-playfair), serif;
   font-style: italic;
   font-weight: 600;
-  background: linear-gradient(135deg, #A5C6F7 0%, #5773FF 100%);
+  background: linear-gradient(135deg, #5773FF 0%, #051D96 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -633,13 +633,25 @@
   }
 }
 
+@media (max-width: 1440px) {
+  .footerTitle {
+    font-size: 4.5rem;
+  }
+  .gridFooter {
+    padding: 100px 40px 60px;
+    min-height: 600px;
+  }
+}
+
 @media (max-width: 1280px) {
   .navbar {
     padding: 20px 32px;
   }
-
   .navLinks {
     gap: 24px;
+  }
+  .footerTitle {
+    font-size: 4rem;
   }
 }
 

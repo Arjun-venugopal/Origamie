@@ -47,24 +47,18 @@
   padding-top: 12px;
 }
 
+.marqueeWrapper {
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 40px;
+}
+
 .pillsSection {
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-wrap: nowrap;
   gap: 24px;
-  width: 100%;
-  overflow-x: auto;
-  padding-top: 0;
-  padding-bottom: 40px;
-  padding-left: max(48px, calc((100% - 1280px) / 2 + 48px));
-  padding-right: max(48px, calc((100% - 1280px) / 2 + 48px));
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.pillsSection::-webkit-scrollbar {
-  display: none;
+  width: max-content;
+  padding-right: 24px; /* Essential for perfect -50% loop math */
 }
 
 .pillCard {
@@ -145,10 +139,6 @@
   .aboutHeader {
     padding: 0 32px;
   }
-  .pillsSection {
-    padding-left: max(32px, calc((100% - 1100px) / 2 + 32px));
-    padding-right: max(32px, calc((100% - 1100px) / 2 + 32px));
-  }
 }
 
 @media (max-width: 1024px) {
@@ -193,9 +183,8 @@
     font-size: 0.9rem;
   }
   .pillsSection {
-    padding-left: 24px;
-    padding-right: 24px;
     gap: 16px;
+    padding-right: 16px;
   }
   .pillCard {
     width: 200px;
@@ -231,9 +220,8 @@
     font-size: 0.85rem;
   }
   .pillsSection {
-    padding-left: 16px;
-    padding-right: 16px;
     gap: 12px;
+    padding-right: 12px;
   }
   .pillCard {
     width: 170px;

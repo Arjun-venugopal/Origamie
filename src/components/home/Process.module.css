@@ -200,6 +200,30 @@
 }
 
 /* Responsive */
+@media (max-width: 1440px) {
+  .processTitle {
+    font-size: 3.6rem;
+  }
+  .bentoIntro {
+    padding: 48px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .processTitle {
+    font-size: 3.2rem;
+  }
+  .bentoCard {
+    padding: 32px;
+  }
+  .stepTitle {
+    font-size: 1.5rem;
+  }
+  .bentoIntro {
+    padding: 40px;
+  }
+}
+
 @media (max-width: 1024px) {
   .bentoGrid {
     grid-template-columns: repeat(2, 1fr);

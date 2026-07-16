@@ -125,9 +125,21 @@
 
 /* ========== RESPONSIVE ========== */
 
-@media (max-width: 1280px) {
+@media (max-width: 1440px) {
   .heroWrapper {
     padding: 160px 32px 120px;
+  }
+  .mainTitle, .convertHash, .convertWord {
+    font-size: clamp(2.5rem, 4.5vw + 1rem, 64px);
+  }
+}
+
+@media (max-width: 1280px) {
+  .heroWrapper {
+    padding: 140px 32px 100px;
+  }
+  .mainTitle, .convertHash, .convertWord {
+    font-size: clamp(2.5rem, 4.5vw + 1rem, 56px);
   }
 }
 

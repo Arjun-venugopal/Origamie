@@ -8,7 +8,7 @@ import FloatingBird from './FloatingBird';
 
 export default function Vision() {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -26,7 +26,7 @@ export default function Vision() {
 
   return (
     <section id="about" className={styles.visionSection} ref={containerRef}>
-      <motion.div 
+      <motion.div
         className={styles.visionHeader}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -40,7 +40,7 @@ export default function Vision() {
         </h2>
       </motion.div>
 
-      <motion.p 
+      <motion.p
         className={styles.visionSubtitle}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export default function Vision() {
 
       <div className={styles.visionGrid}>
         {/* Card 1 (Left) - Fast Parallax */}
-        <motion.div 
+        <motion.div
           className={styles.cardLeft}
           style={{ y: yFast }}
           initial={{ opacity: 0, scale: 0.95 }}
@@ -61,8 +61,8 @@ export default function Vision() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <Image 
-            src="/hand.jpg" 
+          <Image
+            src="/hand.jpg"
             alt="Hand pointing"
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
@@ -70,9 +70,9 @@ export default function Vision() {
             style={{ mixBlendMode: 'overlay' }}
           />
           <div className={styles.cardOverlay} style={{ background: 'linear-gradient(to top, rgba(37,99,235,1) 0%, rgba(37,99,235,0.2) 50%, rgba(37,99,235,0) 100%)' }} />
-          
+
           <div className={styles.cardContent}>
-            <h3 className={styles.cardTitle}>Conversion-<br/>first design</h3>
+            <h3 className={styles.cardTitle}>Conversion-<br />first design</h3>
           </div>
           <div className={styles.cardContent}>
             <p className={styles.cardDesc}>
@@ -80,19 +80,19 @@ export default function Vision() {
             </p>
           </div>
         </motion.div>
-        
+
         {/* Card 2 (Top Middle) - Slow Parallax */}
-        <motion.div 
+        <motion.div
           className={styles.cardTopMiddle}
           style={{ y: ySlow }}
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.85 }}
           whileInView={{ opacity: 1, scale: 1 }}
           whileHover={{ scale: 1.02 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
         >
-          <Image 
-            src="/runner.jpg" 
+          <Image
+            src="/runner.jpg"
             alt="Running person blur"
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
@@ -100,7 +100,7 @@ export default function Vision() {
             style={{ mixBlendMode: 'overlay' }}
           />
           <div className={styles.cardOverlay} style={{ background: 'linear-gradient(to top, rgba(0,23,141,0.9) 0%, rgba(0,23,141,0.4) 60%, rgba(0,23,141,0) 100%)' }} />
-          
+
           <div className={styles.cardContent}>
             <div className={styles.cardLabel}>Promise</div>
             <h3 className={styles.cardTitle}>A site that <span>earns</span> its budget — or we keep iterating until it does.</h3>
@@ -108,7 +108,7 @@ export default function Vision() {
         </motion.div>
 
         {/* Card 3 (Top Right) - Slow Parallax */}
-        <motion.div 
+        <motion.div
           className={styles.cardTopRight}
           style={{ y: ySlow }}
           initial={{ opacity: 0, scale: 0.95 }}
@@ -125,9 +125,9 @@ export default function Vision() {
           <button className={styles.enquireBtn}>Enquire Now</button>
           <span className={styles.enquireSub}>Replies within 24 hours · Fixed quote · No pressure</span>
         </motion.div>
-        
+
         {/* Card 4 (Bottom Right - Wide) - Fast Parallax */}
-        <motion.div 
+        <motion.div
           className={styles.cardBottomRight}
           style={{ y: yFast }}
           initial={{ opacity: 0, scale: 0.95 }}
@@ -136,8 +136,8 @@ export default function Vision() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.3 }}
         >
-          <Image 
-            src="/people.jpg" 
+          <Image
+            src="/people.jpg"
             alt="People walking"
             fill
             sizes="(max-width: 768px) 100vw, 66vw"
@@ -145,7 +145,7 @@ export default function Vision() {
             style={{ mixBlendMode: 'overlay' }}
           />
           <div className={styles.cardOverlay} style={{ background: 'linear-gradient(90deg, rgba(0,23,141,0.95) 0%, rgba(0,23,141,0.5) 100%)' }} />
-          
+
           <div className={styles.cardContent}>
             <div className={styles.cardLabel}>Strategy that ships</div>
             <h3 className={styles.cardTitle}>Audience research, positioning and a measurable goal — before a single pixel.</h3>

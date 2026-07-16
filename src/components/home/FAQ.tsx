@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import styles from './FAQ.module.css';
 
 interface FAQItem {
@@ -62,6 +62,7 @@ export default function FAQ() {
         <div className={styles.faqRight}>
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
+
             return (
               <div key={index} className={styles.faqItem}>
                 <button
@@ -70,9 +71,13 @@ export default function FAQ() {
                   aria-expanded={isOpen}
                 >
                   <span className={styles.faqQuestionText}>{faq.question}</span>
-                  <span className={styles.faqIconWrapper}>
-                    {isOpen ? <X size={20} className={styles.iconX} /> : <Plus size={20} className={styles.iconPlus} />}
-                  </span>
+                  <motion.span 
+                    className={styles.faqIconWrapper}
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                  >
+                    <Plus size={24} strokeWidth={1.5} />
+                  </motion.span>
                 </button>
 
                 <AnimatePresence initial={false}>
@@ -81,7 +86,7 @@ export default function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
                       className={styles.faqAnswerContainer}
                     >
                       <p className={styles.faqAnswerText}>{faq.answer}</p>

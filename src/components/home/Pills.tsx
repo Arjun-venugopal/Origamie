@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useMotionValue, useAnimationFrame, useMotionValueEvent } from 'framer-motion';
 import { ArrowDownRight, Megaphone, Search, Infinity as InfinityIcon, MousePointer2, PenTool, Video, Globe, Smartphone, Wrench } from 'lucide-react';
 import styles from './Pills.module.css';
 
@@ -100,7 +100,50 @@ const floatingIcon = {
   })
 };
 
+const duplicatedServices = [...services, ...services];
+
 export default function Pills() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(0);
+  const x = useMotionValue(0);
+  const isDragging = useRef(false);
+  const isHovered = useRef(false);
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (scrollRef.current) {
+        setWidth(scrollRef.current.scrollWidth / 2);
+      }
+    };
+    
+    updateWidth();
+    const timer = setTimeout(updateWidth, 150);
+    window.addEventListener('resize', updateWidth);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateWidth);
+    };
+  }, []);
+
+  useAnimationFrame((time, delta) => {
+    if (!width || isDragging.current || isHovered.current) return;
+    
+    // Auto-scroll speed (pixels per ms)
+    const moveBy = 0.05 * delta; 
+    let newX = x.get() - moveBy;
+    x.set(newX);
+  });
+
+  useMotionValueEvent(x, "change", (latest) => {
+    if (!width) return;
+    // Seamless infinite wrap
+    if (latest <= -width) {
+      x.set(latest + width);
+    } else if (latest > 0) {
+      x.set(latest - width);
+    }
+  });
+
   return (
     <section id="services" className={styles.aboutSection}>
       <div className={styles.aboutHeader}>
@@ -125,34 +168,44 @@ export default function Pills() {
         </motion.p>
       </div>
 
-      <div className={styles.pillsSection}>
-        {services.map((s, i) => (
-          <motion.div
-            key={s.id}
-            className={styles.pillCard}
-            custom={i}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={springScaleIn}
-          >
-            <motion.div 
-              className={styles.pillIconWrapper}
-              custom={i}
-              animate="animate"
-              variants={floatingIcon}
+      <div className={styles.marqueeWrapper}>
+        <motion.div 
+          ref={scrollRef}
+          className={styles.pillsSection}
+          style={{ x, cursor: isDragging.current ? 'grabbing' : 'grab' }}
+          drag="x"
+          dragConstraints={{ left: -width * 2, right: width }}
+          dragElastic={0}
+          onDragStart={() => { isDragging.current = true; }}
+          onDragEnd={() => { isDragging.current = false; }}
+          onMouseEnter={() => { isHovered.current = true; }}
+          onMouseLeave={() => { isHovered.current = false; }}
+          onPointerDown={() => { isDragging.current = true; }}
+          onPointerUp={() => { isDragging.current = false; }}
+        >
+          {duplicatedServices.map((s, i) => (
+            <div
+              key={`${s.id}-${i}`}
+              className={styles.pillCard}
             >
-              {s.icon}
-            </motion.div>
-            <h3 className={styles.pillTitle}>
-              {s.titleBlack} <span>{s.titleBlue}</span>
-            </h3>
-            <p className={styles.pillDesc}>{s.desc}</p>
-            <button className={styles.pillButton}>
-              <ArrowDownRight size={20} />
-            </button>
-          </motion.div>
-        ))}
+              <motion.div 
+                className={styles.pillIconWrapper}
+                custom={i}
+                animate="animate"
+                variants={floatingIcon}
+              >
+                {s.icon}
+              </motion.div>
+              <h3 className={styles.pillTitle}>
+                {s.titleBlack} <span>{s.titleBlue}</span>
+              </h3>
+              <p className={styles.pillDesc}>{s.desc}</p>
+              <button className={styles.pillButton}>
+                <ArrowDownRight size={20} />
+              </button>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

@@ -208,15 +208,24 @@
 
 /* ========== RESPONSIVE ========== */
 
+@media (max-width: 1440px) {
+  .visionTitle {
+    font-size: 3.2rem;
+  }
+  .visionGrid {
+    max-width: 1100px;
+  }
+}
+
 @media (max-width: 1280px) {
   .visionSection {
     padding: 100px 32px 70px;
   }
   .visionTitle {
-    font-size: 4.5rem;
+    font-size: 2.8rem;
   }
   .visionGrid {
-    max-width: 1000px;
+    max-width: 900px;
     gap: 20px;
   }
 }
