@@ -64,7 +64,7 @@ export default function ContactForm() {
               </div>
               <div>
                 <h4 className={styles.contactMethodTitle}>Call Us</h4>
-                <a href="tel:+1234567890" className={styles.contactMethodValue}>+1 (234) 567-890</a>
+                <a href="tel:+1234567890" className={styles.contactMethodValue}>+91 9544639774</a>
               </div>
             </div>
 
