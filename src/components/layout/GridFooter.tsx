@@ -3,12 +3,12 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight, MessageCircle, Sparkles, ShieldCheck, Zap } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import styles from './layout.module.css';
 
 const textReveal = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
@@ -24,75 +24,63 @@ export default function GridFooter() {
     offset: ["start end", "end end"]
   });
 
-
-  // Inner content parallax (simulates the curtain reveal)
-  const contentY = useTransform(scrollYProgress, [0, 1], [150, 0]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.5, 1]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [100, 0]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.4, 1], [0, 0.6, 1]);
 
   return (
     <div className={styles.footerWrapper}>
       <footer id="contact" className={styles.gridFooter} ref={footerRef}>
-        {/* 0. Aurora Gradient Flow Background */}
+        
+        {/* Background Aurora Orbs & Giant Watermark */}
         <div className={styles.auroraContainer}>
           <div className={styles.auroraBlob1} />
           <div className={styles.auroraBlob2} />
           <div className={styles.auroraBlob3} />
         </div>
 
-        {/* 1. Curved Wave Backdrop (Layered SVG waves with opacity variations) */}
+        <div className={styles.footerWatermark}>
+          ORIGAMIE
+        </div>
+
+        {/* Curved Wave Layers */}
         <div className={styles.footerWaveLayers}>
           <svg
             viewBox="0 0 1440 400"
             preserveAspectRatio="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* Wave 1 */}
             <path
               d="M0,150 C360,280 720,100 1080,240 C1260,310 1380,240 1440,200 L1440,400 L0,400 Z"
-              fill="#006affff"
-              opacity="0.05"
+              fill="#5773FF"
+              opacity="0.08"
             />
-            {/* Wave 2 */}
             <path
               d="M0,220 C480,90 960,320 1440,160 L1440,400 L0,400 Z"
-              fill="#330791ff"
-              opacity="0.07"
-            />
-            {/* Wave 3 */}
-            <path
-              d="M0,180 C360,60 1080,300 1440,120 L1440,400 L0,400 Z"
-              fill="#07c1ffff"
-              opacity="0.04"
+              fill="#051D96"
+              opacity="0.12"
             />
           </svg>
         </div>
 
-
-        {/* === Main Content (z-indexed above overlay) === */}
+        {/* Main Footer Body */}
         <motion.div
           className={styles.footerContent}
           style={{ y: contentY, opacity: contentOpacity }}
         >
-          {/* Logo Icon */}
+          {/* Studio Availability Tag */}
           <motion.div
-            className={styles.footerLogoWrapper}
+            className={styles.footerStatusBadge}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             variants={textReveal}
             custom={0}
           >
-            <Image
-              src="/crane-logo.png"
-              alt="Origamie crane logo"
-              width={80}
-              height={80}
-              style={{ width: 'auto', height: 'auto' }}
-              className={styles.footerLogoIcon}
-            />
+            <span className={styles.badgePulseDot} />
+            <span>ACCEPTING NEW PROJECTS • Q3/Q4</span>
           </motion.div>
 
-          {/* Heading */}
+          {/* Headline */}
           <motion.h2
             className={styles.footerTitle}
             initial="hidden"
@@ -102,10 +90,10 @@ export default function GridFooter() {
             custom={1}
           >
             Let&apos;s build something <br />
-            <span>Pays for itself.</span>
+            <span className={styles.footerTitleGradient}>that pays for itself.</span>
           </motion.h2>
 
-          {/* Description */}
+          {/* Subtitle */}
           <motion.p
             className={styles.footerSubtitle}
             initial="hidden"
@@ -114,13 +102,12 @@ export default function GridFooter() {
             variants={textReveal}
             custom={2}
           >
-            Book a free 20-minute strategy call. You&apos;ll leave with 3 conversion ideas you can
-            ship this week — even if we never work together.
+            Book a free 20-minute strategy session. You&apos;ll leave with 3 concrete conversion ideas you can ship this week &mdash; even if we never work together.
           </motion.p>
 
-          {/* CTA Button & Links */}
+          {/* Action Row */}
           <motion.div
-            className={styles.footerCtaRow}
+            className={styles.footerCtaGroup}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
@@ -130,31 +117,53 @@ export default function GridFooter() {
             <motion.a
               href="/contact"
               className={styles.footerPrimaryBtn}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
             >
-              Book a free strategy call
-              <ArrowRight size={20} />
+              <span>Book a strategy call</span>
+              <ArrowUpRight size={18} />
             </motion.a>
-            <span className={styles.footerEmailLink}>
-              or email <a href="mailto:hello@origamie.in">hello@origamie.in</a>
-            </span>
+
+            <motion.a
+              href="https://wa.me/919544639774"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footerWhatsappBtn}
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <MessageCircle size={18} />
+              <span>Chat on WhatsApp</span>
+            </motion.a>
           </motion.div>
 
-          {/* Trust text */}
-          <motion.p
-            className={styles.footerMicroCopy}
+          {/* Studio Guarantee Badges */}
+          <motion.div
+            className={styles.footerGuaranteeStrip}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             variants={textReveal}
             custom={4}
           >
-            No pitch deck. No pressure. Fixed quote within 24 hours.
-          </motion.p>
+            <div className={styles.guaranteeItem}>
+              <Zap size={15} />
+              <span>Fixed Quote in 24h</span>
+            </div>
+            <span className={styles.guaranteeDot}>•</span>
+            <div className={styles.guaranteeItem}>
+              <ShieldCheck size={15} />
+              <span>100% Fixed Guarantee</span>
+            </div>
+            <span className={styles.guaranteeDot}>•</span>
+            <div className={styles.guaranteeItem}>
+              <Sparkles size={15} />
+              <span>Direct Founder Access</span>
+            </div>
+          </motion.div>
         </motion.div>
 
-        {/* === Bottom Bar === */}
+        {/* Bottom Bar */}
         <motion.div
           className={styles.footerBottomBar}
           initial="hidden"
@@ -163,11 +172,21 @@ export default function GridFooter() {
           variants={textReveal}
           custom={5}
         >
-          <span className={styles.footerCopyright}>
-            © {new Date().getFullYear()} Origamie. All rights reserved.
-          </span>
+          <div className={styles.footerBrandCol}>
+            <Image
+              src="/crane-logo.png"
+              alt="Origamie crane logo"
+              width={28}
+              height={28}
+              className={styles.footerBottomLogoIcon}
+            />
+            <span className={styles.footerCopyright}>
+              © {new Date().getFullYear()} Origamie Studio. All rights reserved.
+            </span>
+          </div>
 
           <div className={styles.footerBottomLinks}>
+            <Link href="/">Home</Link>
             <Link href="/works">Work</Link>
             <Link href="/services">Services</Link>
             <Link href="/about">About</Link>
@@ -175,24 +194,12 @@ export default function GridFooter() {
           </div>
 
           <div className={styles.footerSocials}>
-            {/* TODO: Replace with real social media URLs */}
-            <a href="#" className={styles.footerSocialLink} aria-label="Twitter">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-              </svg>
-            </a>
-            <a href="#" className={styles.footerSocialLink} aria-label="LinkedIn">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
-              </svg>
-            </a>
-            <a href="#" className={styles.footerSocialLink} aria-label="Instagram">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
+            <a href="mailto:hello@origamie.in" className={styles.footerSocialLink} aria-label="Email">
+              hello@origamie.in
             </a>
           </div>
         </motion.div>
+
       </footer>
     </div>
   );

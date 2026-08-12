@@ -442,16 +442,163 @@
 
 .gridFooter {
   position: relative;
-  padding: 120px 40px 60px;
+  padding: 140px 40px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
   width: 100%;
-  min-height: 720px;
-  background: linear-gradient(to bottom, #051D96 0%, #031475 50%, #00178D 100%);
+  min-height: 740px;
+  background: linear-gradient(180deg, #020826 0%, #051D96 50%, #02092B 100%);
   isolation: isolate;
+}
+
+/* Background Watermark Text */
+.footerWatermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(6rem, 20vw, 24rem);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.025);
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
+  z-index: 1;
+}
+
+/* Status Badge */
+.footerStatusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #60A5FA;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+
+/* Heading & Gradient Accent */
+.footerTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 1.08;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 28px;
+  letter-spacing: -0.035em;
+}
+
+.footerTitleGradient {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-weight: 600;
+  background: linear-gradient(135deg, #60A5FA 0%, #38BDF8 50%, #A5B4FC 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+}
+
+/* Subtitle */
+.footerSubtitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 40px;
+  max-width: 680px;
+}
+
+/* Action Group */
+.footerCtaGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 44px;
+}
+
+.footerPrimaryBtn {
+  background: #ffffff;
+  color: #051D96;
+  padding: 18px 38px;
+  border-radius: 999px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footerPrimaryBtn:hover {
+  background-color: #F8FAFC;
+  box-shadow: 0 18px 40px rgba(96, 165, 250, 0.4);
+}
+
+.footerWhatsappBtn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 18px 32px;
+  border-radius: 999px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footerWhatsappBtn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #60A5FA;
+}
+
+/* Guarantee Strip */
+.footerGuaranteeStrip {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.guaranteeItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.guaranteeDot {
+  color: rgba(255, 255, 255, 0.3);
 }
 
 /* --- Layered SVG Waves Backdrop --- */
@@ -510,94 +657,6 @@
   height: 100%;
 }
 
-/* Heading */
-.footerTitle {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 5.5rem;
-  line-height: 1.05;
-  font-weight: 500;
-  color: #ffffff;
-  margin-bottom: 32px;
-  letter-spacing: -0.04em;
-}
-
-.footerTitle span {
-  font-family: var(--font-playfair), serif;
-  font-style: italic;
-  font-weight: 600;
-  background: linear-gradient(135deg, #5773FF 0%, #051D96 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Subtitle */
-.footerSubtitle {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 1.08rem;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 40px;
-  max-width: 660px;
-}
-
-/* CTA Row */
-.footerCtaRow {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-bottom: 24px;
-}
-
-/* Primary CTA Button */
-.footerPrimaryBtn {
-  background: #ffffff;
-  color: #0F1B3C;
-  padding: 18px 40px;
-  border-radius: 999px;
-  font-family: var(--font-urbanist), sans-serif;
-  font-weight: 600;
-  font-size: 1.05rem;
-  text-decoration: none;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.footerPrimaryBtn:hover {
-  transform: translateY(-4px);
-  background-color: #F8FAFC;
-  box-shadow: 0 20px 40px rgba(87, 115, 255, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
-}
-
-/* Email link */
-.footerEmailLink {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.footerEmailLink a {
-  color: #B8D4F1;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.footerEmailLink a:hover {
-  color: #D4E5F5;
-  text-decoration: underline;
-}
-
-/* Trust / micro copy */
-.footerMicroCopy {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.5);
-  letter-spacing: 0.02em;
-}
-
 /* --- Bottom bar --- */
 .footerBottomBar {
   position: relative;
@@ -609,47 +668,59 @@
   max-width: 1280px;
   margin-top: 80px;
   padding-top: 32px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footerBrandCol {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footerBottomLogoIcon {
+  width: 28px;
+  height: 28px;
 }
 
 .footerCopyright {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .footerBottomLinks {
   display: flex;
-  gap: 32px;
+  gap: 28px;
 }
 
 .footerBottomLinks a {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   transition: color 200ms ease;
-  font-size: 14px;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 
 .footerBottomLinks a:hover {
-  color: #ffffff;
+  color: #60A5FA;
 }
 
 .footerSocials {
   display: flex;
-  gap: 16px;
   align-items: center;
 }
 
 .footerSocialLink {
-  color: rgba(255, 255, 255, 0.6);
-  transition: color 0.2s ease, transform 0.2s ease;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
 }
 
 .footerSocialLink:hover {
-  color: #ffffff;
-  transform: translateY(-2px);
+  color: #60A5FA;
 }
 
 .footerDesigner {
