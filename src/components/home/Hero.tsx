@@ -130,7 +130,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Live KPI Stats Strip */}
-          {/* <motion.div
+          <motion.div
             className={styles.heroStatsStrip}
             initial="hidden"
             animate="visible"
@@ -151,7 +151,7 @@ export default function Hero() {
               <span className={styles.statNumber}>100%</span>
               <span className={styles.statLabel}>Fixed Quote Guarantee</span>
             </div>
-          </motion.div> */}
+          </motion.div>
         </div>
 
         {/* Right Column: Interactive Glass Showcase Card */}
