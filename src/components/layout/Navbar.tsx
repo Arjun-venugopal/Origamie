@@ -5,15 +5,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
 import styles from './layout.module.css';
 
 const navItems = [
   { label: 'Home', href: '/' },
-  { label: 'About Us', href: '/about' },
+  { label: 'About', href: '/about' },
   { label: 'Works', href: '/works' },
   { label: 'Services', href: '/services' },
-  { label: 'Contact Us', href: '/contact' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 /* Origamie Wordmark */
@@ -88,27 +88,33 @@ export default function Navbar() {
     <>
       <motion.nav
         className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`}
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
       >
+        {/* Left Side: Brand Logo & Status Pill */}
         <div className={styles.navbarLeft}>
           <Link href="/" className={styles.logo}>
             <div className={styles.logoBadgeCircle}>
               <Image
                 src="/crane-logo.png"
                 alt="Origamie crane logo"
-                width={28}
-                height={28}
+                width={26}
+                height={26}
                 className={styles.navbarIcon}
                 priority
               />
             </div>
             <Wordmark />
           </Link>
+
+          <div className={styles.navLiveStatus}>
+            <span className={styles.badgePulseDot} />
+            <span>AVAILABLE Q3/Q4</span>
+          </div>
         </div>
 
-        {/* Desktop Navigation Link Pills */}
+        {/* Center Navigation Link Pills */}
         <div className={styles.navLinks}>
           {navItems.map((item) => {
             const isActive = pathname === item.href;
@@ -123,7 +129,7 @@ export default function Navbar() {
                   <motion.div
                     layoutId="activeNavPill"
                     className={styles.activePillBackground}
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    transition={{ type: "spring", stiffness: 420, damping: 32 }}
                   />
                 )}
               </Link>
@@ -131,25 +137,24 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Primary CTA */}
+        {/* Right Side: CTA Button & Mobile Trigger */}
         <div className={styles.navbarRight}>
           <a href="/contact" className={styles.navButtonPrimary}>
             <span>Book a free call</span>
             <ArrowUpRight size={16} className={styles.navCtaIcon} />
           </a>
 
-          {/* Mobile Menu Button */}
           <button
             className={styles.mobileMenuBtn}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </motion.nav>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Curtain Drawer Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -209,13 +214,15 @@ export default function Navbar() {
 
             <motion.div variants={itemVariants} className={styles.mobileMenuFooter}>
               <div className={styles.mobileContactItem}>
-                <span className={styles.mobileContactLabel}>Get in touch</span>
+                <span className={styles.mobileContactLabel}>Direct Connect</span>
                 <a href="mailto:hello@origamie.in" className={styles.mobileContactValue}>
                   hello@origamie.in
                 </a>
               </div>
               <div className={styles.mobileSocials}>
-                <a href="https://wa.me/919544639774" target="_blank" rel="noopener noreferrer" className={styles.mobileSocialLink}>WhatsApp</a>
+                <a href="https://wa.me/919544639774" target="_blank" rel="noopener noreferrer" className={styles.mobileSocialLink}>
+                  WhatsApp Direct
+                </a>
               </div>
             </motion.div>
           </motion.div>
