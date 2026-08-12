@@ -128,30 +128,6 @@ export default function Hero() {
               <ArrowUpRight size={18} className={styles.ctaIconSec} />
             </a>
           </motion.div>
-
-          {/* Live KPI Stats Strip */}
-          {/* <motion.div
-            className={styles.heroStatsStrip}
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            custom={4}
-          >
-            <div className={styles.statItem}>
-              <span className={styles.statNumber}>30+</span>
-              <span className={styles.statLabel}>Projects Shipped</span>
-            </div>
-            <div className={styles.statDivider} />
-            <div className={styles.statItem}>
-              <span className={styles.statNumber}>2.8x</span>
-              <span className={styles.statLabel}>Avg Lead Growth</span>
-            </div>
-            <div className={styles.statDivider} />
-            <div className={styles.statItem}>
-              <span className={styles.statNumber}>100%</span>
-              <span className={styles.statLabel}>Fixed Quote Guarantee</span>
-            </div>
-          </motion.div> */}
         </div>
 
         {/* Right Column: Interactive Glass Showcase Card */}

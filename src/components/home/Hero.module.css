@@ -434,9 +434,6 @@
   .heroCtaGroup {
     justify-content: center;
   }
-  .heroStatsStrip {
-    justify-content: center;
-  }
   .heroRightCol {
     width: 100%;
   }
@@ -444,14 +441,14 @@
 
 @media (max-width: 768px) {
   .heroSection {
-    min-height: calc(100vh - 70px);
-    padding: 100px 20px 48px;
+    min-height: calc(100vh - 80px);
+    padding: 96px 20px 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
   .heroRightCol {
-    display: none; /* Minimal mobile view: hide heavy 3D card for ultra-clean fast load */
+    display: none; /* Minimal mobile view: hide heavy card for zero-distraction fast load */
   }
   .heroStatusBadge {
     font-size: 0.68rem;
@@ -462,13 +459,13 @@
     box-shadow: 0 4px 16px rgba(5, 29, 150, 0.06);
   }
   .heroHeadline {
-    font-size: clamp(2.2rem, 7.8vw, 3.4rem);
+    font-size: clamp(2.15rem, 7.6vw, 3.2rem);
     line-height: 1.08;
     margin-bottom: 18px;
   }
   .heroDescription {
-    font-size: 0.98rem;
-    line-height: 1.65;
+    font-size: 0.96rem;
+    line-height: 1.6;
     margin-bottom: 28px;
     max-width: 100%;
     color: #475569;
@@ -477,13 +474,13 @@
     flex-direction: column;
     width: 100%;
     gap: 12px;
-    margin-bottom: 32px;
+    margin-bottom: 0;
   }
   .primaryCtaBtn {
     width: 100%;
     max-width: 100%;
     padding: 16px 24px;
-    font-size: 1rem;
+    font-size: 0.98rem;
     box-sizing: border-box;
     box-shadow: 0 12px 30px rgba(5, 29, 150, 0.28);
   }
@@ -491,44 +488,14 @@
     width: 100%;
     max-width: 100%;
     padding: 16px 24px;
-    font-size: 1rem;
+    font-size: 0.98rem;
     box-sizing: border-box;
-  }
-  .heroStatsStrip {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 14px 16px;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(87, 115, 255, 0.2);
-    box-shadow: 0 8px 24px rgba(5, 29, 150, 0.06);
-  }
-  .statItem {
-    align-items: center;
-    text-align: center;
-  }
-  .statNumber {
-    font-size: 1.25rem;
-  }
-  .statLabel {
-    font-size: 0.7rem;
-  }
-  .statDivider {
-    width: 1px;
-    height: 24px;
-    background-color: rgba(148, 163, 184, 0.25);
   }
 }
 
 @media (max-width: 480px) {
   .heroSection {
-    padding: 90px 16px 36px;
+    padding: 88px 16px 32px;
   }
   .heroStatusBadge {
     font-size: 0.62rem;
@@ -536,21 +503,11 @@
     margin-bottom: 16px;
   }
   .heroHeadline {
-    font-size: clamp(2rem, 8.5vw, 2.6rem);
+    font-size: clamp(1.95rem, 8.2vw, 2.5rem);
     margin-bottom: 16px;
   }
   .heroDescription {
     font-size: 0.92rem;
     margin-bottom: 24px;
-  }
-  .heroStatsStrip {
-    padding: 12px 14px;
-    gap: 8px;
-  }
-  .statNumber {
-    font-size: 1.15rem;
-  }
-  .statLabel {
-    font-size: 0.66rem;
   }
 }
