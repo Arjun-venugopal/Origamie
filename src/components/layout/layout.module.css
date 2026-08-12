@@ -31,6 +31,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  flex: 1;
 }
 
 .navLiveStatus {
@@ -100,6 +101,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
   font-weight: 500;
   background: rgba(241, 245, 249, 0.75);
@@ -146,7 +148,9 @@
 .navbarRight {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 14px;
+  flex: 1;
 }
 
 .navButtonPrimary {
