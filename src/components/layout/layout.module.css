@@ -440,69 +440,93 @@
   display: none;
 }
 
+/* ========== AWWWARDS KINETIC GRID FOOTER ========== */
 .gridFooter {
   position: relative;
-  padding: 140px 40px 60px;
+  padding: 0 0 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   overflow: hidden;
   width: 100%;
-  min-height: 740px;
-  background: linear-gradient(180deg, #020826 0%, #051D96 50%, #02092B 100%);
+  background: linear-gradient(180deg, #020718 0%, #051D96 55%, #020926 100%);
   isolation: isolate;
+  color: #ffffff;
 }
 
-/* Background Watermark Text */
-.footerWatermark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: clamp(6rem, 20vw, 24rem);
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.025);
-  pointer-events: none;
+/* Marquee Ticker Track */
+.footerMarqueeTrack {
+  width: 100%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 16px 0;
   white-space: nowrap;
-  user-select: none;
-  z-index: 1;
 }
 
-/* Status Badge */
-.footerStatusBadge {
+.footerMarqueeContent {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #60A5FA;
+  text-transform: uppercase;
+}
+
+/* Main Grid */
+.footerMainGrid {
+  position: relative;
+  z-index: 10;
+  max-width: 1320px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 60px;
+  padding: 100px 48px 80px;
+  align-items: flex-start;
+}
+
+/* Left Column */
+.footerLeftCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.footerLiveTag {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 8px 18px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   font-family: var(--font-urbanist), sans-serif;
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: #60A5FA;
   text-transform: uppercase;
-  margin-bottom: 32px;
-}
-
-/* Heading & Gradient Accent */
-.footerTitle {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: clamp(2.8rem, 6vw, 5.5rem);
-  line-height: 1.08;
-  font-weight: 500;
-  color: #ffffff;
   margin-bottom: 28px;
-  letter-spacing: -0.035em;
 }
 
-.footerTitleGradient {
+.footerHugeHeadline {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.italicSerifGradient {
   font-family: var(--font-playfair), serif;
   font-style: italic;
   font-weight: 600;
@@ -510,224 +534,290 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  display: block;
 }
 
-/* Subtitle */
-.footerSubtitle {
+.footerBioText {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  font-size: 1.1rem;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 40px;
-  max-width: 680px;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 580px;
+  margin-bottom: 36px;
 }
 
-/* Action Group */
-.footerCtaGroup {
+.footerDirectContactCards {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 44px;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
-.footerPrimaryBtn {
-  background: #ffffff;
-  color: #051D96;
-  padding: 18px 38px;
-  border-radius: 999px;
-  font-family: var(--font-urbanist), sans-serif;
-  font-weight: 700;
-  font-size: 1.05rem;
-  text-decoration: none;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.footerPrimaryBtn:hover {
-  background-color: #F8FAFC;
-  box-shadow: 0 18px 40px rgba(96, 165, 250, 0.4);
-}
-
-.footerWhatsappBtn {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  padding: 18px 32px;
-  border-radius: 999px;
-  font-family: var(--font-urbanist), sans-serif;
-  font-weight: 600;
-  font-size: 1.05rem;
-  text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.footerWhatsappBtn:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: #60A5FA;
-}
-
-/* Guarantee Strip */
-.footerGuaranteeStrip {
+.footerContactCard {
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 12px 24px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.8);
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 0.82rem;
-  font-weight: 500;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+  color: #ffffff;
+  flex: 1;
+  min-width: 240px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.guaranteeItem {
+.footerContactCard:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #60A5FA;
+  transform: translateY(-3px);
+}
+
+.contactCardText {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactCardSub {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.contactCardMain {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.cardArrow {
+  color: #60A5FA;
+  transition: transform 0.3s ease;
+}
+
+.footerContactCard:hover .cardArrow {
+  transform: translate(3px, -3px);
+}
+
+/* Right Column: Dispatch Bento Card */
+.footerDispatchCard {
+  position: relative;
+  width: 100%;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+  padding: 36px;
+}
+
+.dispatchHeader {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #60A5FA;
+  margin-bottom: 16px;
+}
+
+.dispatchIcon {
+  color: #60A5FA;
+}
+
+.dispatchTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.servicePillGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.servicePill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: rgba(255, 255, 255, 0.85);
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-.guaranteeDot {
-  color: rgba(255, 255, 255, 0.3);
+.servicePill:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
 }
 
-/* --- Layered SVG Waves Backdrop --- */
-.footerWaveLayers {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
+.servicePillActive {
+  background: #60A5FA !important;
+  color: #030712 !important;
+  border-color: #60A5FA !important;
+  box-shadow: 0 4px 14px rgba(96, 165, 250, 0.3);
 }
 
-.footerWaveLayers svg {
-  width: 100%;
-  height: 100%;
-  display: block;
+.dispatchCtaBox {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 24px;
 }
 
-.footerWaveLayers path:nth-child(1) {
-  animation: waveFloat1 15s ease-in-out infinite;
+.dispatchNote {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
 }
 
-.footerWaveLayers path:nth-child(2) {
-  animation: waveFloat2 18s ease-in-out infinite;
+.dispatchNote strong {
+  color: #60A5FA;
 }
 
-.footerWaveLayers path:nth-child(3) {
-  animation: waveFloat1 22s ease-in-out infinite reverse;
-}
-
-/* --- Dark Semi-Transparent Overlay --- */
-.footerOverlay {
-  display: none;
-}
-
-/* --- Main content area --- */
-.footerContent {
-  position: relative;
-  z-index: 10;
+.dispatchBtnGroup {
   display: flex;
   flex-direction: column;
+  gap: 12px;
+}
+
+.dispatchPrimaryBtn {
+  display: flex;
   align-items: center;
-  text-align: center;
-  max-width: 800px;
-  width: 100%;
+  justify-content: center;
+  gap: 10px;
+  background: #ffffff;
+  color: #051D96;
+  padding: 16px 28px;
+  border-radius: 999px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Logo */
-.footerLogoWrapper {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 32px;
-  filter: drop-shadow(0 8px 32px rgba(255, 255, 255, 0.15));
+.dispatchPrimaryBtn:hover {
+  background: #F8FAFC;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(96, 165, 250, 0.35);
 }
 
-.footerLogoIcon {
-  width: 100%;
-  height: 100%;
+.dispatchSecondaryBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  padding: 16px 28px;
+  border-radius: 999px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* --- Bottom bar --- */
-.footerBottomBar {
+.dispatchSecondaryBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #60A5FA;
+}
+
+/* 4-Column Navigation Grid */
+.footerNavGrid {
   position: relative;
   z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  max-width: 1320px;
   width: 100%;
-  max-width: 1280px;
-  margin-top: 80px;
-  padding-top: 32px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding: 60px 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footerBrandCol {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.brandLogoRow {
+  display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
-.footerBottomLogoIcon {
-  width: 28px;
-  height: 28px;
+.footerCraneLogo {
+  width: 32px;
+  height: 32px;
 }
 
-.footerCopyright {
+.brandTitle {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.footerBottomLinks {
-  display: flex;
-  gap: 28px;
-}
-
-.footerBottomLinks a {
-  color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
-  transition: color 200ms ease;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.footerBottomLinks a:hover {
-  color: #60A5FA;
-}
-
-.footerSocials {
-  display: flex;
-  align-items: center;
-}
-
-.footerSocialLink {
-  color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  transition: color 0.2s ease;
+  color: #ffffff;
+  letter-spacing: -0.03em;
 }
 
-.footerSocialLink:hover {
-  color: #60A5FA;
-}
-
-.footerDesigner {
+.brandSubText {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: 13px;
-  font-weight: 400;
+  font-size: 0.92rem;
+  line-height: 1.6;
   color: rgba(255, 255, 255, 0.6);
+  max-width: 300px;
+}
+
+.footerLinkCol {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footerLinkCol h4 {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 6px;
+}
+
+.footerLinkCol a,
+.footerLinkCol span {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 
