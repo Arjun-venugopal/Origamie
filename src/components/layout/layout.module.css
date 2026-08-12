@@ -1,28 +1,30 @@
-/* ========== NAVBAR (FULL-WIDTH EDGE-TO-EDGE GLASS HEADER) ========== */
+/* ========== NAVBAR (FLOATING GLASS ROUND CAPSULE) ========== */
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1200px, calc(100% - 40px));
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 48px;
+  padding: 10px 24px;
   z-index: 1000;
   color: #0F172A;
   font-size: 0.95rem;
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.76);
   backdrop-filter: blur(24px) saturate(200%);
   -webkit-backdrop-filter: blur(24px) saturate(200%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 8px 30px rgba(5, 29, 150, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 16px 40px -10px rgba(5, 29, 150, 0.08), 0 0 0 1px rgba(87, 115, 255, 0.15) inset;
+  border-radius: 999px;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .navbarScrolled {
   background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 12px 36px rgba(5, 29, 150, 0.1);
-  padding: 12px 48px;
+  box-shadow: 0 20px 48px -10px rgba(5, 29, 150, 0.14), 0 0 0 1px rgba(87, 115, 255, 0.2) inset;
+  padding: 8px 24px;
 }
 
 .navbarLeft {
