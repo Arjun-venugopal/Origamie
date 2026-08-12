@@ -31,7 +31,6 @@ export default function GridFooter() {
 
   return (
     <div className={styles.footerWrapper}>
-      <div className={styles.footerGradientSpill} />
       <footer id="contact" className={styles.gridFooter} ref={footerRef}>
         {/* 0. Aurora Gradient Flow Background */}
         <div className={styles.auroraContainer}>
@@ -67,9 +66,6 @@ export default function GridFooter() {
             />
           </svg>
         </div>
-
-        {/* 2. Overlay: Semi-transparent dark overlay to ensure readability */}
-        <div className={styles.footerOverlay} />
 
 
         {/* === Main Content (z-indexed above overlay) === */}

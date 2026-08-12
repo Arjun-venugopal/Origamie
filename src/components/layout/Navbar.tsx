@@ -176,8 +176,8 @@ export default function Navbar() {
             <motion.div variants={itemVariants} className={styles.mobileMenuFooter}>
               <div className={styles.mobileContactItem}>
                 <span className={styles.mobileContactLabel}>Get in touch</span>
-                <a href="mailto:hello@origamie.co" className={styles.mobileContactValue}>
-                  hello@origamie.co
+                <a href="mailto:hello@origamie.in" className={styles.mobileContactValue}>
+                  hello@origamie.in
                 </a>
               </div>
               <div className={styles.mobileSocials}>

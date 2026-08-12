@@ -328,7 +328,7 @@
   max-width: 1280px;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.15fr;
   gap: 80px;
 }
 
@@ -338,58 +338,157 @@
   align-self: start;
 }
 
-.contactMethod {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
+/* Availability Badge */
+.availabilityBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background-color: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #059669;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.badgePulseDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+}
+
+.sectionSubDesc {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #475569;
+  margin-top: 16px;
   margin-bottom: 40px;
 }
 
-.contactMethodIcon {
-  width: 56px;
-  height: 56px;
-  background-color: rgba(0, 23, 141, 0.04);
-  border-radius: 16px;
+/* Glass Contact Cards */
+.contactCardsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.contactCard {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  border-radius: 20px;
+  background: #F8FAFC;
+  border: 1px solid rgba(5, 29, 150, 0.08);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.contactCard:hover {
+  background: #ffffff;
+  border-color: rgba(87, 115, 255, 0.3);
+  box-shadow: 0 12px 28px rgba(5, 29, 150, 0.1);
+}
+
+.contactCardIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #EEF2FF;
+  color: #051D96;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #00178D;
   flex-shrink: 0;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-right: 16px;
+  transition: transform 0.3s ease;
 }
 
-.contactMethod:hover .contactMethodIcon {
-  transform: translateY(-4px) scale(1.05);
-  background-color: rgba(0, 23, 141, 0.08);
-  box-shadow: 0 10px 20px -10px rgba(0, 23, 141, 0.15);
+.contactCard:hover .contactCardIcon {
+  transform: scale(1.08) rotate(-4deg);
+  background: #051D96;
+  color: #ffffff;
 }
 
-.contactMethodTitle {
+.contactCardBody {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.contactCardLabel {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: 1.25rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: #111827;
-  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748B;
+  margin-bottom: 2px;
 }
 
-.contactMethodValue {
-  font-size: 1.1rem;
-  color: #4B5563;
-  line-height: 1.6;
-  text-decoration: none;
-  transition: color 0.2s ease;
+.contactCardValue {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0F172A;
 }
 
-a.contactMethodValue:hover {
-  color: #00178D;
+.contactCardAction {
+  color: #94A3B8;
+  transition: all 0.3s ease;
+}
+
+.contactCard:hover .contactCardAction {
+  color: #051D96;
+  transform: translate(3px, -3px);
+}
+
+/* Studio Promises Box */
+.studioPromiseBox {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background: rgba(241, 245, 249, 0.8);
+  border: 1px border-dashed rgba(148, 163, 184, 0.3);
+}
+
+.promiseItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.promiseIcon {
+  color: #5773FF;
 }
 
 /* Form Styling - Dark Premium & Floating Labels */
 .contactFormWrapper {
-  background: #00178D;
-  padding: 64px;
-  border-radius: 32px;
-  box-shadow: 0 40px 80px -20px rgba(0, 23, 141, 0.2), 0 0 0 1px rgba(0, 23, 141, 0.1);
+  background: linear-gradient(145deg, #051D96 0%, #020826 100%);
+  padding: 56px;
+  border-radius: 36px;
+  box-shadow: 0 40px 80px -20px rgba(5, 29, 150, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   position: relative;
   overflow: hidden;
   color: #ffffff;
@@ -399,39 +498,105 @@ a.contactMethodValue:hover {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 100% 0%, rgba(87, 115, 255, 0.3) 0%, transparent 50%);
+  background: radial-gradient(circle at 100% 0%, rgba(87, 115, 255, 0.35) 0%, transparent 60%);
   pointer-events: none;
 }
 
 .formHeader {
-  margin-bottom: 48px;
+  margin-bottom: 36px;
   position: relative;
   z-index: 1;
 }
 
+.formTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #A5B4FC;
+  margin-bottom: 12px;
+}
+
 .formHeader h3 {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   letter-spacing: -0.02em;
+  color: #ffffff;
 }
 
 .formHeader p {
   color: rgba(255, 255, 255, 0.7);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   line-height: 1.5;
+}
+
+/* Interactive Project Type Selector Chips */
+.formTypeSection {
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.formTypeSectionLabel {
+  display: block;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 12px;
+}
+
+.typeChipsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.typeChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.typeChip:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.typeChipActive {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #051D96;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .formRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 20px;
 }
 
 .formGroup {
   position: relative;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
   z-index: 1;
 }
 
@@ -448,10 +613,9 @@ a.contactMethodValue:hover {
 
 .formInput, .formTextarea {
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  /* Top padding makes room for floating label */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
   padding: 26px 20px 10px 52px;
   font-family: inherit;
   font-size: 1rem;
@@ -463,96 +627,96 @@ a.contactMethodValue:hover {
 }
 
 .formTextarea {
-  min-height: 140px;
+  min-height: 130px;
   resize: vertical;
-  /* Override padding and icon positioning for textarea specifically */
   padding: 34px 20px 16px 52px;
 }
 
-/* Hide the placeholder so only the label shows when empty */
 .formInput::placeholder, .formTextarea::placeholder {
   color: transparent;
 }
 
 .formInput:hover, .formTextarea:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .formInput:focus, .formTextarea:focus {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: #5773FF;
-  box-shadow: 0 0 0 4px rgba(87, 115, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #A5B4FC;
+  box-shadow: 0 0 0 4px rgba(165, 180, 252, 0.2);
 }
 
-/* Base Label State */
 .formLabel {
   position: absolute;
   left: 52px;
   top: 50%;
   transform: translateY(-50%);
   font-family: var(--font-urbanist), sans-serif;
-  font-size: 1rem;
+  font-size: 0.98rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.55);
   pointer-events: none;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
   transform-origin: left top;
   z-index: 2;
 }
 
-/* Floating Action on Focus OR Has Value (not placeholder-shown) */
 .formInput:focus ~ .formLabel,
 .formInput:not(:placeholder-shown) ~ .formLabel {
   transform: translateY(-130%) scale(0.75);
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
 }
 
-/* Textarea Floating Action */
 .formTextarea:focus ~ .formLabel,
 .formTextarea:not(:placeholder-shown) ~ .formLabel {
   transform: translateY(-16px) scale(0.75);
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
 }
 
-/* Icon Highlight on Focus */
 .formInput:focus ~ .inputIcon,
 .formTextarea:focus ~ .inputIcon {
-  color: #5773FF;
+  color: #A5B4FC;
 }
 
 .submitBtn {
   width: 100%;
   background: #ffffff;
-  color: #00178D;
+  color: #051D96;
   border: none;
-  padding: 20px;
-  border-radius: 16px;
+  padding: 18px 24px;
+  border-radius: 18px;
   font-family: var(--font-urbanist), sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.08rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  margin-top: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  margin-top: 12px;
   z-index: 1;
 }
 
+.btnContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
 .submitBtn:hover:not(:disabled) {
-  background: #EEF2FF;
-  transform: translateY(-2px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  background: #F8FAFC;
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
 .submitBtn:active:not(:disabled) {
-  transform: translateY(1px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
 }
 
 .submitBtn:disabled {
-  opacity: 0.7;
+  opacity: 0.75;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
