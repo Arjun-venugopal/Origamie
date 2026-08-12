@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './CraneScrollAnimation.module.css';
@@ -16,23 +16,46 @@ export default function CraneScrollAnimation() {
   const trackRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
+  const activeFrameRef = useRef<number>(0);
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
 
-  // Check mobile state
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-    checkMobile(); // Check immediately on mount
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+  // Draw frame helper on canvas
+  const drawFrame = useCallback((index: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const img = imagesRef.current[index];
+    if (!img || !img.complete || img.naturalWidth === 0) return;
+
+    // Clear previous frame
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const canvasRatio = canvas.width / canvas.height;
+    const imgRatio = img.naturalWidth / img.naturalHeight;
+
+    let drawWidth = canvas.width;
+    let drawHeight = canvas.height;
+    let drawX = 0;
+    let drawY = 0;
+
+    if (imgRatio > canvasRatio) {
+      drawHeight = canvas.height;
+      drawWidth = canvas.height * imgRatio;
+      drawX = (canvas.width - drawWidth) / 2;
+    } else {
+      drawWidth = canvas.width;
+      drawHeight = canvas.width / imgRatio;
+      drawY = (canvas.height - drawHeight) / 2;
+    }
+
+    ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
   }, []);
 
-  // Ref for drawing without re-binding listeners
-  const activeFrameRef = useRef(0);
-
-  // Preload all 30 frames
+  // 1. Preload 30 PNG frames
   useEffect(() => {
     let loadedCount = 0;
     const loadedImages: HTMLImageElement[] = [];
@@ -57,181 +80,93 @@ export default function CraneScrollAnimation() {
     imagesRef.current = loadedImages;
   }, []);
 
-  // Main canvas drawing logic
-  const drawFrame = (index: number) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const img = imagesRef.current[index];
-    if (!img || !img.complete) return;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const canvasRatio = canvas.width / canvas.height;
-    const imgRatio = img.width / img.height;
-
-    let drawWidth = canvas.width;
-    let drawHeight = canvas.height;
-    let drawX = 0;
-    let drawY = 0;
-
-    const isMobile = window.innerWidth <= 768;
-
-    if (isMobile) {
-      // Contain on mobile so crane isn't wildly cropped
-      if (imgRatio > canvasRatio) {
-        drawWidth = canvas.width;
-        drawHeight = canvas.width / imgRatio;
-        drawY = (canvas.height - drawHeight) / 2;
-      } else {
-        drawHeight = canvas.height;
-        drawWidth = canvas.height * imgRatio;
-        drawX = (canvas.width - drawWidth) / 2;
-      }
-    } else {
-      // Cover on desktop for cinematic background
-      if (imgRatio > canvasRatio) {
-        drawHeight = canvas.height;
-        drawWidth = canvas.height * imgRatio;
-        drawX = (canvas.width - drawWidth) / 2;
-      } else {
-        drawWidth = canvas.width;
-        drawHeight = canvas.width / imgRatio;
-        drawY = (canvas.height - drawHeight) / 2;
-      }
-    }
-
-    ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
-  };
-
-  // Canvas resize handler
+  // 2. Handle canvas resizing & initial frame render
   useEffect(() => {
-    if (!isLoaded) return;
+    if (!isLoaded || !canvasRef.current) return;
 
-    const handleResize = () => {
+    const resizeCanvas = () => {
       const canvas = canvasRef.current;
       if (!canvas) return;
-
       const rect = canvas.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
 
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-
-      drawFrame(activeFrameRef.current);
+      if (rect.width > 0 && rect.height > 0) {
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        drawFrame(activeFrameRef.current);
+      }
     };
 
-    window.addEventListener('resize', handleResize);
-    handleResize();
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-    return () => window.removeEventListener('resize', handleResize);
-  }, [isLoaded]);
+    // Initial draw frame 0 after small DOM paint frame
+    const timer = setTimeout(() => {
+      resizeCanvas();
+      drawFrame(0);
+    }, 50);
 
-  // Handle GSAP Horizontal Scroll & Frame Scrubbing
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      clearTimeout(timer);
+    };
+  }, [isLoaded, drawFrame]);
+
+  // 3. GSAP ScrollTrigger horizontal track & frame scrubbing
   useEffect(() => {
-    // Skip GSAP entirely if we are on mobile to prevent scroll-jacking bugs
-    if (isMobile) return;
-    
     if (!isLoaded || !containerRef.current || !trackRef.current) return;
 
     const ctx = gsap.context(() => {
-      
+      // Draw first frame
+      drawFrame(0);
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          end: '+=300%', // 300% scroll distance for 3 panels
+          end: '+=300%', // 3x scroll distance for smooth scrubbing
           pin: true,
-          scrub: 1, // Smooth scrub
+          scrub: 0.5,
+          anticipatePin: 1,
           onUpdate: (self) => {
-            // Scrub canvas frames based on progress
-            const targetFrame = Math.min(
-              Math.floor(self.progress * TOTAL_FRAMES),
+            const frameIndex = Math.min(
+              Math.floor(self.progress * (TOTAL_FRAMES - 1)),
               TOTAL_FRAMES - 1
             );
-            
-            if (activeFrameRef.current !== targetFrame) {
-              activeFrameRef.current = targetFrame;
-              drawFrame(targetFrame);
+
+            if (activeFrameRef.current !== frameIndex) {
+              activeFrameRef.current = frameIndex;
+              drawFrame(frameIndex);
             }
           }
         }
       });
 
-      // Move the track horizontally by exactly 2 screen widths
-      // (from Panel 1 [0%] to Panel 3 [66.66%])
+      // Translate track horizontally across 3 panels
       tl.to(trackRef.current, {
         xPercent: -66.666,
         ease: 'none'
       });
 
+      // Refresh ScrollTrigger after pin calculation
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 150);
+
     }, containerRef);
 
     return () => ctx.revert();
-  }, [isLoaded]);
-
-  if (isMobile) {
-    return (
-      <section className={styles.mobileBentoSection}>
-        <div className={styles.bentoHeader}>
-          <h2 className={styles.bentoMainTitle}>
-            Your digital presence,<br />
-            <span>fully realized.</span>
-          </h2>
-          <p className={styles.bentoMainDesc}>
-            A cinematic experience distilled into a high-performance, conversion-focused grid.
-          </p>
-        </div>
-        
-        <div className={styles.bentoGrid}>
-          {/* Card 1 - Large */}
-          <div className={`${styles.bentoCard} ${styles.bentoCardLarge}`}>
-            <span className={styles.captionTag}>01 &mdash; Precision</span>
-            <h3 className={styles.bentoTitle}>
-              Crafted with <span>surgical precision.</span>
-            </h3>
-            <p className={styles.bentoDesc}>
-              We align every folding line of the creative layout to lead your user's eyes directly to the core message.
-            </p>
-          </div>
-
-          {/* Card 2 - Half */}
-          <div className={styles.bentoCard}>
-            <span className={styles.captionTag}>02 &mdash; Alignment</span>
-            <h3 className={styles.bentoTitle}>
-              Where art meets <span>science.</span>
-            </h3>
-            <p className={styles.bentoDesc}>
-              Layout hierarchies optimized for engagement.
-            </p>
-          </div>
-
-          {/* Card 3 - Half */}
-          <div className={styles.bentoCard}>
-            <span className={styles.captionTag}>03 &mdash; Unfold</span>
-            <h3 className={styles.bentoTitle}>
-              Exponential <span>growth.</span>
-            </h3>
-            <p className={styles.bentoDesc}>
-              High-performance web pages that drive conversion.
-            </p>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  }, [isLoaded, drawFrame]);
 
   return (
     <div ref={containerRef} className={styles.scrollAnimationSection}>
       <div className={styles.scrollAnimationSticky}>
         
-        {/* Loader */}
+        {/* Loading Indicator */}
         {!isLoaded && (
           <div className={styles.loaderContainer}>
             <div className={styles.loaderTypography}>{loadProgress}%</div>
-            <div className={styles.loaderLabel}>Loading Cinematic Experience</div>
+            <div className={styles.loaderLabel}>Loading Crane Animation</div>
           </div>
         )}
 
@@ -241,7 +176,7 @@ export default function CraneScrollAnimation() {
           <div className={styles.canvasOverlay} />
         </div>
 
-        {/* Horizontal Scrolling Track */}
+        {/* Horizontal Scrolling Panels Track */}
         {isLoaded && (
           <div ref={trackRef} className={styles.horizontalTrack}>
             
@@ -252,7 +187,7 @@ export default function CraneScrollAnimation() {
                 Crafted with <span>surgical precision.</span>
               </h2>
               <p className={styles.captionDesc}>
-                We align every folding line of the creative layout to lead your user's eyes directly to the core message.
+                We align every folding line of the creative layout to lead your user&apos;s eyes directly to the core message.
               </p>
             </div>
 
