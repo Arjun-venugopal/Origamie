@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import styles from './layout.module.css';
 
 const navItems = [
@@ -16,10 +16,10 @@ const navItems = [
   { label: 'Contact Us', href: '/contact' },
 ];
 
-/* Origamie wordmark */
+/* Origamie Wordmark */
 const Wordmark = () => (
-  <span style={{ fontWeight: 400, fontSize: '1.75rem', color: '#111827', letterSpacing: '-0.03em', display: 'inline-flex', alignItems: 'center' }}>
-    Origam<span style={{ color: '#5773FF' }}>ie</span>
+  <span className={styles.navWordmark}>
+    Origam<span className={styles.wordmarkAccent}>ie</span>
   </span>
 );
 
@@ -56,7 +56,21 @@ const itemVariants = {
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  // Scroll detection for navbar background transition
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Prevent scroll when mobile menu is open
   useEffect(() => {
@@ -72,22 +86,29 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={styles.navbar}>
+      <motion.nav
+        className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className={styles.navbarLeft}>
           <Link href="/" className={styles.logo}>
-            <Image
-              src="/crane-logo.png"
-              alt="Origamie crane logo"
-              width={40}
-              height={40}
-              style={{ width: 'auto', height: 'auto' }}
-              className={styles.navbarIcon}
-              priority
-            />
+            <div className={styles.logoBadgeCircle}>
+              <Image
+                src="/crane-logo.png"
+                alt="Origamie crane logo"
+                width={28}
+                height={28}
+                className={styles.navbarIcon}
+                priority
+              />
+            </div>
             <Wordmark />
           </Link>
         </div>
 
+        {/* Desktop Navigation Link Pills */}
         <div className={styles.navLinks}>
           {navItems.map((item) => {
             const isActive = pathname === item.href;
@@ -95,27 +116,40 @@ export default function Navbar() {
               <Link 
                 key={item.label} 
                 href={item.href}
-                className={isActive ? styles.activeNavLink : ''}
+                className={`${styles.navLinkItem} ${isActive ? styles.activeNavLink : ''}`}
               >
-                {item.label}
+                <span>{item.label}</span>
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavPill"
+                    className={styles.activePillBackground}
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
               </Link>
             );
           })}
         </div>
 
-        <a href="/contact" className={styles.navButtonPrimary}>
-          Book a free call
-        </a>
+        {/* Primary CTA */}
+        <div className={styles.navbarRight}>
+          <a href="/contact" className={styles.navButtonPrimary}>
+            <span>Book a free call</span>
+            <ArrowUpRight size={16} className={styles.navCtaIcon} />
+          </a>
 
-        <button
-          className={styles.mobileMenuBtn}
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </nav>
+          {/* Mobile Menu Button */}
+          <button
+            className={styles.mobileMenuBtn}
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
+      </motion.nav>
 
+      {/* Mobile Drawer Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -132,7 +166,6 @@ export default function Navbar() {
                   alt="Origamie crane logo"
                   width={32}
                   height={32}
-                  style={{ width: 'auto', height: 'auto' }}
                   className={styles.mobileNavIcon}
                   priority
                 />
@@ -168,7 +201,8 @@ export default function Navbar() {
 
               <motion.div variants={itemVariants} className={styles.mobileCTAWrapper}>
                 <a href="/contact" className={styles.mobileNavCTA} onClick={() => setMobileOpen(false)}>
-                  Book a free call
+                  <span>Book a free call</span>
+                  <ArrowUpRight size={20} />
                 </a>
               </motion.div>
             </div>
@@ -181,10 +215,7 @@ export default function Navbar() {
                 </a>
               </div>
               <div className={styles.mobileSocials}>
-                {/* TODO: Replace with real social media URLs */}
-                <a href="#" aria-label="LinkedIn" className={styles.mobileSocialLink}>LN</a>
-                <a href="#" aria-label="Twitter" className={styles.mobileSocialLink}>TW</a>
-                <a href="#" aria-label="Instagram" className={styles.mobileSocialLink}>IG</a>
+                <a href="https://wa.me/919544639774" target="_blank" rel="noopener noreferrer" className={styles.mobileSocialLink}>WhatsApp</a>
               </div>
             </motion.div>
           </motion.div>
