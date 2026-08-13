@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Sparkles } from 'lucide-react';
 import styles from './layout.module.css';
 
 const navItems = [
@@ -25,7 +26,7 @@ const curtainVariants = {
   hidden: {
     y: '-100%',
     transition: {
-      duration: 0.8,
+      duration: 0.7,
       ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
       when: 'afterChildren',
     }
@@ -33,41 +34,43 @@ const curtainVariants = {
   visible: {
     y: '0%',
     transition: {
-      duration: 0.8,
+      duration: 0.7,
       ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
       when: 'beforeChildren',
-      staggerChildren: 0.08,
+      staggerChildren: 0.06,
     }
   }
 };
 
 const linkRevealVariants = {
-  hidden: { opacity: 0, y: 60, rotate: 2 },
+  hidden: { opacity: 0, y: 50, rotate: 1.5 },
   visible: {
     opacity: 1,
     y: 0,
     rotate: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }
   }
 };
 
 const fadeVariants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.4 }
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number], delay: 0.3 }
   }
 };
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 25);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -84,43 +87,85 @@ export default function Navbar() {
 
   return (
     <>
-      {/* 1. Default Ultra-Minimal Header */}
+      {/* 1. Floating Glassmorphic Pill Dock Header */}
       <motion.header
         className={`${styles.minimalHeader} ${scrolled ? styles.minimalHeaderScrolled : ''} ${menuOpen ? styles.minimalHeaderHidden : ''}`}
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
       >
+        {/* Brand Logo */}
         <div className={styles.headerLeft}>
           <Link href="/" className={styles.minimalLogo}>
-            <Image
-              src="/crane-logo.png"
-              alt="Origamie crane logo"
-              width={24}
-              height={24}
-              className={styles.navbarIcon}
-              priority
-            />
+            <motion.div
+              whileHover={{ rotate: 12, scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 350, damping: 25 }}
+              className={styles.logoIconWrapper}
+            >
+              <Image
+                src="/crane-logo.png"
+                alt="Origamie crane logo"
+                width={26}
+                height={26}
+                className={styles.navbarIcon}
+                priority
+              />
+            </motion.div>
             <Wordmark />
           </Link>
         </div>
 
+        {/* Center Desktop Navigation Pill Bar */}
+        <div className={styles.headerCenter}>
+          <nav className={styles.desktopNavDock} aria-label="Main Navigation">
+            {navItems.map((item) => {
+              const isActive =
+                item.href === '/'
+                  ? pathname === '/'
+                  : pathname?.startsWith(item.href);
+
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`${styles.navDockItem} ${isActive ? styles.navDockItemActive : ''}`}
+                >
+                  <span className={styles.navDockLabel}>{item.label}</span>
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeNavPill"
+                      className={styles.activePillBackground}
+                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+
+        {/* Right CTA & Menu Trigger */}
         <div className={styles.headerRight}>
-          <a href="/contact" className={styles.navButtonPrimary}>
+          <Link href="/contact" className={styles.navButtonPrimary}>
             <span>Let's Talk</span>
             <ArrowUpRight size={16} className={styles.navCtaIcon} />
-          </a>
+          </Link>
+
           <button
             className={styles.menuTriggerBtn}
             onClick={() => setMenuOpen(true)}
-            aria-label="Open menu"
+            aria-label="Open full menu"
           >
-            Menu
+            <span className={styles.menuDotsIcon}>
+              <span className={styles.dot} />
+              <span className={styles.dot} />
+            </span>
+            <span className={styles.menuText}>Menu</span>
           </button>
         </div>
       </motion.header>
 
-      {/* 2. Full-Screen Kinetic Curtain Menu */}
+      {/* 2. Full-Screen Kinetic Curtain Overlay */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -142,34 +187,44 @@ export default function Navbar() {
                 />
                 <Wordmark />
               </Link>
+
               <button
                 className={styles.closeCurtainBtn}
                 onClick={() => setMenuOpen(false)}
                 aria-label="Close menu"
               >
-                Close ✕
+                <span>Close</span>
+                <span className={styles.closeCross}>✕</span>
               </button>
             </div>
 
             {/* Split Screen Content */}
             <div className={styles.curtainBody}>
               
-              {/* Left Column: Giant Links */}
+              {/* Left Column: Kinetic Links */}
               <div className={styles.curtainNavLinks}>
-                {navItems.map((item, index) => (
-                  <div className={styles.kineticLinkWrapper} key={item.label}>
-                    <motion.div variants={linkRevealVariants}>
-                      <Link
-                        href={item.href}
-                        className={styles.kineticLink}
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        <span className={styles.kineticLinkIndex}>0{index + 1}</span>
-                        <span className={styles.kineticLinkText}>{item.label}</span>
-                      </Link>
-                    </motion.div>
-                  </div>
-                ))}
+                {navItems.map((item, index) => {
+                  const isActive =
+                    item.href === '/'
+                      ? pathname === '/'
+                      : pathname?.startsWith(item.href);
+
+                  return (
+                    <div className={styles.kineticLinkWrapper} key={item.label}>
+                      <motion.div variants={linkRevealVariants}>
+                        <Link
+                          href={item.href}
+                          className={`${styles.kineticLink} ${isActive ? styles.kineticLinkActive : ''}`}
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          <span className={styles.kineticLinkIndex}>0{index + 1}</span>
+                          <span className={styles.kineticLinkText}>{item.label}</span>
+                          {isActive && <Sparkles size={20} className={styles.activeSparkle} />}
+                        </Link>
+                      </motion.div>
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Right Column: Information & Dispatch */}
@@ -210,3 +265,4 @@ export default function Navbar() {
     </>
   );
 }
+
