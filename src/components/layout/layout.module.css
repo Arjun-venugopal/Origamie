@@ -1,31 +1,41 @@
-/* ========== AWWWARDS MINIMAL HEADER ========== */
+/* ========== FLOATING GLASSMORPHIC HEADER ========== */
 .minimalHeader {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 80px);
+  max-width: 1280px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 48px;
+  padding: 16px 32px;
   z-index: 1000;
   color: #0F172A;
   font-size: 0.95rem;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  background: transparent;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  box-shadow: 0 12px 35px rgba(5, 29, 150, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
 }
 
 .minimalHeaderScrolled {
-  padding: 16px 48px;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  top: 14px;
+  padding: 12px 28px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 45px rgba(5, 29, 150, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
 }
 
 .minimalHeaderHidden {
   pointer-events: none;
   opacity: 0 !important;
+  transform: translate(-50%, -20px) !important;
 }
 
 .headerLeft {
@@ -66,35 +76,43 @@
 .headerRight {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 
 .menuTriggerBtn {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   font-family: var(--font-urbanist), sans-serif;
   font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: -0.02em;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
   color: #0F172A;
   cursor: pointer;
-  padding: 12px;
+  padding: 10px 20px;
+  border-radius: 999px;
   text-transform: uppercase;
-  transition: color 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .menuTriggerBtn:hover {
-  color: #051D96;
+  background: #051D96;
+  color: #ffffff;
+  border-color: #051D96;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(5, 29, 150, 0.25);
 }
 
 .navButtonPrimary {
   background-color: #051D96;
   color: #ffffff;
-  padding: 12px 26px;
+  padding: 11px 24px;
   border-radius: 999px;
   font-family: var(--font-urbanist), sans-serif;
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   text-decoration: none;
   box-shadow: 0 6px 20px rgba(5, 29, 150, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
