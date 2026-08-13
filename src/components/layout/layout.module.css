@@ -1,41 +1,34 @@
-/* ========== FLOATING GLASSMORPHIC HEADER ========== */
+/* ========== NORMAL CLEAN HEADER ========== */
 .minimalHeader {
   position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 80px);
-  max-width: 1280px;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 32px;
+  padding: 24px 48px;
   z-index: 1000;
   color: #0F172A;
   font-size: 0.95rem;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 999px;
-  box-shadow: 0 12px 35px rgba(5, 29, 150, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  background: transparent;
+  border-bottom: 1px solid transparent;
 }
 
 .minimalHeaderScrolled {
-  top: 14px;
-  padding: 12px 28px;
+  padding: 16px 48px;
   background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  border-color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 16px 45px rgba(5, 29, 150, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 20px rgba(5, 29, 150, 0.05);
 }
 
 .minimalHeaderHidden {
   pointer-events: none;
   opacity: 0 !important;
-  transform: translate(-50%, -20px) !important;
+  transform: translateY(-100%) !important;
 }
 
 .headerLeft {
@@ -76,45 +69,37 @@
 .headerRight {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 }
 
 .menuTriggerBtn {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: none;
+  border: none;
   font-family: var(--font-urbanist), sans-serif;
   font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
   color: #0F172A;
   cursor: pointer;
-  padding: 10px 20px;
-  border-radius: 999px;
+  padding: 10px 16px;
   text-transform: uppercase;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: color 0.3s ease;
 }
 
 .menuTriggerBtn:hover {
-  background: #051D96;
-  color: #ffffff;
-  border-color: #051D96;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(5, 29, 150, 0.25);
+  color: #051D96;
 }
 
 .navButtonPrimary {
   background-color: #051D96;
   color: #ffffff;
-  padding: 11px 24px;
+  padding: 12px 26px;
   border-radius: 999px;
   font-family: var(--font-urbanist), sans-serif;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   text-decoration: none;
-  box-shadow: 0 6px 20px rgba(5, 29, 150, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  box-shadow: 0 6px 20px rgba(5, 29, 150, 0.25);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   align-items: center;
@@ -124,7 +109,7 @@
 .navButtonPrimary:hover {
   background-color: #031475;
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(5, 29, 150, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+  box-shadow: 0 10px 28px rgba(5, 29, 150, 0.35);
 }
 
 .navCtaIcon {
@@ -1104,9 +1089,22 @@
   line-height: 1.5;
 }
 
-/* ========== RESPONSIVE OVERRIDES FOR LAYOUT & BENTO GRID FOOTER ========== */
+@media (min-width: 1440px) {
+  .minimalHeader {
+    padding: 24px 64px;
+  }
+  .minimalHeaderScrolled {
+    padding: 16px 64px;
+  }
+}
 
 @media (max-width: 1280px) {
+  .minimalHeader {
+    padding: 20px 40px;
+  }
+  .minimalHeaderScrolled {
+    padding: 14px 40px;
+  }
   .navbar {
     padding: 20px 32px;
   }
@@ -1132,6 +1130,12 @@
 }
 
 @media (max-width: 1024px) {
+  .minimalHeader {
+    padding: 18px 32px;
+  }
+  .minimalHeaderScrolled {
+    padding: 12px 32px;
+  }
   .navLinks,
   .navButtonPrimary {
     display: none;
@@ -1183,6 +1187,16 @@
 }
 
 @media (max-width: 768px) {
+  .minimalHeader {
+    padding: 16px 24px;
+  }
+  .minimalHeaderScrolled {
+    padding: 12px 24px;
+  }
+  .menuTriggerBtn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
   .navbar {
     padding: 16px 24px;
   }
@@ -1284,6 +1298,26 @@
 }
 
 @media (max-width: 540px) {
+  .minimalHeader {
+    top: 10px;
+    width: calc(100% - 24px);
+    padding: 8px 14px;
+  }
+  .minimalHeaderScrolled {
+    top: 8px;
+    padding: 8px 12px;
+  }
+  .navWordmark {
+    font-size: 1.35rem;
+  }
+  .navbarIcon {
+    width: 22px;
+    height: 22px;
+  }
+  .menuTriggerBtn {
+    padding: 7px 14px;
+    font-size: 0.75rem;
+  }
   .navbar {
     padding: 12px 16px;
   }
