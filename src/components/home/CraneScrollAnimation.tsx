@@ -11,6 +11,33 @@ if (typeof window !== 'undefined') {
 
 const TOTAL_FRAMES = 30;
 
+const panelsData = [
+  {
+    step: '01',
+    label: 'Precision',
+    title: 'Crafted with',
+    highlight: 'surgical precision.',
+    desc: 'Every layout fold is engineered to guide user attention directly toward your core value proposition.',
+    features: ['Pixel-perfect alignment', 'Fluid motion design', 'Kinetic typography']
+  },
+  {
+    step: '02',
+    label: 'Alignment',
+    title: 'Where art meets',
+    highlight: 'conversion science.',
+    desc: 'We combine aesthetics with data-driven UX patterns to turn casual visitors into loyal customers.',
+    features: ['High-conversion UX', 'Seamless interactions', 'Sub-second load speeds']
+  },
+  {
+    step: '03',
+    label: 'Unfold',
+    title: 'Your digital presence,',
+    highlight: 'fully realized.',
+    desc: 'Watch your brand unfold into a memorable digital experience that sets you apart from competitors.',
+    features: ['Scalable architecture', 'Mobile-first optimization', 'Bespoke web engineering']
+  }
+];
+
 export default function CraneScrollAnimation() {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -20,6 +47,7 @@ export default function CraneScrollAnimation() {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
 
   // Draw frame helper on canvas
   const drawFrame = useCallback((index: number) => {
@@ -31,7 +59,6 @@ export default function CraneScrollAnimation() {
     const img = imagesRef.current[index];
     if (!img || !img.complete || img.naturalWidth === 0) return;
 
-    // Clear previous frame
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const canvasRatio = canvas.width / canvas.height;
@@ -55,7 +82,7 @@ export default function CraneScrollAnimation() {
     ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
   }, []);
 
-  // 1. Preload 30 PNG frames
+  // Preload PNG frames
   useEffect(() => {
     let loadedCount = 0;
     const loadedImages: HTMLImageElement[] = [];
@@ -80,7 +107,7 @@ export default function CraneScrollAnimation() {
     imagesRef.current = loadedImages;
   }, []);
 
-  // 2. Handle canvas resizing & initial frame render
+  // Canvas Resizing
   useEffect(() => {
     if (!isLoaded || !canvasRef.current) return;
 
@@ -100,7 +127,6 @@ export default function CraneScrollAnimation() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Initial draw frame 0 after small DOM paint frame
     const timer = setTimeout(() => {
       resizeCanvas();
       drawFrame(0);
@@ -112,25 +138,26 @@ export default function CraneScrollAnimation() {
     };
   }, [isLoaded, drawFrame]);
 
-  // 3. GSAP ScrollTrigger horizontal track & frame scrubbing
+  // GSAP ScrollTrigger
   useEffect(() => {
     if (!isLoaded || !containerRef.current || !trackRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Draw first frame
       drawFrame(0);
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          end: '+=300%', // 3x scroll distance for smooth scrubbing
+          end: '+=300%',
           pin: true,
           scrub: 0.5,
           anticipatePin: 1,
           onUpdate: (self) => {
+            const progress = self.progress;
+
             const frameIndex = Math.min(
-              Math.floor(self.progress * (TOTAL_FRAMES - 1)),
+              Math.floor(progress * (TOTAL_FRAMES - 1)),
               TOTAL_FRAMES - 1
             );
 
@@ -138,81 +165,133 @@ export default function CraneScrollAnimation() {
               activeFrameRef.current = frameIndex;
               drawFrame(frameIndex);
             }
+
+            if (progress < 0.33) {
+              setActiveStep(0);
+            } else if (progress < 0.66) {
+              setActiveStep(1);
+            } else {
+              setActiveStep(2);
+            }
           }
         }
       });
 
-      // Translate track horizontally across 3 panels
       tl.to(trackRef.current, {
         xPercent: -66.666,
         ease: 'none'
       });
 
-      // Refresh ScrollTrigger after pin calculation
       setTimeout(() => {
         ScrollTrigger.refresh();
       }, 150);
-
     }, containerRef);
 
     return () => ctx.revert();
   }, [isLoaded, drawFrame]);
 
+  // Smooth scroll to specific step
+  const jumpToStep = (index: number) => {
+    if (!containerRef.current) return;
+    const st = ScrollTrigger.getAll().find(s => s.trigger === containerRef.current);
+    if (st) {
+      const targetProgress = index * 0.5; // 0, 0.5, 1.0
+      const targetY = st.start + targetProgress * (st.end - st.start);
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div ref={containerRef} className={styles.scrollAnimationSection}>
-      <div className={styles.scrollAnimationSticky}>
-        
-        {/* Loading Indicator */}
+    <div ref={containerRef} className={styles.scrollSection}>
+      <div className={styles.stickyContainer}>
+
+        {/* Minimal Subtle Ambient Background Glow */}
+        <div className={styles.ambientGlow} />
+
+        {/* Clean Loader */}
         {!isLoaded && (
-          <div className={styles.loaderContainer}>
-            <div className={styles.loaderTypography}>{loadProgress}%</div>
-            <div className={styles.loaderLabel}>Loading Crane Animation</div>
+          <div className={styles.minimalLoader}>
+            <span className={styles.loaderValue}>{loadProgress}%</span>
+            <div className={styles.loaderProgressTrack}>
+              <div className={styles.loaderProgressFill} style={{ width: `${loadProgress}%` }} />
+            </div>
+            <span className={styles.loaderSubtitle}>Loading 3D Experience</span>
           </div>
         )}
 
-        {/* Cinematic Canvas Background */}
-        <div className={styles.canvasContainer} style={{ opacity: isLoaded ? 1 : 0 }}>
-          <canvas ref={canvasRef} className={styles.scrollCanvas} />
-          <div className={styles.canvasOverlay} />
+        {/* Background Canvas */}
+        <div className={styles.canvasWrapper} style={{ opacity: isLoaded ? 1 : 0 }}>
+          <canvas ref={canvasRef} className={styles.canvasElement} />
+          <div className={styles.vignetteOverlay} />
         </div>
 
-        {/* Horizontal Scrolling Panels Track */}
+        {/* Minimal Top Brand Bar */}
+        {isLoaded && (
+          <div className={styles.topHeader}>
+            <span className={styles.brandTag}>Origamie Studio</span>
+            <span className={styles.stepIndicator}>
+              Step {activeStep + 1} of {panelsData.length}
+            </span>
+          </div>
+        )}
+
+        {/* Horizontal Track of Minimal Cards */}
         {isLoaded && (
           <div ref={trackRef} className={styles.horizontalTrack}>
-            
-            {/* Panel 1 */}
-            <div className={styles.textPanel}>
-              <span className={styles.captionTag}>01 &mdash; Precision</span>
-              <h2 className={styles.captionTitle}>
-                Crafted with <span>surgical precision.</span>
-              </h2>
-              <p className={styles.captionDesc}>
-                We align every folding line of the creative layout to lead your user&apos;s eyes directly to the core message.
-              </p>
-            </div>
+            {panelsData.map((panel, idx) => {
+              const isActive = activeStep === idx;
+              return (
+                <div key={panel.step} className={styles.slidePanel}>
+                  <div className={`${styles.minimalCard} ${isActive ? styles.activeCard : ''}`}>
+                    
+                    <div className={styles.cardStepHeader}>
+                      <span className={styles.stepBadge}>{panel.step}</span>
+                      <span className={styles.stepName}>{panel.label}</span>
+                    </div>
 
-            {/* Panel 2 */}
-            <div className={styles.textPanel}>
-              <span className={styles.captionTag}>02 &mdash; Alignment</span>
-              <h2 className={styles.captionTitle}>
-                Where art meets <span>conversion science.</span>
-              </h2>
-              <p className={styles.captionDesc}>
-                Not just aesthetic grids, but layout hierarchies optimized for deep engagement, retention and conversion.
-              </p>
-            </div>
+                    <h2 className={styles.cardHeading}>
+                      {panel.title} <br />
+                      <span className={styles.serifHighlight}>{panel.highlight}</span>
+                    </h2>
 
-            {/* Panel 3 */}
-            <div className={styles.textPanel}>
-              <span className={styles.captionTag}>03 &mdash; Unfold</span>
-              <h2 className={styles.captionTitle}>
-                Your digital presence, <span>fully realized.</span>
-              </h2>
-              <p className={styles.captionDesc}>
-                Watch your brand unfold seamlessly into high-performance web pages that drive exponential growth.
-              </p>
-            </div>
+                    <p className={styles.cardBody}>{panel.desc}</p>
 
+                    <div className={styles.featureList}>
+                      {panel.features.map(feat => (
+                        <div key={feat} className={styles.featurePill}>
+                          <span className={styles.featureDot} />
+                          <span>{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* User-Friendly Bottom Control Bar */}
+        {isLoaded && (
+          <div className={styles.bottomControls}>
+            <div className={styles.navPillsContainer}>
+              {panelsData.map((panel, idx) => {
+                const isActive = activeStep === idx;
+                return (
+                  <button
+                    key={panel.step}
+                    type="button"
+                    className={`${styles.navPill} ${isActive ? styles.activeNavPill : ''}`}
+                    onClick={() => jumpToStep(idx)}
+                    aria-label={`Jump to stage ${panel.label}`}
+                  >
+                    <span className={styles.pillIndex}>{panel.step}</span>
+                    <span className={styles.pillLabel}>{panel.label}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         )}
 

@@ -3,7 +3,7 @@
 import React, { useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { ArrowUpRight, Sparkles, TrendingUp, Award, Zap, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, TrendingUp, Award, Zap } from 'lucide-react';
 import styles from './Hero.module.css';
 import FloatingBird from './FloatingBird';
 
@@ -127,6 +127,28 @@ export default function Hero() {
               <span>Explore selected works</span>
               <ArrowUpRight size={18} className={styles.ctaIconSec} />
             </a>
+          </motion.div>
+
+          {/* Mobile Trust Proof Badges */}
+          <motion.div
+            className={styles.mobileTrustGroup}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={4}
+          >
+            <div className={styles.trustBadgeItem}>
+              <Zap size={13} className={styles.trustBadgeIcon} />
+              <span>99/100 Speed</span>
+            </div>
+            <div className={styles.trustBadgeItem}>
+              <TrendingUp size={13} className={styles.trustBadgeIcon} />
+              <span>2–4x Lead Growth</span>
+            </div>
+            <div className={styles.trustBadgeItem}>
+              <Award size={13} className={styles.trustBadgeIcon} />
+              <span>Award Craft</span>
+            </div>
           </motion.div>
         </div>
 

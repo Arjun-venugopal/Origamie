@@ -1,283 +1,401 @@
-/* ========== HORIZONTAL JOURNEY - AWWWARDS UI ========== */
+/* ========== SENIOR UI/UX MINIMALIST DESIGN ========== */
 
-.scrollAnimationSection {
+.scrollSection {
   position: relative;
-  height: 100vh; /* The section itself will be pinned by GSAP, scrolling height is defined by end value */
-  background-color: #030510; /* Ultra-deep cinematic background */
+  height: 100vh;
+  background-color: #030712;
   color: #ffffff;
   overflow: hidden;
   z-index: 10;
+  isolation: isolate;
 }
 
-.scrollAnimationSticky {
+.stickyContainer {
   position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
 }
 
-/* Loader */
-.loaderContainer {
+/* Soft Ambient Background Glow */
+.ambientGlow {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(87, 115, 255, 0.15) 0%, rgba(3, 7, 18, 0) 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Minimal Loader */
+.minimalLoader {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #030510;
+  background: #030712;
   z-index: 50;
+  gap: 16px;
 }
 
-.loaderTypography {
+.loaderValue {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: clamp(4rem, 15vw, 12rem);
-  font-weight: 800;
+  font-size: 3.5rem;
+  font-weight: 700;
   color: #ffffff;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  margin: 0;
+  letter-spacing: -0.03em;
 }
 
-.loaderLabel {
+.loaderProgressTrack {
+  width: 180px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.loaderProgressFill {
+  height: 100%;
+  background: #5773FF;
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+
+.loaderSubtitle {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  color: rgba(255, 255, 255, 0.4);
-  margin-top: 16px;
 }
 
-/* Canvas Layer */
-.canvasContainer {
+/* Canvas & Vignette */
+.canvasWrapper {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
   z-index: 2;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s ease;
 }
 
-.scrollCanvas {
+.canvasElement {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Fill the screen completely */
-  opacity: 0.7; /* Dim the crane slightly so text pops */
-  filter: saturate(0) contrast(1.2); /* Make the crane feel metallic/dramatic */
+  object-fit: cover;
+  opacity: 0.6;
+  filter: saturate(0.85) contrast(1.1);
 }
 
-/* Dark cinematic overlay */
-.canvasOverlay {
+.vignetteOverlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, transparent 0%, #030510 100%);
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 20%, #030712 90%);
   z-index: 3;
   pointer-events: none;
 }
 
-/* Horizontal Scrolling Track */
+/* Minimal Header Bar */
+.topHeader {
+  position: absolute;
+  top: 36px;
+  left: 48px;
+  right: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.brandTag {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.stepIndicator {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #5773FF;
+  letter-spacing: 0.08em;
+}
+
+/* Horizontal Slide Panels */
 .horizontalTrack {
   position: absolute;
   top: 0;
   left: 0;
-  width: 300vw; /* 3 panels * 100vw */
+  width: 300vw;
   height: 100vh;
   display: flex;
   z-index: 10;
-  /* GSAP will translate this track X: -200vw */
 }
 
-/* Individual Text Panels */
-.textPanel {
+.slidePanel {
   width: 100vw;
   height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 0 5vw;
+  padding: 0 40px;
 }
 
-/* Typography */
-.captionTag {
+/* Clean Minimal Card */
+.minimalCard {
+  position: relative;
+  max-width: 760px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
+  padding: 48px 56px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  transition: all 0.4s ease;
+  text-align: left;
+}
+
+.activeCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(87, 115, 255, 0.3);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+}
+
+.cardStepHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stepBadge {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #5773FF;
+  background: rgba(87, 115, 255, 0.12);
+  border: 1px solid rgba(87, 115, 255, 0.25);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.stepName {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.cardHeading {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(2.2rem, 4.2vw, 3.8rem);
+  font-weight: 500;
+  line-height: 1.1;
+  color: #ffffff;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.03em;
+}
+
+.serifHighlight {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-weight: 600;
+  color: #5773FF;
+}
+
+.cardBody {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.7;
+  margin: 0 0 32px 0;
+  max-width: 620px;
+}
+
+.featureList {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.featurePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.featureDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #5773FF;
+}
+
+/* User-Friendly Bottom Control Bar */
+.bottomControls {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+}
+
+.navPillsContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.navPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
   font-family: var(--font-urbanist), sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.35em;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 32px;
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-.captionTag::before,
-.captionTag::after {
-  content: '';
-  width: 40px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.captionTitle {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: clamp(3rem, 7vw, 7rem); /* Massive */
-  font-weight: 300;
-  line-height: 1.05;
+.navPill:hover {
   color: #ffffff;
-  margin: 0 0 40px 0;
-  letter-spacing: -0.02em;
-  max-width: 90vw;
-  text-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.captionTitle span {
-  font-family: var(--font-playfair), serif;
-  font-style: italic;
-  font-weight: 400;
-  color: #5773FF; /* Signature blue */
-  display: block; /* New line */
+.activeNavPill {
+  background: #5773FF !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(87, 115, 255, 0.4);
 }
 
-.captionDesc {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: clamp(1rem, 1.5vw, 1.3rem);
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.8;
-  max-width: 600px;
-  margin: 0;
-  font-weight: 300;
-  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+.pillIndex {
+  font-size: 0.76rem;
+  opacity: 0.85;
+}
+
+.pillLabel {
+  font-size: 0.85rem;
 }
 
 /* ========== RESPONSIVE OVERRIDES ========== */
-@media (max-width: 768px) {
-  .captionTag::before,
-  .captionTag::after {
-    width: 20px;
+@media (max-width: 1024px) {
+  .topHeader {
+    top: 24px;
+    left: 28px;
+    right: 28px;
   }
-  
-  .captionTitle {
-    font-size: clamp(2.5rem, 9vw, 4rem);
+
+  .bottomControls {
+    bottom: 28px;
+  }
+
+  .minimalCard {
+    padding: 40px 36px;
+    max-width: 680px;
+  }
+
+  .cardHeading {
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .topHeader {
+    top: 20px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .bottomControls {
+    bottom: 20px;
+  }
+
+  .minimalCard {
+    padding: 32px 24px;
+    border-radius: 24px;
+  }
+
+  .cardHeading {
+    font-size: 1.95rem;
+    margin-bottom: 16px;
+  }
+
+  .cardBody {
+    font-size: 0.95rem;
     margin-bottom: 24px;
   }
-  
-  .captionTitle span {
-    display: block;
+
+  .featureList {
+    gap: 12px;
+    padding-top: 16px;
   }
 
-  .scrollCanvas {
-    object-fit: contain; /* Don't crop the crane on mobile */
-    opacity: 0.5;
+  .featurePill {
+    font-size: 0.78rem;
   }
 }
 
-/* ========== MOBILE BENTO GRID ========== */
-.mobileBentoSection {
-  background-color: #030510;
-  padding: 100px 24px;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-}
-
-.bentoHeader {
-  text-align: center;
-  margin-bottom: 16px;
-}
-
-.bentoMainTitle {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 2.8rem;
-  font-weight: 300;
-  line-height: 1.1;
-  color: #ffffff;
-  margin: 0 0 16px 0;
-  letter-spacing: -0.02em;
-}
-
-.bentoMainTitle span {
-  font-family: var(--font-playfair), serif;
-  font-style: italic;
-  font-weight: 400;
-  color: #5773FF;
-}
-
-.bentoMainDesc {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.6;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.bentoGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.bentoCard {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
-  padding: 32px 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  backdrop-filter: blur(10px);
-}
-
-.bentoCardLarge {
-  grid-column: span 2;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-  padding: 48px 32px;
-}
-
-.bentoTitle {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: #ffffff;
-  margin: 0 0 12px 0;
-  line-height: 1.2;
-}
-
-.bentoCardLarge .bentoTitle {
-  font-size: 2rem;
-  margin-bottom: 16px;
-}
-
-.bentoTitle span {
-  font-family: var(--font-playfair), serif;
-  font-style: italic;
-  color: #5773FF;
-}
-
-.bentoDesc {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.6);
-  line-height: 1.6;
-  margin: 0;
-}
-
-@media (max-width: 500px) {
-  .bentoGrid {
-    grid-template-columns: 1fr;
+@media (max-width: 480px) {
+  .minimalCard {
+    padding: 24px 18px;
+    border-radius: 20px;
   }
-  .bentoCardLarge {
-    grid-column: span 1;
-    padding: 32px 24px;
+
+  .cardHeading {
+    font-size: 1.6rem;
+  }
+
+  .cardBody {
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .navPillsContainer {
+    padding: 4px;
+    gap: 4px;
+  }
+
+  .navPill {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+
+  .pillLabel {
+    display: none;
   }
 }
