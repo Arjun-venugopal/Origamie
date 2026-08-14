@@ -6,7 +6,7 @@ import {
   Hero,
   Pills,
   Vision,
-  CraneScrollAnimation,
+  SpatialShowcase,
   Process,
   FAQ
 } from '@/components/home';
@@ -22,7 +22,7 @@ export default function Home() {
           <Hero />
           <Pills />
           <Vision />
-          <CraneScrollAnimation />
+          <SpatialShowcase />
           <Process />
           <FAQ />
           <GridFooter />

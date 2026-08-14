@@ -1,0 +1,901 @@
+/* ==========================================================================
+   ORIGAMIE — ULTRA-PREMIUM KINETIC NAVIGATION SYSTEM
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. FLOATING DOCK / HEADER
+   -------------------------------------------------------------------------- */
+.headerWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 24px;
+  z-index: 1000;
+  pointer-events: none;
+  transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.headerWrapperScrolled {
+  padding: 12px 24px;
+}
+
+.floatingDock {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 1240px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px 8px 20px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 9999px;
+  box-shadow: 
+    0 4px 6px -1px rgba(5, 29, 150, 0.03),
+    0 12px 32px -4px rgba(5, 29, 150, 0.08),
+    0 0 0 1px rgba(15, 23, 42, 0.04),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.floatingDockScrolled {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 10px 40px -10px rgba(5, 29, 150, 0.14),
+    0 0 0 1px rgba(15, 23, 42, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+/* Compact Island when scrolling down */
+.floatingDockCompact {
+  max-width: 320px;
+  padding: 6px 8px 6px 14px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  box-shadow: 
+    0 12px 42px -6px rgba(5, 29, 150, 0.18),
+    0 0 0 1px rgba(15, 23, 42, 0.09),
+    inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+.headerHidden {
+  opacity: 0 !important;
+  transform: translateY(-40px) scale(0.96) !important;
+  pointer-events: none !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. BRAND LOGO
+   -------------------------------------------------------------------------- */
+.logoGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #0F172A;
+  position: relative;
+  z-index: 2;
+  user-select: none;
+}
+
+.logoIconBadge {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(87, 115, 255, 0.12) 0%, rgba(5, 29, 150, 0.05) 100%);
+  border: 1px solid rgba(87, 115, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(87, 115, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logoGroup:hover .logoIconBadge {
+  border-color: rgba(87, 115, 255, 0.5);
+  box-shadow: 0 4px 16px rgba(87, 115, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.craneLogoImg {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(5, 29, 150, 0.2));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logoGroup:hover .craneLogoImg {
+  transform: scale(1.1) rotate(6deg);
+}
+
+.logoTypography {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.brandName {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #0F172A;
+  line-height: 1;
+}
+
+.brandDot {
+  color: #3B52FF;
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.brandSuffix {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: #64748B;
+  letter-spacing: 0.01em;
+  margin-left: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   3. CENTER NAVIGATION DOCK
+   -------------------------------------------------------------------------- */
+.centerDock {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.navPillContainer {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(15, 23, 42, 0.035);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  padding: 4px;
+  border-radius: 9999px;
+}
+
+.navItem {
+  position: relative;
+  padding: 8px 18px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #475569;
+  text-decoration: none;
+  border-radius: 9999px;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+
+.navItem:hover {
+  color: #0F172A;
+}
+
+.navItemActive {
+  color: #FFFFFF !important;
+}
+
+.navLabel {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.2s ease;
+}
+
+.navItemActive .navLabel {
+  font-weight: 700;
+}
+
+.navActiveBackground {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #051D96 0%, #3B52FF 100%);
+  box-shadow: 0 4px 16px rgba(5, 29, 150, 0.35);
+  z-index: 1;
+}
+
+.navHoverBackground {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.06);
+  z-index: 0;
+}
+
+.navItemBadge {
+  position: relative;
+  z-index: 2;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(87, 115, 255, 0.12);
+  color: #3B52FF;
+  border: 1px solid rgba(87, 115, 255, 0.2);
+  line-height: 1;
+}
+
+.navItemActive .navItemBadge {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   4. RIGHT ACTIONS & MENU TRIGGER
+   -------------------------------------------------------------------------- */
+.rightActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.liveStatusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #059669;
+  user-select: none;
+}
+
+.statusDotPulse {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+}
+
+.statusDotPulse::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: #10B981;
+  opacity: 0.4;
+  animation: pingPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes pingPulse {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #051D96 0%, #3B52FF 100%);
+  color: #FFFFFF;
+  font-family: var(--font-urbanist), sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  box-shadow: 
+    0 4px 14px rgba(5, 29, 150, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.6s ease;
+}
+
+.ctaButton:hover::before {
+  left: 100%;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 8px 24px rgba(5, 29, 150, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  filter: brightness(1.06);
+}
+
+.ctaButton:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.ctaIcon {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ctaButton:hover .ctaIcon {
+  transform: translate(2px, -2px);
+}
+
+.menuTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  min-height: 40px;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.05);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  color: #0F172A;
+  font-family: var(--font-urbanist), sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.menuTrigger:hover {
+  background: rgba(5, 29, 150, 0.08);
+  border-color: rgba(5, 29, 150, 0.22);
+  color: #051D96;
+}
+
+.menuTrigger:active {
+  transform: scale(0.95);
+}
+
+.burgerLines {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px;
+  width: 14px;
+}
+
+.burgerLine {
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.burgerLineTop {
+  width: 14px;
+}
+
+.burgerLineBottom {
+  width: 10px;
+  align-self: flex-start;
+}
+
+.menuTrigger:hover .burgerLineTop {
+  transform: translateX(2px);
+}
+
+.menuTrigger:hover .burgerLineBottom {
+  width: 14px;
+  transform: translateX(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   5. FULL-SCREEN KINETIC CURTAIN MENU
+   -------------------------------------------------------------------------- */
+.curtainBackdrop {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: #0B0F19;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  color: #F8FAFC;
+}
+
+/* Ambient glow & geometry */
+.auroraGlowContainer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.auroraGlow1 {
+  position: absolute;
+  top: -15%;
+  left: -10%;
+  width: 55vw;
+  height: 55vw;
+  max-width: 600px;
+  max-height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(87, 115, 255, 0.28) 0%, rgba(5, 29, 150, 0) 70%);
+  filter: blur(80px);
+  animation: floatGlow 18s ease-in-out infinite alternate;
+}
+
+.auroraGlow2 {
+  position: absolute;
+  bottom: -20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  max-width: 700px;
+  max-height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(122, 0, 255, 0.22) 0%, rgba(5, 29, 150, 0) 70%);
+  filter: blur(100px);
+  animation: floatGlow 22s ease-in-out infinite alternate-reverse;
+}
+
+.curtainGridPattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.7;
+}
+
+@keyframes floatGlow {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, 30px) scale(1.1); }
+  100% { transform: translate(-30px, 50px) scale(0.95); }
+}
+
+/* Curtain Header Bar */
+.curtainHeader {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: max(24px, env(safe-area-inset-top)) 48px 20px;
+  width: 100%;
+}
+
+.curtainLogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.curtainLogo .brandName {
+  color: #FFFFFF;
+}
+
+.curtainLogo .brandSuffix {
+  color: #94A3B8;
+}
+
+.curtainCloseBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  color: #FFFFFF;
+  font-family: var(--font-urbanist), sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  padding: 10px 22px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-transform: uppercase;
+}
+
+.curtainCloseBtn:hover {
+  background: rgba(87, 115, 255, 0.25);
+  border-color: rgba(87, 115, 255, 0.6);
+  transform: scale(1.04);
+  box-shadow: 0 4px 20px rgba(87, 115, 255, 0.3);
+}
+
+.curtainCloseBtn:active {
+  transform: scale(0.96);
+}
+
+.closeIcon {
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.curtainCloseBtn:hover .closeIcon {
+  transform: rotate(90deg);
+}
+
+/* Curtain Main Content Body */
+.curtainContent {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 60px;
+  padding: 20px 8% 48px;
+  align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Kinetic Links List */
+.kineticLinksNav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.linkRevealMask {
+  overflow: hidden;
+}
+
+.kineticNavLink {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 20px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.kineticNavLink::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.kineticNavLink:hover::before,
+.kineticNavLinkActive::before {
+  opacity: 1;
+}
+
+.kineticLinkIndex {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #5773FF;
+  letter-spacing: 0.05em;
+  min-width: 32px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.kineticNavLink:hover .kineticLinkIndex {
+  color: #CCFF00;
+  transform: scale(1.15);
+}
+
+.kineticLinkTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(2.4rem, 4.4vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #94A3B8;
+  line-height: 1.1;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.kineticNavLink:hover .kineticLinkTitle {
+  color: #FFFFFF;
+  transform: translateX(12px);
+}
+
+.kineticNavLinkActive .kineticLinkTitle {
+  color: #FFFFFF;
+}
+
+.activeSparkleIcon {
+  color: #CCFF00;
+  animation: rotateSparkle 8s linear infinite;
+}
+
+@keyframes rotateSparkle {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.linkHoverArrow {
+  opacity: 0;
+  transform: translateX(-10px);
+  color: #5773FF;
+  transition: all 0.3s ease;
+}
+
+.kineticNavLink:hover .linkHoverArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Curtain Right Information Panel */
+.curtainInfoColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 36px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Dynamic Preview Card */
+.previewFeatureCard {
+  background: linear-gradient(145deg, rgba(87, 115, 255, 0.12) 0%, rgba(5, 29, 150, 0.06) 100%);
+  border: 1px solid rgba(87, 115, 255, 0.25);
+  border-radius: 20px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.previewTag {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #CCFF00;
+}
+
+.previewHeading {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+}
+
+.previewDesc {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.88rem;
+  color: #CBD5E1;
+  line-height: 1.5;
+}
+
+/* Dispatch details */
+.curtainDetailsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.detailBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detailHeading {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748B;
+}
+
+.detailLink {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #F8FAFC;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detailLink:hover {
+  color: #5773FF;
+}
+
+.liveClockDisplay {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #38BDF8;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.curtainSocialRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.curtainSocialBtn {
+  font-family: var(--font-urbanist), sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #94A3B8;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.25s ease;
+}
+
+.curtainSocialBtn:hover {
+  color: #FFFFFF;
+  background: rgba(87, 115, 255, 0.2);
+  border-color: rgba(87, 115, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   6. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 1080px) {
+  .centerDock {
+    display: none;
+  }
+
+  .liveStatusPill {
+    display: none;
+  }
+
+  .curtainContent {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 16px 24px 40px;
+  }
+
+  .curtainInfoColumn {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerWrapper {
+    padding: 12px 16px;
+  }
+
+  .headerWrapperScrolled {
+    padding: 8px 16px;
+  }
+
+  .floatingDock {
+    padding: 6px 8px 6px 14px;
+  }
+
+  .brandName {
+    font-size: 1.25rem;
+  }
+
+  .brandSuffix {
+    display: none;
+  }
+
+  .ctaButton {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .menuTrigger {
+    padding: 8px 12px;
+    font-size: 0.82rem;
+  }
+
+  .curtainHeader {
+    padding: max(16px, env(safe-area-inset-top)) 20px 16px;
+  }
+
+  .curtainContent {
+    padding: 12px 16px 36px;
+  }
+
+  .kineticLinkTitle {
+    font-size: clamp(2rem, 8vw, 2.75rem);
+  }
+
+  .kineticNavLink {
+    gap: 14px;
+    padding: 8px 10px;
+  }
+
+  .curtainDetailsGrid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .floatingDock {
+    padding: 6px 6px 6px 12px;
+  }
+
+  .logoIconBadge {
+    width: 32px;
+    height: 32px;
+  }
+
+  .craneLogoImg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .brandName {
+    font-size: 1.15rem;
+  }
+
+  .ctaButton {
+    padding: 7px 12px;
+    font-size: 0.8rem;
+  }
+
+  .menuTrigger {
+    padding: 7px 10px;
+  }
+
+  .menuTrigger span:last-child {
+    display: none;
+  }
+
+  .curtainSocialRow {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}

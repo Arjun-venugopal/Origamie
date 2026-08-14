@@ -1,383 +1,416 @@
-/* ========== VISION SECTION ========== */
+/* ==========================================================================
+   ORIGAMIE — 3D SPATIAL VISION & VALUE ENGINE
+   3D Interactive Bento • Holographic Depth • Specular Reflections
+   ========================================================================== */
+
 .visionSection {
-  padding: 40px 40px 100px;
-  text-align: center;
-  background: #ffffff;
-}
-
-.visionHeader {
-  margin-bottom: 20px;
-}
-
-.visionPreTitle {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 1.1rem;
-  color: #4B5563;
-  margin-bottom: 12px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.visionPreTitle span {
-  color: #00178D;
-  font-weight: 700;
-}
-
-.visionTitle {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 3.5rem;
-  font-weight: 400;
-  margin: 0;
-  color: #111827;
-  letter-spacing: -0.02em;
-}
-
-.visionTitle span {
-  color: #00178D;
-  font-family: var(--font-playfair), serif;
-  font-style: italic;
-  font-weight: 500;
-}
-
-.visionSubtitle {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 1.05rem;
-  max-width: 680px;
-  margin: 0 auto 60px;
-  color: #4B5563;
-  line-height: 1.6;
-}
-
-.visionGrid {
-  display: grid;
-  grid-template-columns: 389fr 384fr 455fr;
-  grid-template-rows: 371px 226px;
-  gap: 16px;
-  max-width: 1259px;
-  margin: 0 auto;
-}
-
-.cardLeft {
-  grid-column: 1;
-  grid-row: 1 / 3;
-  border-radius: 40px;
-  overflow: hidden;
   position: relative;
-  background: linear-gradient(180deg, #2563EB 0%, #00178D 100%);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 40px;
-  text-align: left;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-}
-
-.cardTopMiddle {
-  grid-column: 2;
-  grid-row: 1;
-  border-radius: 40px;
-  overflow: hidden;
-  position: relative;
-  background: linear-gradient(180deg, #1E3A8A 0%, #00178D 100%);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 40px;
-  text-align: left;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-}
-
-.cardTopRight {
-  grid-column: 3;
-  grid-row: 1;
-  border-radius: 22px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  position: relative;
-  background: #F4F6FF;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 40px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-}
-
-.cardBottomRight {
-  grid-column: 2 / 4;
-  grid-row: 2;
-  border-radius: 40px;
-  overflow: hidden;
-  position: relative;
-  background: linear-gradient(90deg, #00178D 0%, #1E40AF 100%);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 40px;
-  text-align: left;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-}
-
-.cardLabel {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  margin-bottom: 12px;
-  opacity: 0.8;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.cardTitle {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 1.85rem;
-  font-weight: 500;
-  line-height: 1.3;
-}
-
-.cardTitle span {
-  font-family: var(--font-playfair), serif;
-  font-style: italic;
-  font-weight: 500;
-}
-
-.cardDesc {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  opacity: 0.9;
-}
-
-.enquireBtn {
-  background-color: #00178D;
-  color: white;
-  padding: 16px 44px;
-  border-radius: var(--radius-full);
-  font-weight: 600;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 20px;
-  transition: transform 0.2s, background-color 0.2s;
-  z-index: 10;
-  box-shadow: 0 8px 20px rgba(0, 23, 141, 0.2);
-}
-
-.enquireBtn:hover {
-  background-color: #051D96;
-  transform: translateY(-2px);
-}
-
-.enquireSub {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 0.72rem;
-  color: #4B5563;
-  font-weight: 500;
-  z-index: 10;
-}
-
-.cardImage {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
+  padding: 140px 48px;
+  background-color: #060913;
+  color: #FFFFFF;
+  overflow: hidden;
+  z-index: 10;
+  perspective: 1400px;
 }
 
-.cardOverlay {
+/* Ambient 3D Spatial Lights */
+.ambientGlowPrimary {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 82, 255, 0.14) 0%, rgba(5, 29, 150, 0.02) 65%, transparent 80%);
+  filter: blur(120px);
+  pointer-events: none;
   z-index: 1;
 }
 
-.cardContent {
+.ambientGlowSecondary {
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  width: 600px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(122, 0, 255, 0.12) 0%, transparent 75%);
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.visionContainer {
   position: relative;
-  z-index: 2;
+  max-width: 1320px;
+  margin: 0 auto;
+  z-index: 5;
 }
 
-/* ========== RESPONSIVE ========== */
-
-@media (max-width: 1440px) {
-  .visionTitle {
-    font-size: 3.2rem;
-  }
-  .visionGrid {
-    max-width: 1100px;
-  }
+/* Section Header */
+.visionHeader {
+  text-align: center;
+  margin-bottom: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-@media (max-width: 1280px) {
-  .visionSection {
-    padding: 100px 32px 70px;
-  }
-  .visionTitle {
-    font-size: 2.8rem;
-  }
-  .visionGrid {
-    max-width: 900px;
-    gap: 20px;
-  }
+.preTitleBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(59, 82, 255, 0.1);
+  border: 1px solid rgba(59, 82, 255, 0.25);
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #3B52FF;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
+.badgePulseDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3B52FF;
+  box-shadow: 0 0 8px #3B52FF;
+}
+
+.mainTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1.08;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  letter-spacing: -0.035em;
+  max-width: 900px;
+}
+
+.serifWord {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-weight: 600;
+  background: linear-gradient(135deg, #5773FF 0%, #CCFF00 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mainSubtitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(1.05rem, 1.35vw, 1.22rem);
+  font-weight: 500;
+  color: #94A3B8;
+  line-height: 1.65;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   3D BENTO GRID SYSTEM
+   -------------------------------------------------------------------------- */
+.bentoGrid3D {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 28px;
+  transform-style: preserve-3d;
+}
+
+/* 3D Card Base */
+.card3DBase {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
+  padding: 44px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.card3DBase:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(87, 115, 255, 0.35);
+  box-shadow: 
+    0 30px 80px -10px rgba(5, 29, 150, 0.35),
+    0 0 0 1px rgba(87, 115, 255, 0.25);
+  transform: translateY(-4px);
+}
+
+/* Card 1: 3D Conversion Velocity Engine (Large Left) */
+.cardConversionVelocity {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 440px;
+}
+
+.cardCategoryLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #3B52FF;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.cardHeadline {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #FFFFFF;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+}
+
+.cardParagraph {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.02rem;
+  color: #CBD5E1;
+  line-height: 1.65;
+  max-width: 540px;
+  margin-bottom: 32px;
+}
+
+/* 3D Visual Widget inside Card 1 */
+.visual3DGraphStage {
+  position: relative;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.graphBarGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.graphBarFill {
+  width: 100%;
+  background: linear-gradient(180deg, #3B52FF 0%, rgba(5, 29, 150, 0.3) 100%);
+  border-radius: 8px;
+  position: relative;
+  transition: height 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.graphBarFillActive {
+  background: linear-gradient(180deg, #CCFF00 0%, #3B52FF 100%);
+  box-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
+}
+
+.barLabelText {
+  font-family: ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: #94A3B8;
+  font-weight: 600;
+}
+
+.barValueTag {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+/* Card 2: Interactive 3D Origami Spatial Portal (Right Top) */
+.cardSpatialPortal {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(135deg, rgba(5, 29, 150, 0.25) 0%, rgba(255, 255, 255, 0.03) 100%);
+  min-height: 440px;
+}
+
+.floatingBirdStage {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portalCtaBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 28px;
+  background: #FFFFFF;
+  color: #060913;
+  border-radius: 999px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+}
+
+.portalCtaBtn:hover {
+  background: #3B52FF;
+  color: #FFFFFF;
+  box-shadow: 0 12px 35px rgba(59, 82, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.portalGuarantee {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.78rem;
+  color: #64748B;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Card 3: 3D Technology Matrix (Left Bottom) */
+.cardTechMatrix {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.techBadgesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.techPillBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #E2E8F0;
+  transition: all 0.25s ease;
+}
+
+.techPillBadge:hover {
+  background: rgba(59, 82, 255, 0.15);
+  border-color: rgba(59, 82, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.techDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3B52FF;
+}
+
+/* Card 4: Measurable ROI Guarantee (Right Bottom) */
+.cardRoiGuarantee {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.roiStatBox {
+  margin-top: 24px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.roiNumber {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 3.8rem;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, #CCFF00 0%, #3B52FF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.04em;
+}
+
+.roiLabel {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #94A3B8;
+}
+
+/* Responsive */
 @media (max-width: 1024px) {
-  .visionTitle {
-    font-size: 3.5rem;
+  .visionSection {
+    padding: 100px 32px;
   }
-  .visionGrid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 380px 380px;
+
+  .bentoGrid3D {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
-  .cardLeft {
-    grid-column: 1;
-    grid-row: 1 / 3;
-  }
-  .cardTopMiddle {
-    grid-column: 2;
-    grid-row: 1;
-  }
-  .cardTopRight {
-    grid-column: 2;
-    grid-row: 2;
-  }
-  .cardBottomRight {
-    grid-column: 1 / 3;
-    grid-row: 3;
-    height: 300px;
+
+  .cardConversionVelocity,
+  .cardSpatialPortal,
+  .cardTechMatrix,
+  .cardRoiGuarantee {
+    grid-column: 1 / 2;
+    grid-row: auto;
   }
 }
 
 @media (max-width: 768px) {
   .visionSection {
-    padding: 80px 24px 60px;
+    padding: 80px 20px;
   }
-  .visionHeader {
-    margin-bottom: 16px;
-  }
-  .visionPreTitle {
-    font-size: 1rem;
-  }
-  .visionTitle {
-    font-size: 2.5rem;
-  }
-  .visionSubtitle {
-    font-size: 0.95rem;
-    margin: 0 auto 40px;
-  }
-  .visionGrid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 16px;
-  }
-  .cardLeft {
-    grid-column: 1;
-    grid-row: auto;
-    height: 500px;
-  }
-  .cardTopMiddle {
-    grid-column: 1;
-    grid-row: auto;
-    height: 350px;
-  }
-  .cardTopRight {
-    grid-column: 1;
-    grid-row: auto;
-    height: auto;
-    min-height: 280px;
-  }
-  .cardBottomRight {
-    grid-column: 1;
-    grid-row: auto;
-    height: 350px;
-    padding: 28px;
+
+  .card3DBase {
+    padding: 32px 24px;
     border-radius: 24px;
   }
-  .cardTitle {
+
+  .mainTitle {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+
+  .cardHeadline {
     font-size: 1.6rem;
   }
-  .cardLabel {
-    font-size: 0.85rem;
-  }
-  .enquireBtn {
-    padding: 14px 32px;
-    font-size: 1rem;
-  }
-}
 
-@media (max-width: 480px) {
-  .visionSection {
-    padding: 60px 16px 48px;
-  }
-  .visionPreTitle {
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-  }
-  .visionTitle {
-    font-size: 1.8rem;
-  }
-  .visionSubtitle {
-    font-size: 0.85rem;
-    margin: 0 auto 32px;
-  }
-  .visionGrid {
-    gap: 12px;
-  }
-  .cardLeft {
-    height: 420px;
-    padding: 28px;
-  }
-  .cardTopMiddle {
-    height: 300px;
-    padding: 28px;
-  }
-  .cardTopRight {
-    padding: 28px;
-  }
-  .cardBottomRight {
-    height: 300px;
-    padding: 24px;
-    border-radius: 20px;
-  }
-  .cardTitle {
-    font-size: 1.3rem;
-  }
-  .cardDesc {
-    font-size: 0.85rem;
-  }
-  .cardLabel {
-    font-size: 0.8rem;
-  }
-  .enquireBtn {
-    padding: 12px 28px;
-    font-size: 0.95rem;
-  }
-  .enquireSub {
-    font-size: 0.65rem;
-  }
-}
-
-@media (max-width: 360px) {
-  .visionTitle {
-    font-size: 1.5rem;
-  }
-  .cardLeft {
-    height: 380px;
-  }
-  .cardBottomRight {
-    height: 260px;
-    padding: 20px;
-  }
-  .cardTitle {
-    font-size: 1.1rem;
+  .visual3DGraphStage {
+    padding: 16px;
   }
 }
