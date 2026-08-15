@@ -1,12 +1,12 @@
 /* ==========================================================================
-   ORIGAMIE — 3D SPATIAL AGENCY SHOWCASE (LUXURY WHITE & THEME GRADIENT)
-   Luminous White Backdrop • Theme Blue Gradients • Specular 3D Depth
+   ORIGAMIE — 3D SPATIAL AGENCY SHOWCASE (100% FULLY RESPONSIVE)
+   Fluid Adaptive Height • Clean Luminous Theme • Specular Glass
    ========================================================================== */
 
 .spatialSection {
   position: relative;
   width: 100%;
-  padding: 140px 48px;
+  padding: 120px 48px;
   background-color: #FFFFFF;
   color: #0B1226;
   overflow: hidden;
@@ -60,7 +60,7 @@
 
 .container {
   position: relative;
-  max-width: 1320px;
+  max-width: 1240px;
   margin: 0 auto;
   z-index: 5;
   display: flex;
@@ -71,7 +71,7 @@
 /* Header */
 .sectionHeader {
   text-align: center;
-  margin-bottom: 56px;
+  margin-bottom: 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,9 +104,9 @@
 
 .mainHeading {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: clamp(2.4rem, 4.8vw, 4.4rem);
+  font-size: clamp(2.2rem, 4.5vw, 4.2rem);
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1.1;
   color: #0B1226;
   margin-bottom: 18px;
   letter-spacing: -0.035em;
@@ -122,7 +122,7 @@
 
 .subHeading {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
   font-weight: 500;
   color: #475569;
   line-height: 1.65;
@@ -130,26 +130,40 @@
   margin: 0 auto;
 }
 
-/* Dimension Navigation Switcher */
-.dimensionNavDock {
+/* Dimension Navigation Switcher Dock */
+.dimensionNavDockWrapper {
+  width: 100%;
   display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.dimensionNavDock {
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.85);
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(5, 29, 150, 0.12);
   padding: 6px;
   border-radius: 9999px;
-  margin-bottom: 48px;
   box-shadow: 0 12px 35px rgba(5, 29, 150, 0.08);
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.dimensionNavDock::-webkit-scrollbar {
+  display: none;
 }
 
 .navBtn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 22px;
+  padding: 10px 20px;
   border-radius: 9999px;
   background: transparent;
   border: none;
@@ -158,7 +172,8 @@
   font-size: 0.88rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
 }
 
@@ -180,51 +195,34 @@
 }
 
 /* --------------------------------------------------------------------------
-   3D INTERACTIVE STAGE & PERSPECTIVE CARD
+   3D STAGE & ADAPTIVE CARD CONTAINER
    -------------------------------------------------------------------------- */
 .stage3DWrapper {
   position: relative;
   width: 100%;
   max-width: 1200px;
-  height: 580px;
   transform-style: preserve-3d;
+  transition: transform 0.18s ease-out;
 }
 
 .card3DContainer {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  width: 100%;
   display: grid;
   grid-template-columns: 1.15fr 1fr;
   align-items: center;
   gap: 48px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(36px) saturate(180%);
   -webkit-backdrop-filter: blur(36px) saturate(180%);
   border: 1px solid rgba(5, 29, 150, 0.12);
   border-radius: 36px;
-  padding: 48px 56px;
+  padding: 44px 52px;
   box-shadow: 
     0 30px 80px -20px rgba(5, 29, 150, 0.12),
     0 0 0 1px rgba(59, 82, 255, 0.08),
     inset 0 1px 1px rgba(255, 255, 255, 0.8);
-  transform-style: preserve-3d;
-  opacity: 0;
-  transform: perspective(1200px) translate3d(0, 30px, -50px) rotateX(6deg);
-  transition: 
-    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-}
-
-.card3DActive {
-  opacity: 1;
-  transform: perspective(1200px) translate3d(0, 0, 20px) rotateX(0deg);
-  pointer-events: auto;
-  border-color: rgba(59, 82, 255, 0.28);
-  box-shadow: 
-    0 40px 100px -20px rgba(5, 29, 150, 0.18),
-    0 0 0 1px rgba(59, 82, 255, 0.2),
-    inset 0 1px 2px rgba(255, 255, 255, 1);
+  min-height: 520px;
 }
 
 /* 3D Visual Render Window (Left) */
@@ -232,17 +230,17 @@
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 440px;
+  min-height: 420px;
   border-radius: 24px;
   overflow: hidden;
   border: 1px solid rgba(5, 29, 150, 0.12);
-  background: #060913;
-  transform: translateZ(30px);
-  box-shadow: 0 20px 50px rgba(5, 29, 150, 0.15);
+  background: #0B1226;
+  box-shadow: 0 20px 50px rgba(5, 29, 150, 0.12);
 }
 
 .visualImage {
   object-fit: cover;
+  object-position: center;
   transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -259,8 +257,8 @@
 
 .visualTagOverlay {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 18px;
+  left: 18px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -273,6 +271,7 @@
   font-size: 0.74rem;
   font-weight: 700;
   color: #38BDF8;
+  z-index: 2;
 }
 
 /* Content Details (Right) */
@@ -280,7 +279,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transform: translateZ(40px);
   text-align: left;
 }
 
@@ -292,41 +290,41 @@
   font-size: 0.8rem;
   font-weight: 700;
   color: #00178D;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .cardTitle {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
   font-weight: 700;
-  line-height: 1.12;
+  line-height: 1.14;
   color: #0B1226;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   letter-spacing: -0.03em;
 }
 
 .cardDesc {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: #475569;
-  line-height: 1.7;
-  margin-bottom: 28px;
+  line-height: 1.68;
+  margin-bottom: 24px;
 }
 
 .metricsGrid {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .metricItem {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   font-family: var(--font-urbanist), sans-serif;
   font-size: 0.92rem;
-  font-weight: 600;
+  line-height: 1.5;
   color: #1E293B;
 }
 
@@ -336,6 +334,21 @@
   border-radius: 50%;
   background: #3B52FF;
   box-shadow: 0 0 8px #3B52FF;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.metricItemContent {
+  display: inline;
+}
+
+.metricItemName {
+  font-weight: 700;
+  color: #0B1226;
+}
+
+.metricItemDesc {
+  color: #64748B;
 }
 
 .actionCtaBtn {
@@ -364,90 +377,92 @@
   transform: translateY(-2px);
 }
 
-/* Responsive Breakpoints */
-@media (max-width: 1200px) {
-  .stage3DWrapper {
-    max-width: 1000px;
-    height: 540px;
-  }
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS (ALL DEVICES)
+   ========================================================================== */
 
+/* Laptops & Tablets Landscape (1024px to 1280px) */
+@media (max-width: 1200px) {
   .card3DContainer {
     padding: 36px 40px;
     gap: 36px;
+    min-height: 480px;
+  }
+
+  .visual3DWindow {
+    min-height: 380px;
   }
 }
 
+/* Tablets Portrait (768px to 1024px) */
 @media (max-width: 1024px) {
   .spatialSection {
     padding: 90px 24px;
   }
 
-  .stage3DWrapper {
-    height: auto;
-    min-height: 680px;
-    position: relative;
-  }
-
   .card3DContainer {
     grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 32px 28px;
+    gap: 32px;
+    padding: 36px 32px;
+    min-height: auto;
   }
 
   .visual3DWindow {
-    min-height: 280px;
-    height: 280px;
+    min-height: 320px;
+    height: 320px;
   }
 
   .dimensionNavDock {
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    justify-content: flex-start;
+    padding: 6px;
+    gap: 6px;
   }
 
-  .dimensionNavDock::-webkit-scrollbar {
-    display: none;
+  .navBtn {
+    padding: 8px 16px;
+    font-size: 0.84rem;
   }
 }
 
+/* Mobile Phones (480px to 768px) */
 @media (max-width: 768px) {
   .spatialSection {
     padding: 70px 16px;
   }
 
   .sectionHeader {
-    margin-bottom: 36px;
-  }
-
-  .stage3DWrapper {
-    min-height: 640px;
+    margin-bottom: 32px;
   }
 
   .card3DContainer {
-    padding: 24px 18px;
-    border-radius: 26px;
-    gap: 22px;
+    padding: 24px 20px;
+    border-radius: 28px;
+    gap: 24px;
   }
 
   .visual3DWindow {
-    min-height: 220px;
-    height: 220px;
-    border-radius: 18px;
+    min-height: 230px;
+    height: 230px;
+    border-radius: 20px;
+  }
+
+  .visualTagOverlay {
+    top: 12px;
+    left: 12px;
+    font-size: 0.7rem;
+    padding: 5px 10px;
   }
 
   .mainHeading {
-    font-size: clamp(2rem, 8vw, 2.75rem);
+    font-size: clamp(2rem, 8vw, 2.6rem);
     margin-bottom: 14px;
   }
 
   .subHeading {
-    font-size: 1rem;
+    font-size: 0.98rem;
   }
 
   .cardTitle {
-    font-size: clamp(1.45rem, 5vw, 1.85rem);
+    font-size: 1.6rem;
     margin-bottom: 12px;
   }
 
@@ -459,21 +474,23 @@
 
   .metricsGrid {
     gap: 10px;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
   .metricItem {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
+  }
+
+  .dimensionNavDockWrapper {
+    margin-bottom: 28px;
   }
 
   .dimensionNavDock {
-    gap: 6px;
-    padding: 4px;
     border-radius: 20px;
-    margin-bottom: 32px;
-    width: 100%;
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px;
   }
 
   .navBtn {
@@ -489,28 +506,31 @@
   }
 }
 
+/* Small Mobile Phones (< 480px) */
 @media (max-width: 480px) {
   .spatialSection {
-    padding: 60px 12px;
-  }
-
-  .stage3DWrapper {
-    min-height: 620px;
+    padding: 56px 12px;
   }
 
   .card3DContainer {
     padding: 20px 14px;
-    border-radius: 20px;
+    border-radius: 22px;
+    gap: 20px;
   }
 
   .visual3DWindow {
     min-height: 190px;
     height: 190px;
+    border-radius: 16px;
   }
 
   .statusPill {
     font-size: 0.72rem;
     padding: 5px 12px;
+  }
+
+  .cardTitle {
+    font-size: 1.4rem;
   }
 
   .navBtn {

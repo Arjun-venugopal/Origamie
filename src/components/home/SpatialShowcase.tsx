@@ -3,7 +3,7 @@
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowUpRight, 
   Sparkles, 
@@ -94,15 +94,15 @@ export default function SpatialShowcase() {
   const [activeDim, setActiveDim] = useState(0);
   const stageRef = useRef<HTMLDivElement>(null);
 
-  // 3D Mouse Parallax Tilt
+  // 3D Mouse Parallax Tilt (Desktop only)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!stageRef.current) return;
+    if (!stageRef.current || window.innerWidth < 1024) return;
     const rect = stageRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
     const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
 
-    const tiltX = (y * -6).toFixed(2);
-    const tiltY = (x * 6).toFixed(2);
+    const tiltX = (y * -5).toFixed(2);
+    const tiltY = (x * 5).toFixed(2);
 
     stageRef.current.style.transform = `perspective(1400px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
   };
@@ -113,13 +113,15 @@ export default function SpatialShowcase() {
     }
   };
 
+  const currentService = AGENCY_SERVICES_3D[activeDim];
+
   return (
     <section 
       className={styles.spatialSection}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* 3D Atmospheric Background */}
+      {/* Ambient Theme Gradients */}
       <div className={styles.spatialGlow1} />
       <div className={styles.spatialGlow2} />
       <div className={styles.isometricGridFloor} />
@@ -161,84 +163,87 @@ export default function SpatialShowcase() {
         </div>
 
         {/* 3D Dimension Navigation Switcher */}
-        <div className={styles.dimensionNavDock}>
-          {AGENCY_SERVICES_3D.map((dim, idx) => {
-            const isActive = activeDim === idx;
-            return (
-              <button
-                key={dim.id}
-                type="button"
-                className={`${styles.navBtn} ${isActive ? styles.navBtnActive : ''}`}
-                onClick={() => setActiveDim(idx)}
-                aria-label={`Switch to ${dim.label}`}
-              >
-                <span className={styles.navIndex}>{dim.id}</span>
-                <span className={styles.btnLabelText}>{dim.label}</span>
-              </button>
-            );
-          })}
+        <div className={styles.dimensionNavDockWrapper}>
+          <div className={styles.dimensionNavDock}>
+            {AGENCY_SERVICES_3D.map((dim, idx) => {
+              const isActive = activeDim === idx;
+              return (
+                <button
+                  key={dim.id}
+                  type="button"
+                  className={`${styles.navBtn} ${isActive ? styles.navBtnActive : ''}`}
+                  onClick={() => setActiveDim(idx)}
+                  aria-label={`Switch to ${dim.label}`}
+                >
+                  <span className={styles.navIndex}>{dim.id}</span>
+                  <span className={styles.btnLabelText}>{dim.label}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* 3D Interactive Perspective Stage */}
         <div 
           ref={stageRef}
           className={styles.stage3DWrapper}
-          style={{ transition: 'transform 0.18s ease-out' }}
         >
-          {AGENCY_SERVICES_3D.map((dim, idx) => {
-            const isActive = activeDim === idx;
-            return (
-              <div
-                key={dim.id}
-                className={`${styles.card3DContainer} ${isActive ? styles.card3DActive : ''}`}
-              >
-                
-                {/* 3D Visual Render Window (Left) */}
-                <div className={styles.visual3DWindow}>
-                  <Image
-                    src={dim.image}
-                    alt={dim.imageAlt}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className={styles.visualImage}
-                    priority={idx === 0}
-                  />
-                  <div className={styles.visualOverlayGlint} />
-                  <div className={styles.visualTagOverlay}>
-                    <Sparkles size={13} color="#38BDF8" />
-                    <span>{dim.imageBadge}</span>
-                  </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentService.id}
+              className={styles.card3DContainer}
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.98 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            >
+              
+              {/* Visual Render Window (Left) */}
+              <div className={styles.visual3DWindow}>
+                <Image
+                  src={currentService.image}
+                  alt={currentService.imageAlt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                  className={styles.visualImage}
+                  priority
+                />
+                <div className={styles.visualOverlayGlint} />
+                <div className={styles.visualTagOverlay}>
+                  <Sparkles size={13} color="#38BDF8" />
+                  <span>{currentService.imageBadge}</span>
                 </div>
-
-                {/* Content Details (Right) */}
-                <div className={styles.contentBlock3D}>
-                  <div className={styles.phaseBadge}>
-                    <span>{dim.tag}</span>
-                  </div>
-
-                  <h3 className={styles.cardTitle}>{dim.title}</h3>
-                  <p className={styles.cardDesc}>{dim.desc}</p>
-
-                  <div className={styles.metricsGrid}>
-                    {dim.includedServices.map((svc, sIdx) => (
-                      <div key={sIdx} className={styles.metricItem}>
-                        <span className={styles.metricBulletDot} />
-                        <div>
-                          <strong>{svc.name}</strong> — {svc.desc}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <Link href={dim.ctaLink} className={styles.actionCtaBtn}>
-                    <span>{dim.ctaText}</span>
-                    <ArrowUpRight size={18} />
-                  </Link>
-                </div>
-
               </div>
-            );
-          })}
+
+              {/* Content Details (Right) */}
+              <div className={styles.contentBlock3D}>
+                <div className={styles.phaseBadge}>
+                  <span>{currentService.tag}</span>
+                </div>
+
+                <h3 className={styles.cardTitle}>{currentService.title}</h3>
+                <p className={styles.cardDesc}>{currentService.desc}</p>
+
+                <div className={styles.metricsGrid}>
+                  {currentService.includedServices.map((svc, sIdx) => (
+                    <div key={sIdx} className={styles.metricItem}>
+                      <span className={styles.metricBulletDot} />
+                      <div className={styles.metricItemContent}>
+                        <strong className={styles.metricItemName}>{svc.name}</strong>
+                        <span className={styles.metricItemDesc}> — {svc.desc}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <Link href={currentService.ctaLink} className={styles.actionCtaBtn}>
+                  <span>{currentService.ctaText}</span>
+                  <ArrowUpRight size={18} />
+                </Link>
+              </div>
+
+            </motion.div>
+          </AnimatePresence>
         </div>
 
       </div>
