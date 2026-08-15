@@ -338,7 +338,11 @@
 
 @media (max-width: 768px) {
   .heroSection {
-    padding: 120px 16px 50px;
+    padding: 110px 16px 40px;
+  }
+
+  .minimalTagPill {
+    display: none;
   }
 
   .masterHeadline {
