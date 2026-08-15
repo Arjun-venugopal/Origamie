@@ -3,8 +3,8 @@
 import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { 
-  ArrowUpRight, 
+import {
+  ArrowUpRight,
   Sparkles,
   ShieldCheck,
   TrendingUp,
@@ -45,9 +45,9 @@ export default function Hero() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section 
-      id="home" 
-      className={styles.heroSection} 
+    <section
+      id="home"
+      className={styles.heroSection}
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -60,7 +60,7 @@ export default function Hero() {
         <div className={styles.auroraMesh3} />
 
         {/* Layer 2: Geometric Perspective Grid with Radial Gradient Fade */}
-        <motion.div 
+        <motion.div
           className={styles.themeGridLines}
           style={{ x: bgParallaxX, y: bgParallaxY }}
         />
@@ -70,7 +70,7 @@ export default function Hero() {
 
         {/* Layer 4: Interactive Cursor Spotlight Glow */}
         {mousePos.rawX > 0 && (
-          <div 
+          <div
             className={styles.cursorSpotlight}
             style={{
               background: `radial-gradient(550px circle at ${mousePos.rawX}px ${mousePos.rawY}px, rgba(59, 82, 255, 0.14), transparent 80%)`
@@ -82,13 +82,13 @@ export default function Hero() {
         <div className={styles.bottomVignetteGradient} />
       </div>
 
-      <motion.div 
+      <motion.div
         className={styles.heroContainer}
         style={{ y: heroScrollY, opacity: heroOpacity }}
       >
-        
+
         {/* 1. Status Indicator Tag */}
-        <motion.div 
+        <motion.div
           className={styles.minimalTagPill}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -99,7 +99,7 @@ export default function Hero() {
         </motion.div>
 
         {/* 2. Crystal Clear Headline */}
-        <motion.h1 
+        <motion.h1
           className={styles.masterHeadline}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -110,7 +110,7 @@ export default function Hero() {
         </motion.h1>
 
         {/* 3. Concise Value Proposition */}
-        <motion.p 
+        <motion.p
           className={styles.leadText}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -120,7 +120,7 @@ export default function Hero() {
         </motion.p>
 
         {/* 4. Action Buttons */}
-        <motion.div 
+        <motion.div
           className={styles.actionRow}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -134,35 +134,6 @@ export default function Hero() {
             <span>See Selected Work (4+)</span>
           </Link>
         </motion.div>
-
-        {/* 5. Minimal Trust & Performance Footer Strip */}
-        <motion.div 
-          className={styles.minimalProofStrip}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <div className={styles.proofStatItem}>
-            <span className={styles.proofStatNumber}>2–4x</span>
-            <span className={styles.proofStatLabel}>Average Qualified<br />Lead Increase</span>
-          </div>
-
-          <div className={styles.proofStatItem}>
-            <span className={styles.proofStatNumber}>&lt; 50ms</span>
-            <span className={styles.proofStatLabel}>Global Edge<br />Server Response</span>
-          </div>
-
-          <div className={styles.proofStatItem}>
-            <span className={styles.proofStatNumber}>50+</span>
-            <span className={styles.proofStatLabel}>Founders &amp; Teams<br />Accelerated</span>
-          </div>
-
-          <div className={styles.proofStatItem}>
-            <span className={styles.proofStatNumber}>24h</span>
-            <span className={styles.proofStatLabel}>Guaranteed Discovery<br />&amp; Fixed Quote</span>
-          </div>
-        </motion.div>
-
       </motion.div>
     </section>
   );

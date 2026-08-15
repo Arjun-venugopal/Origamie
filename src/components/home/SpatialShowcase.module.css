@@ -364,61 +364,161 @@
   transform: translateY(-2px);
 }
 
-/* Responsive */
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .stage3DWrapper {
+    max-width: 1000px;
+    height: 540px;
+  }
+
+  .card3DContainer {
+    padding: 36px 40px;
+    gap: 36px;
+  }
+}
+
 @media (max-width: 1024px) {
   .spatialSection {
-    padding: 100px 32px;
+    padding: 90px 24px;
   }
 
   .stage3DWrapper {
     height: auto;
+    min-height: 680px;
+    position: relative;
   }
 
   .card3DContainer {
-    position: relative;
     grid-template-columns: 1fr;
-    gap: 32px;
-    padding: 36px 32px;
+    gap: 28px;
+    padding: 32px 28px;
   }
 
   .visual3DWindow {
-    min-height: 320px;
+    min-height: 280px;
+    height: 280px;
+  }
+
+  .dimensionNavDock {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    justify-content: flex-start;
+  }
+
+  .dimensionNavDock::-webkit-scrollbar {
+    display: none;
   }
 }
 
 @media (max-width: 768px) {
   .spatialSection {
-    padding: 80px 20px;
+    padding: 70px 16px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 36px;
+  }
+
+  .stage3DWrapper {
+    min-height: 640px;
   }
 
   .card3DContainer {
-    padding: 28px 20px;
-    border-radius: 24px;
+    padding: 24px 18px;
+    border-radius: 26px;
+    gap: 22px;
   }
 
   .visual3DWindow {
-    min-height: 240px;
+    min-height: 220px;
+    height: 220px;
+    border-radius: 18px;
   }
 
   .mainHeading {
-    font-size: clamp(2rem, 7.5vw, 2.6rem);
+    font-size: clamp(2rem, 8vw, 2.75rem);
+    margin-bottom: 14px;
+  }
+
+  .subHeading {
+    font-size: 1rem;
   }
 
   .cardTitle {
-    font-size: 1.8rem;
+    font-size: clamp(1.45rem, 5vw, 1.85rem);
+    margin-bottom: 12px;
+  }
+
+  .cardDesc {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .metricsGrid {
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .metricItem {
+    font-size: 0.85rem;
   }
 
   .dimensionNavDock {
-    gap: 4px;
+    gap: 6px;
     padding: 4px;
+    border-radius: 20px;
+    margin-bottom: 32px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .navBtn {
     padding: 8px 14px;
     font-size: 0.8rem;
+    border-radius: 999px;
+  }
+
+  .actionCtaBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .spatialSection {
+    padding: 60px 12px;
+  }
+
+  .stage3DWrapper {
+    min-height: 620px;
+  }
+
+  .card3DContainer {
+    padding: 20px 14px;
+    border-radius: 20px;
+  }
+
+  .visual3DWindow {
+    min-height: 190px;
+    height: 190px;
+  }
+
+  .statusPill {
+    font-size: 0.72rem;
+    padding: 5px 12px;
+  }
+
+  .navBtn {
+    padding: 6px 10px;
+    font-size: 0.75rem;
   }
 
   .btnLabelText {
-    display: none;
+    display: inline;
   }
 }

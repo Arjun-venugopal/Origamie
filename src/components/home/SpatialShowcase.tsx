@@ -43,7 +43,7 @@ const AGENCY_SERVICES_3D = [
     tag: 'VISUAL CRAFT // 02',
     title: 'Editorial Branding & Kinetic Motion Graphics.',
     desc: 'We sculpt iconic visual brand languages, social media design systems, and fluid animated motion graphics that capture market attention and build authority.',
-    image: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1600&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop',
     imageAlt: '3D Geometric Design and Kinetic Motion Art',
     imageBadge: '3D VISUAL & MOTION DIRECTION',
     includedServices: [
@@ -77,8 +77,8 @@ const AGENCY_SERVICES_3D = [
     tag: 'SYSTEMS & SUPPORT // 04',
     title: 'Enterprise Computer Maintenance & IT Support.',
     desc: 'Reliable hardware diagnostics, computer repairs, software configuration, and on-demand technical assistance to keep your business operating without interruption.',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop',
-    imageAlt: 'Hardware Architecture and Managed IT Support',
+    image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=1600&auto=format&fit=crop',
+    imageAlt: 'High-Performance Computer Hardware & Enterprise IT Support',
     imageBadge: 'MANAGED IT & HARDWARE SUPPORT',
     includedServices: [
       { name: 'Computer Repairs & Maintenance', desc: 'Full hardware diagnostics, repairs, & cleaning' },

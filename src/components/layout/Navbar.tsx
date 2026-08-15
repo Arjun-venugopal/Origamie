@@ -127,11 +127,26 @@ export default function Navbar() {
   const [timeString, setTimeString] = useState('');
   const lastScrollY = useRef(0);
 
-  // Handle scroll effect
+  // Handle scroll effect & scroll direction
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setScrolled(currentScrollY > 20);
+
+      // Determine scroll direction
+      if (currentScrollY > 60) {
+        if (currentScrollY > lastScrollY.current + 4) {
+          // Scrolling DOWN: collapse into logo & menu icon
+          setIsScrollingDown(true);
+        } else if (currentScrollY < lastScrollY.current - 4) {
+          // Scrolling UP: reveal full navigation
+          setIsScrollingDown(false);
+        }
+      } else {
+        // At or near top: always reveal full navbar
+        setIsScrollingDown(false);
+      }
+
       lastScrollY.current = currentScrollY;
     };
 
