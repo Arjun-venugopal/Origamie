@@ -1,12 +1,10 @@
 'use client';
 
 import styles from './page.module.css';
-import Navbar from '@/components/layout/Navbar';
 import {
   Hero,
   Pills,
   Vision,
-  SpatialShowcase,
   Process,
   FAQ
 } from '@/components/home';
@@ -18,11 +16,9 @@ export default function Home() {
     <div className="page-wrapper">
       <SmoothScroll>
         <main className={styles.main}>
-          <Navbar />
           <Hero />
           <Pills />
           <Vision />
-          <SpatialShowcase />
           <Process />
           <FAQ />
           <GridFooter />
