@@ -4,59 +4,88 @@ import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Sparkles, Box, Layers, Zap } from 'lucide-react';
+import { 
+  ArrowUpRight, 
+  Sparkles, 
+  Globe, 
+  PenTool, 
+  Megaphone, 
+  Wrench, 
+  Smartphone, 
+  Video, 
+  Search, 
+  Infinity as InfinityIcon, 
+  MousePointer2 
+} from 'lucide-react';
 import styles from './SpatialShowcase.module.css';
 
-const DIMENSIONS = [
+const AGENCY_SERVICES_3D = [
   {
     id: '01',
-    label: 'Brand Identity',
-    tag: 'SPATIAL ART // 01',
-    title: 'Sculpted in Crystal Origami Geometry.',
-    desc: 'We craft bespoke 3D brand assets, kinetic identities, and editorial typography that capture immediate market attention and convey unmistakable technical authority.',
-    image: '/images/3d/origami-crane-3d.jpg',
-    imageAlt: '3D Crystal Origami Crane Sculpture',
-    imageBadge: 'OCTANE 8K RAY-TRACED SCULPTURE',
-    metrics: [
-      'Bespoke 3D Creative Direction & Shaders',
-      'Editorial Brand Positioning & Guidelines',
-      'Awwwards Site-of-the-Day Grade Polish'
+    label: 'Web & App Dev',
+    tag: 'CORE ENGINEERING // 01',
+    title: 'High-Performance Web & Mobile Applications.',
+    desc: 'From bespoke Next.js 16 websites to native and cross-platform mobile apps. Engineered for sub-50ms TTFB, 100% Core Web Vitals, and effortless conversion flows.',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600&auto=format&fit=crop',
+    imageAlt: 'Modern Web and App Development Engineering',
+    imageBadge: 'NEXT.JS 16 & REACT 19 STACK',
+    includedServices: [
+      { name: 'Web Development', desc: 'Fast, responsive, SEO-friendly custom websites' },
+      { name: 'App Development', desc: 'Custom iOS & Android apps with business features' },
+      { name: 'SaaS & Web Platforms', desc: 'Scalable architecture with sub-second page loads' }
     ],
-    ctaText: 'Explore Brand Craft',
-    ctaLink: '/works'
+    ctaText: 'Explore Web & Apps',
+    ctaLink: '/services'
   },
   {
     id: '02',
-    label: 'Web Engineering',
-    tag: 'ARCHITECTURE // 02',
-    title: 'Next.js 16 & React 19 High-Speed Systems.',
-    desc: 'Engineered for extreme performance. We code custom web applications with sub-50ms global TTFB, 100% Core Web Vitals, and buttery smooth 60fps micro-animations.',
-    image: '/images/3d/hologram-ui-3d.jpg',
-    imageAlt: '3D Spatial Hologram Web Application UI',
-    imageBadge: 'NEXT.JS 16 ENTERPRISE RUNTIME',
-    metrics: [
-      'Sub-50ms Global Edge Server Response',
-      'React 19 Server Actions & TypeScript Strict',
-      'Frictionless Interactive 3D Canvas Integration'
+    label: 'Design & Motion',
+    tag: 'VISUAL CRAFT // 02',
+    title: 'Editorial Branding & Kinetic Motion Graphics.',
+    desc: 'We sculpt iconic visual brand languages, social media design systems, and fluid animated motion graphics that capture market attention and build authority.',
+    image: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1600&auto=format&fit=crop',
+    imageAlt: '3D Geometric Design and Kinetic Motion Art',
+    imageBadge: '3D VISUAL & MOTION DIRECTION',
+    includedServices: [
+      { name: 'Graphics Designing', desc: 'Branding, social media posters, & marketing kits' },
+      { name: 'Motion Graphics', desc: 'Animated promo videos & high-converting motion ads' },
+      { name: 'Visual Identity Systems', desc: 'Distinctive typography & bespoke digital assets' }
     ],
-    ctaText: 'View Tech Stack',
+    ctaText: 'See Design & Motion',
     ctaLink: '/services'
   },
   {
     id: '03',
-    label: 'Conversion Physics',
+    label: 'Marketing & Ads',
     tag: 'GROWTH ENGINE // 03',
-    title: 'Turning Traffic into Qualified Pipeline.',
-    desc: 'Design that directly impacts the bottom line. We pair spatial aesthetics with empirical conversion triggers, turning visitors into high-intent inbound inquiries.',
-    image: '/images/3d/kinetic-core-3d.jpg',
-    imageAlt: '3D Crystalline Kinetic Conversion Core',
-    imageBadge: 'CONVERSION VELOCITY // 4.8X LIFT',
-    metrics: [
-      '2–4x Increase in Qualified Lead Conversion',
-      'Psychological UX & Decision-Flow Architecture',
-      'Full-Funnel Organic Search & SEO Authority'
+    title: 'Precision Ads & Search Engine Dominance.',
+    desc: 'Full-funnel digital marketing across Meta and Google Ads paired with technical SEO to turn commercial search intent into qualified inbound leads and revenue.',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop',
+    imageAlt: 'Digital Marketing Performance and Data Analytics',
+    imageBadge: 'PAID ADS & SEO VELOCITY',
+    includedServices: [
+      { name: 'Google Ads & Search', desc: 'High-intent PPC campaigns for instant qualified enquiries' },
+      { name: 'Meta Ads (FB & IG)', desc: 'Targeted visual ad funnels that lower acquisition costs' },
+      { name: 'Search Engine Optimization (SEO)', desc: 'Organic ranking strategy & website visibility lift' }
     ],
-    ctaText: 'Start a Project',
+    ctaText: 'Explore Marketing & Ads',
+    ctaLink: '/services'
+  },
+  {
+    id: '04',
+    label: 'Computer & IT',
+    tag: 'SYSTEMS & SUPPORT // 04',
+    title: 'Enterprise Computer Maintenance & IT Support.',
+    desc: 'Reliable hardware diagnostics, computer repairs, software configuration, and on-demand technical assistance to keep your business operating without interruption.',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop',
+    imageAlt: 'Hardware Architecture and Managed IT Support',
+    imageBadge: 'MANAGED IT & HARDWARE SUPPORT',
+    includedServices: [
+      { name: 'Computer Repairs & Maintenance', desc: 'Full hardware diagnostics, repairs, & cleaning' },
+      { name: 'Software Support & Setup', desc: 'OS configuration, data migration, & security' },
+      { name: 'Technical Assistance', desc: 'Reliable troubleshooting & fast turn-around support' }
+    ],
+    ctaText: 'Book IT Services',
     ctaLink: '/contact'
   }
 ];
@@ -72,8 +101,8 @@ export default function SpatialShowcase() {
     const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
     const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
 
-    const tiltX = (y * -7).toFixed(2);
-    const tiltY = (x * 7).toFixed(2);
+    const tiltX = (y * -6).toFixed(2);
+    const tiltY = (x * 6).toFixed(2);
 
     stageRef.current.style.transform = `perspective(1400px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
   };
@@ -106,7 +135,7 @@ export default function SpatialShowcase() {
             viewport={{ once: true }}
           >
             <span className={styles.pillDot} />
-            <span>Origamie • 3D Spatial Digital Agency</span>
+            <span>Origamie • Full-Spectrum Digital Agency</span>
           </motion.div>
 
           <motion.h2 
@@ -116,8 +145,8 @@ export default function SpatialShowcase() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            Where high-craft design meets <br />
-            <span className={styles.serifGradient}>3D spatial engineering.</span>
+            Capabilities engineered for <br />
+            <span className={styles.serifGradient}>modern digital growth.</span>
           </motion.h2>
 
           <motion.p 
@@ -127,13 +156,13 @@ export default function SpatialShowcase() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            Explore the three core disciplines behind our award-winning web products — engineered to command authority and convert at scale.
+            Explore our comprehensive suite of creative design, web development, growth marketing, and managed IT services — built to scale your business online.
           </motion.p>
         </div>
 
         {/* 3D Dimension Navigation Switcher */}
         <div className={styles.dimensionNavDock}>
-          {DIMENSIONS.map((dim, idx) => {
+          {AGENCY_SERVICES_3D.map((dim, idx) => {
             const isActive = activeDim === idx;
             return (
               <button
@@ -156,7 +185,7 @@ export default function SpatialShowcase() {
           className={styles.stage3DWrapper}
           style={{ transition: 'transform 0.18s ease-out' }}
         >
-          {DIMENSIONS.map((dim, idx) => {
+          {AGENCY_SERVICES_3D.map((dim, idx) => {
             const isActive = activeDim === idx;
             return (
               <div
@@ -176,7 +205,7 @@ export default function SpatialShowcase() {
                   />
                   <div className={styles.visualOverlayGlint} />
                   <div className={styles.visualTagOverlay}>
-                    <Box size={13} color="#38BDF8" />
+                    <Sparkles size={13} color="#38BDF8" />
                     <span>{dim.imageBadge}</span>
                   </div>
                 </div>
@@ -184,7 +213,6 @@ export default function SpatialShowcase() {
                 {/* Content Details (Right) */}
                 <div className={styles.contentBlock3D}>
                   <div className={styles.phaseBadge}>
-                    <Sparkles size={14} />
                     <span>{dim.tag}</span>
                   </div>
 
@@ -192,10 +220,12 @@ export default function SpatialShowcase() {
                   <p className={styles.cardDesc}>{dim.desc}</p>
 
                   <div className={styles.metricsGrid}>
-                    {dim.metrics.map((item, mIdx) => (
-                      <div key={mIdx} className={styles.metricItem}>
+                    {dim.includedServices.map((svc, sIdx) => (
+                      <div key={sIdx} className={styles.metricItem}>
                         <span className={styles.metricBulletDot} />
-                        <span>{item}</span>
+                        <div>
+                          <strong>{svc.name}</strong> — {svc.desc}
+                        </div>
                       </div>
                     ))}
                   </div>
