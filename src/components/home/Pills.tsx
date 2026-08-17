@@ -154,7 +154,7 @@ export default function Pills() {
           viewport={{ once: true }}
         >
           What we craft, fold,<br />
-          and ship for <span style={{ color: '#ffffff' }}>#you.</span>
+          and ship for <span>#you.</span>
         </motion.h2>
 
         <motion.p

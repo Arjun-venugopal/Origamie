@@ -4,8 +4,12 @@
    ========================================================================== */
 
 .aboutSection {
-  background: linear-gradient(180deg, #FFFFFF 0%, #F4F7FC 50%, #FFFFFF 100%);
-  padding: 100px 0 80px;
+  background: 
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgba(59, 82, 255, 0.28) 0%, transparent 70%),
+    radial-gradient(circle 500px at 15% 25%, rgba(0, 71, 255, 0.2) 0%, transparent 60%),
+    radial-gradient(circle 600px at 85% 35%, rgba(59, 130, 246, 0.22) 0%, transparent 65%),
+    linear-gradient(180deg, #041261 0%, #061F8F 32%, #113BBF 58%, #7296FF 85%, #EEF4FF 96%, #FFFFFF 100%);
+  padding: 110px 0 85px;
   position: relative;
   z-index: 10;
   display: flex;
@@ -22,7 +26,7 @@
   max-width: 1280px;
   margin-bottom: 56px;
   padding: 0 48px;
-  color: #0F172A;
+  color: #FFFFFF;
 }
 
 .aboutTitle {
@@ -32,22 +36,22 @@
   font-weight: 700;
   max-width: 580px;
   letter-spacing: -0.03em;
-  color: #0B1226;
+  color: #FFFFFF;
 }
 
 .aboutTitle span {
   font-family: var(--font-playfair), serif;
   font-style: italic;
   font-weight: 600;
-  color: #00178D;
+  color: #FFFFFF;
 }
 
 .aboutDesc {
   max-width: 440px;
   font-size: 1rem;
   line-height: 1.65;
-  color: #475569;
-  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 400;
 }
 
 .marqueeWrapper {
