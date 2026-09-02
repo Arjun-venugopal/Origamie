@@ -48,7 +48,7 @@ export default function ContactForm() {
     e.preventDefault();
     setStatus('submitting');
 
-    const targetPhone = '919544639774';
+    const targetPhone = '919074749774';
     const servicesText = selectedTypes.length > 0 ? selectedTypes.join(', ') : 'General Inquiry';
     const fullName = `${formData.firstName} ${formData.lastName}`.trim();
     
@@ -112,7 +112,7 @@ export default function ContactForm() {
               </motion.a>
 
               <motion.a 
-                href="https://wa.me/919544639774" 
+                href="https://wa.me/919074749774" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.contactCard}
@@ -124,7 +124,7 @@ export default function ContactForm() {
                 </div>
                 <div className={styles.contactCardBody}>
                   <span className={styles.contactCardLabel}>Chat on WhatsApp</span>
-                  <span className={styles.contactCardValue}>+91 9544639774</span>
+                  <span className={styles.contactCardValue}>+91 9074749774</span>
                 </div>
                 <div className={styles.contactCardAction}>
                   <ArrowUpRight size={18} />
