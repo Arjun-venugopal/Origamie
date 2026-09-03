@@ -141,14 +141,14 @@ export default function GridFooter() {
               </a>
 
               <a
-                href="https://wa.me/919544639774"
+                href="https://wa.me/919074749774"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.footerContactCard}
               >
                 <div className={styles.contactCardText}>
                   <span className={styles.contactCardSub}>Instant WhatsApp</span>
-                  <span className={styles.contactCardMain}>+91 9544639774</span>
+                  <span className={styles.contactCardMain}>+91 9074749774</span>
                 </div>
                 <MessageCircle size={18} className={styles.cardArrow} />
               </a>
@@ -200,7 +200,7 @@ export default function GridFooter() {
                 </a>
 
                 <a
-                  href={`https://wa.me/919544639774?text=${encodeURIComponent(`Hi Origamie! I want to discuss a ${selectedService} project.`)}`}
+                  href={`https://wa.me/919074749774?text=${encodeURIComponent(`Hi Origamie! I want to discuss a ${selectedService} project.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.dispatchSecondaryBtn}
@@ -251,7 +251,7 @@ export default function GridFooter() {
           <div className={styles.footerLinkCol}>
             <h4>Connect</h4>
             <a href="mailto:hello@origamie.in">hello@origamie.in</a>
-            <a href="https://wa.me/919544639774" target="_blank" rel="noopener noreferrer">+91 9544639774</a>
+            <a href="https://wa.me/919074749774" target="_blank" rel="noopener noreferrer">+91 9074749774</a>
             <span>Kerala, India</span>
           </div>
         </div>
@@ -259,7 +259,7 @@ export default function GridFooter() {
         {/* Bottom Bar */}
         <div className={styles.footerBottomBar}>
           <span className={styles.copyrightText}>
-            © {new Date().getFullYear()} Origamie Studio. All rights reserved.
+            © {new Date().getFullYear()} Origamie. All rights reserved.
           </span>
           <span className={styles.craftedText}>
             Crafted for maximum conversion &amp; impact.

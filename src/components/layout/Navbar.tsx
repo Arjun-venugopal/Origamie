@@ -474,13 +474,13 @@ export default function Navbar() {
                   <div className={styles.detailBlock}>
                     <span className={styles.detailHeading}>Fast Track</span>
                     <a 
-                      href="https://wa.me/919544639774" 
+                      href="https://wa.me/919074749774" 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className={styles.detailLink}
                     >
                       <MessageCircle size={16} />
-                      <span>+91 9544 639 774</span>
+                      <span>+91 9074 749 774</span>
                     </a>
                   </div>
 
