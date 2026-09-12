@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useMotionValue, useAnimationFrame, useMotionValueEvent } from 'framer-motion';
+import { motion, useMotionValue, useAnimationFrame, useMotionValueEvent, useInView } from 'framer-motion';
 import { ArrowDownRight, Megaphone, Search, Infinity as InfinityIcon, MousePointer2, PenTool, Video, Globe, Smartphone, Wrench } from 'lucide-react';
 import styles from './Pills.module.css';
 
@@ -103,11 +103,13 @@ const floatingIcon = {
 const duplicatedServices = [...services, ...services];
 
 export default function Pills() {
+  const sectionRef = useRef<HTMLElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
   const x = useMotionValue(0);
   const isDragging = useRef(false);
   const isHovered = useRef(false);
+  const isInView = useInView(sectionRef, { margin: '200px' });
 
   useEffect(() => {
     const updateWidth = () => {
@@ -126,7 +128,7 @@ export default function Pills() {
   }, []);
 
   useAnimationFrame((time, delta) => {
-    if (!width || isDragging.current || isHovered.current) return;
+    if (!isInView || !width || isDragging.current || isHovered.current) return;
     
     // Auto-scroll speed (pixels per ms)
     const moveBy = 0.05 * delta; 
@@ -145,7 +147,7 @@ export default function Pills() {
   });
 
   return (
-    <section id="services" className={styles.aboutSection}>
+    <section id="services" ref={sectionRef} className={styles.aboutSection}>
       <div className={styles.aboutHeader}>
         <motion.h2
           className={styles.aboutTitle}

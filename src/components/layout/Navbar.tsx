@@ -155,8 +155,10 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Update IST Clock
+  // Update IST Clock only when curtain menu is open
   useEffect(() => {
+    if (!menuOpen) return;
+
     const updateTime = () => {
       const options: Intl.DateTimeFormatOptions = {
         timeZone: 'Asia/Kolkata',
@@ -171,7 +173,7 @@ export default function Navbar() {
     updateTime();
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [menuOpen]);
 
   // Lock body scroll when curtain menu is open
   useEffect(() => {

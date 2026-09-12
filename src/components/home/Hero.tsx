@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import { ArrowUpRight, Sparkles, Zap } from 'lucide-react';
@@ -48,6 +48,14 @@ export default function Hero() {
   const badge2X = useTransform(smoothX, [-0.5, 0.5], [26, -26]);
   const badge2Y = useTransform(smoothY, [-0.5, 0.5], [18, -18]);
 
+  const frameRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    };
+  }, []);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -56,14 +64,18 @@ export default function Hero() {
     const normX = rawX / rect.width - 0.5;
     const normY = rawY / rect.height - 0.5;
 
-    mouseX.set(normX);
-    mouseY.set(normY);
-    mouseRawX.set(rawX);
-    mouseRawY.set(rawY);
-    if (!isInside) setIsInside(true);
+    if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    frameRef.current = requestAnimationFrame(() => {
+      mouseX.set(normX);
+      mouseY.set(normY);
+      mouseRawX.set(rawX);
+      mouseRawY.set(rawY);
+      if (!isInside) setIsInside(true);
+    });
   };
 
   const handleMouseLeave = () => {
+    if (frameRef.current) cancelAnimationFrame(frameRef.current);
     mouseX.set(0);
     mouseY.set(0);
     setIsInside(false);

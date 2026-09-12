@@ -100,7 +100,7 @@ export default function SpatialShowcase() {
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                     className={styles.cardImage}
-                    priority={index < 2}
+                    loading="lazy"
                   />
                   <div className={styles.mediaOverlay} />
                   

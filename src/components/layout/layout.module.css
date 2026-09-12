@@ -856,6 +856,8 @@
   background: linear-gradient(180deg, #020718 0%, #051D96 55%, #020926 100%);
   isolation: isolate;
   color: #ffffff;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
 }
 
 /* Marquee Ticker Track */

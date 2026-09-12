@@ -1,0 +1,15 @@
+.birdWrapper {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  animation: floatBird 6s ease-in-out infinite;
+}
+
+@keyframes floatBird {
+  0%, 100% {
+    transform: translateY(0px) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}

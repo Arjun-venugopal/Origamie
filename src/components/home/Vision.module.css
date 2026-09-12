@@ -11,6 +11,8 @@
   color: #0F172A;
   overflow: hidden;
   z-index: 10;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
 }
 
 .visionContainer {

@@ -21,12 +21,9 @@ const projectServices = [
   'Growth & CRO'
 ];
 
-export default function GridFooter() {
-  const footerRef = useRef<HTMLDivElement>(null);
-  const [selectedService, setSelectedService] = useState('Web Development');
-  const [timeString, setTimeString] = useState('');
+function LiveTime() {
+  const [time, setTime] = useState('');
 
-  // Live IST Time
   useEffect(() => {
     const updateTime = () => {
       const options: Intl.DateTimeFormatOptions = {
@@ -36,12 +33,20 @@ export default function GridFooter() {
         second: '2-digit',
         hour12: true
       };
-      setTimeString(new Intl.DateTimeFormat('en-US', options).format(new Date()));
+      setTime(new Intl.DateTimeFormat('en-US', options).format(new Date()));
     };
+
     updateTime();
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  return <>{time || '19:26 IST'}</>;
+}
+
+export default function GridFooter() {
+  const footerRef = useRef<HTMLDivElement>(null);
+  const [selectedService, setSelectedService] = useState('Web Development');
 
   const { scrollYProgress } = useScroll({
     target: footerRef,
@@ -95,7 +100,7 @@ export default function GridFooter() {
               custom={0}
             >
               <span className={styles.badgePulseDot} />
-              <span>KERALA, INDIA &bull; {timeString || '19:26 IST'}</span>
+              <span>KERALA, INDIA &bull; <LiveTime /></span>
             </motion.div>
 
             <motion.h2
