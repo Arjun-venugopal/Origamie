@@ -63,6 +63,56 @@
   max-width: 380px;
 }
 
+.faqDirectHelp {
+  margin-top: 36px;
+  padding: 24px;
+  background: #FFFFFF;
+  border: 1px solid rgba(5, 29, 150, 0.12);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(5, 29, 150, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.helpHeading {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.helpDesc {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.92rem;
+  color: #64748B;
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+
+.helpActionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 8px 16px;
+  background: rgba(5, 29, 150, 0.06);
+  border: 1px solid rgba(5, 29, 150, 0.18);
+  border-radius: 999px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #051D96;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.helpActionBtn:hover {
+  background: #051D96;
+  color: #FFFFFF;
+  border-color: #051D96;
+}
+
 .faqRight {
   flex: 1.6;
   width: 100%;

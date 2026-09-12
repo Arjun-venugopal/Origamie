@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus } from 'lucide-react';
+import { Plus, ArrowUpRight } from 'lucide-react';
 import styles from './FAQ.module.css';
 
 interface FAQItem {
@@ -14,26 +14,26 @@ const faqs: FAQItem[] = [
   {
     question: (
       <>
-        You&apos;re a new studio — <span>why work with Origame?</span>
+        What services does Origamie <span>provide under one roof?</span>
       </>
     ),
-    answer: "Because you get senior, founder-led craft without the layered agency overhead. We take on a small number of projects, obsess over every detail, and price transparently. As one of our first clients you also get founding-partner pricing.",
+    answer: "Origamie is a full-spectrum digital studio operating across four core disciplines: Next-Gen Web & Mobile App Engineering (Next.js 16, React 19, iOS, Android), Editorial Brand Identity & 3D Motion Graphics, Performance Growth Marketing (Google & Meta Ads, Technical SEO), and Managed IT & Hardware Support. You work with one cohesive senior team without managing four separate disconnected agencies.",
   },
   {
-    question: <>Can I see past client work?</>,
-    answer: "Absolutely. During our initial strategy call, we'll walk you through case studies, live production websites, and Figma files that align with your industry and design goals.",
+    question: (
+      <>
+        How do you ensure our website <span>actually drives revenue?</span>
+      </>
+    ),
+    answer: "We don't build generic digital brochures. Every project begins with an in-depth audit of your customer acquisition funnel, user journeys, and commercial KPIs. We pair editorial visual prestige with conversion science — sub-50ms TTFB speeds, frictionless user funnels, mobile-first responsiveness, and structured SEO architectures designed to turn passive visitors into qualified pipeline.",
   },
   {
-    question: <>How much does a project cost?</>,
-    answer: "Our projects typically start at a flat rate of $5,000 depending on the design scope, interactivity, and custom integrations. We provide an exact, fixed quote within 24 hours of our strategy call.",
+    question: <>What does a typical project timeline look like?</>,
+    answer: "Most custom web platforms and brand experiences launch within 3 to 6 weeks. Our sprint framework is engineered for momentum: Week 1 is dedicated to UX wireframing and technical architecture; Weeks 2–3 focus on high-fidelity design systems and 3D visual direction; Weeks 4–5 cover full-stack engineering and custom integrations; and the final sprint is dedicated to rigorous QA, speed audits, and deployment.",
   },
   {
-    question: <>How long until my site is live?</>,
-    answer: "Most marketing sites go live in 2 to 6 weeks. Discover & strategy takes 1 week, design takes 1–2 weeks, and Webflow/custom development is completed in another 2-3 weeks.",
-  },
-  {
-    question: <>What if I don&apos;t love the design?</>,
-    answer: "We offer weekly demos and live Figma access, meaning you are aligned at every single step. We design collaboratively and iterate on the layout until you are absolutely thrilled with it.",
+    question: <>How does your pricing work, and do you offer fixed quotes?</>,
+    answer: "Yes, 100% transparent and fixed. We never bill ambiguous hourly rates or surprise you with unexpected scope creep. Following an initial 20-minute discovery call, we deliver an exact, fixed-scope proposal detailing every milestone, deliverable, and timeline. You know the exact investment before any work begins.",
   },
 ];
 
@@ -49,13 +49,30 @@ export default function FAQ() {
       <div className={styles.faqContainer}>
         {/* Left header column */}
         <div className={styles.faqLeft}>
-          <div className={styles.faqPreTitle}>FAQ</div>
+          <div className={styles.faqPreTitle}>Frequently Asked Questions</div>
           <h2 className={styles.faqTitle}>
-            Answers before <span>you ask.</span>
+            Answers before <br />
+            <span>you ask.</span>
           </h2>
           <p className={styles.faqSubtitle}>
-            Everything founders and marketing leads want to know before booking a call.
+            Everything founders, marketing leads, and technical teams want to know about partnering with Origamie.
           </p>
+
+          <div className={styles.faqDirectHelp}>
+            <span className={styles.helpHeading}>Have a custom question?</span>
+            <p className={styles.helpDesc}>
+              Chat with our technical founders directly for quick answers and transparent guidance.
+            </p>
+            <a
+              href="https://wa.me/919074749774?text=Hi%20Origamie!%20I%20have%20a%20question%20about%20your%20services."
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.helpActionBtn}
+            >
+              <span>Chat on WhatsApp</span>
+              <ArrowUpRight size={15} />
+            </a>
+          </div>
         </div>
 
         {/* Right accordion list */}
@@ -86,7 +103,7 @@ export default function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+                      transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
                       className={styles.faqAnswerContainer}
                     >
                       <p className={styles.faqAnswerText}>{faq.answer}</p>
