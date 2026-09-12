@@ -3,67 +3,80 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Sparkles, TrendingUp, Layers } from 'lucide-react';
+import { ArrowUpRight, Sparkles, TrendingUp, Layers, Clock } from 'lucide-react';
 import styles from '@/app/works/works.module.css';
 
 interface WorkItem {
   id: number;
   title: string;
   category: string;
-  metric: string;
-  metricLabel: string;
+  metric?: string;
+  metricLabel?: string;
   image: string;
   link: string;
   year: string;
   deliverable: string;
+  tags?: string[];
+  isComingSoon?: boolean;
 }
 
-const categories = ['All Projects', 'Web Applications', 'E-Commerce', 'Brand Identity', 'Web Design'];
+const categories = ['All Projects', 'Healthcare', 'Web Applications', 'E-Commerce', 'Brand Identity', 'Web Design'];
 
 const works: WorkItem[] = [
   {
     id: 1,
-    title: 'Apex Fintech Dashboard',
-    category: 'Web Applications',
-    metric: '+185%',
-    metricLabel: 'User Activation Rate',
-    image: '/hand.jpg',
-    link: '#',
-    year: '2026',
-    deliverable: 'Web App & Design System'
+    title: 'HealFort Hospital',
+    category: 'Healthcare',
+    metric: '+240%',
+    metricLabel: 'Online Patient Inquiries',
+    image: '/images/healfort-hospital.jpg',
+    link: 'https://healforthospital.com/',
+    year: '2025',
+    deliverable: 'Advanced Orthopaedic & Trauma Care Platform',
+    tags: ['Web Applications', 'Web Design'],
+    isComingSoon: false
   },
   {
     id: 2,
-    title: 'Veloce Athletic Gear',
-    category: 'E-Commerce',
-    metric: '2.4x',
-    metricLabel: 'Checkout Conversion Boost',
-    image: '/runner.jpg',
+    title: 'Apex Fintech Dashboard',
+    category: 'Web Applications',
+    image: '/hand.jpg',
     link: '#',
     year: '2026',
-    deliverable: 'Headless E-Commerce & CRO'
+    deliverable: 'Web App & Design System',
+    tags: ['Web Design'],
+    isComingSoon: true
   },
   {
     id: 3,
-    title: 'Aura Studio Rebrand',
-    category: 'Brand Identity',
-    metric: 'Awwwards',
-    metricLabel: 'Site of the Month Winner',
-    image: '/people.jpg',
+    title: 'Veloce Athletic Gear',
+    category: 'E-Commerce',
+    image: '/runner.jpg',
     link: '#',
-    year: '2025',
-    deliverable: 'Brand Strategy & 3D Experience'
+    year: '2026',
+    deliverable: 'Headless E-Commerce & CRO',
+    isComingSoon: true
   },
   {
     id: 4,
+    title: 'Aura Studio Rebrand',
+    category: 'Brand Identity',
+    image: '/people.jpg',
+    link: '#',
+    year: '2025',
+    deliverable: 'Brand Strategy & 3D Experience',
+    isComingSoon: true
+  },
+  {
+    id: 5,
     title: 'Pulse AI SaaS Platform',
     category: 'Web Design',
-    metric: '+310%',
-    metricLabel: 'Qualified Lead Growth',
     image: '/hand.jpg',
     link: '#',
     year: '2025',
-    deliverable: 'High-Converting Web Design'
+    deliverable: 'High-Converting Web Design',
+    tags: ['Web Applications'],
+    isComingSoon: true
   }
 ];
 
@@ -72,7 +85,7 @@ export default function WorksGrid() {
 
   const filteredWorks = activeCategory === 'All Projects' 
     ? works 
-    : works.filter(w => w.category === activeCategory);
+    : works.filter(w => w.category === activeCategory || (w.tags && w.tags.includes(activeCategory)));
 
   return (
     <section className={styles.gridSection}>
@@ -131,15 +144,22 @@ export default function WorksGrid() {
         <AnimatePresence mode="popLayout">
           {filteredWorks.map((work) => (
             <motion.a 
-              href={work.link}
+              href={work.isComingSoon ? undefined : work.link}
               key={work.id} 
-              className={styles.worksCard}
+              target={!work.isComingSoon && work.link.startsWith('http') ? '_blank' : undefined}
+              rel={!work.isComingSoon && work.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+              onClick={(e) => {
+                if (work.isComingSoon || !work.link || work.link === '#') {
+                  e.preventDefault();
+                }
+              }}
+              className={`${styles.worksCard} ${work.isComingSoon ? styles.worksCardComingSoon : ''}`}
               layout
               initial={{ opacity: 0, y: 30, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -8 }}
+              whileHover={work.isComingSoon ? { y: -4 } : { y: -8 }}
             >
               {/* Image & Metric Overlay */}
               <div className={styles.worksImageContainer}>
@@ -155,18 +175,39 @@ export default function WorksGrid() {
 
                 {/* Top Badge: Category & Year */}
                 <div className={styles.worksTopBadges}>
-                  <span className={styles.worksCategoryBadge}>{work.category}</span>
+                  <div className={styles.badgeGroupLeft}>
+                    <span className={styles.worksCategoryBadge}>{work.category}</span>
+                    {work.isComingSoon ? (
+                      <span className={styles.worksComingSoonBadge}>Coming Soon</span>
+                    ) : (
+                      work.link.startsWith('http') && (
+                        <span className={styles.worksLiveBadge}>
+                          <span className={styles.liveDot} /> Live Site
+                        </span>
+                      )
+                    )}
+                  </div>
                   <span className={styles.worksYearBadge}>{work.year}</span>
                 </div>
 
-                {/* Metric Badge Pill */}
-                <div className={styles.worksMetricPill}>
-                  <TrendingUp size={16} className={styles.metricIcon} />
-                  <div className={styles.metricTextGroup}>
-                    <span className={styles.metricValue}>{work.metric}</span>
-                    <span className={styles.metricLabel}>{work.metricLabel}</span>
+                {/* Metric / Status Badge Pill */}
+                {work.isComingSoon ? (
+                  <div className={styles.worksComingSoonPill}>
+                    <Clock size={16} className={styles.comingSoonIcon} />
+                    <div className={styles.comingSoonTextGroup}>
+                      <span className={styles.comingSoonValue}>Coming Soon</span>
+                      <span className={styles.comingSoonLabel}>Case Study In Development</span>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className={styles.worksMetricPill}>
+                    <TrendingUp size={16} className={styles.metricIcon} />
+                    <div className={styles.metricTextGroup}>
+                      <span className={styles.metricValue}>{work.metric}</span>
+                      <span className={styles.metricLabel}>{work.metricLabel}</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Card Footer Content */}
@@ -174,12 +215,19 @@ export default function WorksGrid() {
                 <div className={styles.worksDeliverableRow}>
                   <Layers size={14} className={styles.deliverableIcon} />
                   <span>{work.deliverable}</span>
+                  {work.isComingSoon && (
+                    <span className={styles.comingSoonDeliverableTag}>• Coming Soon</span>
+                  )}
                 </div>
                 
                 <h3 className={styles.worksTitle}>
                   <span>{work.title}</span>
-                  <div className={styles.worksArrowCircle}>
-                    <ArrowUpRight className={styles.worksIcon} size={20} />
+                  <div className={`${styles.worksArrowCircle} ${work.isComingSoon ? styles.arrowCircleSoon : ''}`}>
+                    {work.isComingSoon ? (
+                      <Clock className={styles.worksIcon} size={18} />
+                    ) : (
+                      <ArrowUpRight className={styles.worksIcon} size={20} />
+                    )}
                   </div>
                 </h3>
               </div>
