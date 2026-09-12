@@ -1,38 +1,37 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ArrowUpRight, 
-  Sparkles, 
   Globe, 
   PenTool, 
   Megaphone, 
   Wrench, 
-  Smartphone, 
-  Video, 
-  Search, 
-  Infinity as InfinityIcon, 
-  MousePointer2 
+  ArrowUpRight, 
+  Check, 
+  Sparkles,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import styles from './SpatialShowcase.module.css';
 
-const AGENCY_SERVICES_3D = [
+const AGENCY_SERVICES = [
   {
     id: '01',
     label: 'Web & App Dev',
-    tag: 'CORE ENGINEERING // 01',
-    title: 'High-Performance Web & Mobile Applications.',
-    desc: 'From bespoke Next.js 16 websites to native and cross-platform mobile apps. Engineered for sub-50ms TTFB, 100% Core Web Vitals, and effortless conversion flows.',
+    tag: '01 • Core Engineering',
+    title: 'High-Performance Web & Mobile Applications',
+    desc: 'From bespoke Next.js web applications to fast cross-platform mobile apps. Engineered for sub-second page loads, 100% Core Web Vitals, and effortless conversion flows.',
     image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600&auto=format&fit=crop',
     imageAlt: 'Modern Web and App Development Engineering',
-    imageBadge: 'NEXT.JS 16 & REACT 19 STACK',
+    imageBadge: 'Next.js 16 & React 19',
+    icon: Globe,
     includedServices: [
-      { name: 'Web Development', desc: 'Fast, responsive, SEO-friendly custom websites' },
-      { name: 'App Development', desc: 'Custom iOS & Android apps with business features' },
-      { name: 'SaaS & Web Platforms', desc: 'Scalable architecture with sub-second page loads' }
+      { name: 'Web Development', desc: 'Fast, responsive, SEO-ready custom websites' },
+      { name: 'App Development', desc: 'Custom iOS & Android apps with modern UI' },
+      { name: 'SaaS & Web Platforms', desc: 'Scalable architecture with lightning-fast load times' }
     ],
     ctaText: 'Explore Web & Apps',
     ctaLink: '/services'
@@ -40,12 +39,13 @@ const AGENCY_SERVICES_3D = [
   {
     id: '02',
     label: 'Design & Motion',
-    tag: 'VISUAL CRAFT // 02',
-    title: 'Editorial Branding & Kinetic Motion Graphics.',
+    tag: '02 • Visual Craft',
+    title: 'Editorial Branding & Kinetic Motion Graphics',
     desc: 'We sculpt iconic visual brand languages, social media design systems, and fluid animated motion graphics that capture market attention and build authority.',
     image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop',
     imageAlt: '3D Geometric Design and Kinetic Motion Art',
-    imageBadge: '3D VISUAL & MOTION DIRECTION',
+    imageBadge: 'Visual & Motion Direction',
+    icon: PenTool,
     includedServices: [
       { name: 'Graphics Designing', desc: 'Branding, social media posters, & marketing kits' },
       { name: 'Motion Graphics', desc: 'Animated promo videos & high-converting motion ads' },
@@ -57,16 +57,17 @@ const AGENCY_SERVICES_3D = [
   {
     id: '03',
     label: 'Marketing & Ads',
-    tag: 'GROWTH ENGINE // 03',
-    title: 'Precision Ads & Search Engine Dominance.',
+    tag: '03 • Growth Engine',
+    title: 'Precision Ads & Search Engine Dominance',
     desc: 'Full-funnel digital marketing across Meta and Google Ads paired with technical SEO to turn commercial search intent into qualified inbound leads and revenue.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop',
     imageAlt: 'Digital Marketing Performance and Data Analytics',
-    imageBadge: 'PAID ADS & SEO VELOCITY',
+    imageBadge: 'Paid Ads & SEO Growth',
+    icon: Megaphone,
     includedServices: [
       { name: 'Google Ads & Search', desc: 'High-intent PPC campaigns for instant qualified enquiries' },
       { name: 'Meta Ads (FB & IG)', desc: 'Targeted visual ad funnels that lower acquisition costs' },
-      { name: 'Search Engine Optimization (SEO)', desc: 'Organic ranking strategy & website visibility lift' }
+      { name: 'Search Engine Optimization', desc: 'Organic ranking strategy & website visibility lift' }
     ],
     ctaText: 'Explore Marketing & Ads',
     ctaLink: '/services'
@@ -74,12 +75,13 @@ const AGENCY_SERVICES_3D = [
   {
     id: '04',
     label: 'Computer & IT',
-    tag: 'SYSTEMS & SUPPORT // 04',
-    title: 'Enterprise Computer Maintenance & IT Support.',
+    tag: '04 • Systems & Support',
+    title: 'Enterprise Computer Maintenance & IT Support',
     desc: 'Reliable hardware diagnostics, computer repairs, software configuration, and on-demand technical assistance to keep your business operating without interruption.',
     image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=1600&auto=format&fit=crop',
     imageAlt: 'High-Performance Computer Hardware & Enterprise IT Support',
-    imageBadge: 'MANAGED IT & HARDWARE SUPPORT',
+    imageBadge: 'Managed IT & Diagnostics',
+    icon: Wrench,
     includedServices: [
       { name: 'Computer Repairs & Maintenance', desc: 'Full hardware diagnostics, repairs, & cleaning' },
       { name: 'Software Support & Setup', desc: 'OS configuration, data migration, & security' },
@@ -91,157 +93,157 @@ const AGENCY_SERVICES_3D = [
 ];
 
 export default function SpatialShowcase() {
-  const [activeDim, setActiveDim] = useState(0);
-  const stageRef = useRef<HTMLDivElement>(null);
+  const [activeTab, setActiveTab] = useState(0);
 
-  // 3D Mouse Parallax Tilt (Desktop only)
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!stageRef.current || window.innerWidth < 1024) return;
-    const rect = stageRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
-    const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+  const currentService = AGENCY_SERVICES[activeTab];
 
-    const tiltX = (y * -5).toFixed(2);
-    const tiltY = (x * 5).toFixed(2);
-
-    stageRef.current.style.transform = `perspective(1400px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+  const handlePrev = () => {
+    setActiveTab((prev) => (prev === 0 ? AGENCY_SERVICES.length - 1 : prev - 1));
   };
 
-  const handleMouseLeave = () => {
-    if (stageRef.current) {
-      stageRef.current.style.transform = `perspective(1400px) rotateX(0deg) rotateY(0deg)`;
-    }
+  const handleNext = () => {
+    setActiveTab((prev) => (prev === AGENCY_SERVICES.length - 1 ? 0 : prev + 1));
   };
-
-  const currentService = AGENCY_SERVICES_3D[activeDim];
 
   return (
-    <section 
-      className={styles.spatialSection}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* Ambient Theme Gradients */}
-      <div className={styles.spatialGlow1} />
-      <div className={styles.spatialGlow2} />
-      <div className={styles.isometricGridFloor} />
-
+    <section id="capabilities" className={styles.section}>
       <div className={styles.container}>
         
         {/* Section Header */}
         <div className={styles.sectionHeader}>
-          <motion.div 
-            className={styles.statusPill}
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className={styles.pillDot} />
-            <span>Origamie • Full-Spectrum Digital Agency</span>
-          </motion.div>
+          <div className={styles.preTitle}>
+            <span>Origamie Capabilities</span>
+          </div>
 
-          <motion.h2 
-            className={styles.mainHeading}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
+          <h2 className={styles.mainHeading}>
             Capabilities engineered for <br />
             <span className={styles.serifGradient}>modern digital growth.</span>
-          </motion.h2>
+          </h2>
 
-          <motion.p 
-            className={styles.subHeading}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
+          <p className={styles.subHeading}>
             Explore our comprehensive suite of creative design, web development, growth marketing, and managed IT services — built to scale your business online.
-          </motion.p>
+          </p>
         </div>
 
-        {/* 3D Dimension Navigation Switcher */}
-        <div className={styles.dimensionNavDockWrapper}>
-          <div className={styles.dimensionNavDock}>
-            {AGENCY_SERVICES_3D.map((dim, idx) => {
-              const isActive = activeDim === idx;
+        {/* Minimal Segmented Tab Dock */}
+        <div className={styles.tabBarWrapper}>
+          <div className={styles.tabBar} role="tablist" aria-label="Capabilities Navigation">
+            {AGENCY_SERVICES.map((service, idx) => {
+              const Icon = service.icon;
+              const isActive = activeTab === idx;
               return (
                 <button
-                  key={dim.id}
+                  key={service.id}
                   type="button"
-                  className={`${styles.navBtn} ${isActive ? styles.navBtnActive : ''}`}
-                  onClick={() => setActiveDim(idx)}
-                  aria-label={`Switch to ${dim.label}`}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`panel-${service.id}`}
+                  id={`tab-${service.id}`}
+                  className={`${styles.tabBtn} ${isActive ? styles.tabBtnActive : ''}`}
+                  onClick={() => setActiveTab(idx)}
                 >
-                  <span className={styles.navIndex}>{dim.id}</span>
-                  <span className={styles.btnLabelText}>{dim.label}</span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTabIndicator"
+                      className={styles.tabActiveBg}
+                      transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                    />
+                  )}
+                  <span className={styles.tabIcon}>
+                    <Icon size={16} strokeWidth={isActive ? 2.2 : 1.8} />
+                  </span>
+                  <span className={styles.tabLabel}>{service.label}</span>
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* 3D Interactive Perspective Stage */}
-        <div 
-          ref={stageRef}
-          className={styles.stage3DWrapper}
-        >
+        {/* Minimal User-Friendly Showcase Card */}
+        <div className={styles.showcaseCardWrapper}>
           <AnimatePresence mode="wait">
             <motion.div
               key={currentService.id}
-              className={styles.card3DContainer}
-              initial={{ opacity: 0, y: 20, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.98 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              id={`panel-${currentService.id}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${currentService.id}`}
+              className={styles.showcaseCard}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             >
-              
-              {/* Visual Render Window (Left) */}
-              <div className={styles.visual3DWindow}>
-                <Image
-                  src={currentService.image}
-                  alt={currentService.imageAlt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                  className={styles.visualImage}
-                  priority
-                />
-                <div className={styles.visualOverlayGlint} />
-                <div className={styles.visualTagOverlay}>
-                  <Sparkles size={13} color="#38BDF8" />
-                  <span>{currentService.imageBadge}</span>
-                </div>
-              </div>
-
-              {/* Content Details (Right) */}
-              <div className={styles.contentBlock3D}>
-                <div className={styles.phaseBadge}>
+              {/* Left Column: Details */}
+              <div className={styles.contentCol}>
+                <div className={styles.tagBadge}>
                   <span>{currentService.tag}</span>
                 </div>
 
                 <h3 className={styles.cardTitle}>{currentService.title}</h3>
                 <p className={styles.cardDesc}>{currentService.desc}</p>
 
-                <div className={styles.metricsGrid}>
-                  {currentService.includedServices.map((svc, sIdx) => (
-                    <div key={sIdx} className={styles.metricItem}>
-                      <span className={styles.metricBulletDot} />
-                      <div className={styles.metricItemContent}>
-                        <strong className={styles.metricItemName}>{svc.name}</strong>
-                        <span className={styles.metricItemDesc}> — {svc.desc}</span>
+                <div className={styles.featuresList}>
+                  {currentService.includedServices.map((item, i) => (
+                    <div key={i} className={styles.featureItem}>
+                      <div className={styles.checkIconWrapper}>
+                        <Check size={13} strokeWidth={2.6} />
+                      </div>
+                      <div className={styles.featureText}>
+                        <strong className={styles.featureName}>{item.name}</strong>
+                        <span className={styles.featureDesc}> — {item.desc}</span>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <Link href={currentService.ctaLink} className={styles.actionCtaBtn}>
-                  <span>{currentService.ctaText}</span>
-                  <ArrowUpRight size={18} />
-                </Link>
+                <div className={styles.cardFooterActions}>
+                  <Link href={currentService.ctaLink} className={styles.primaryBtn}>
+                    <span>{currentService.ctaText}</span>
+                    <ArrowUpRight size={17} />
+                  </Link>
+
+                  <div className={styles.navControls}>
+                    <button
+                      type="button"
+                      onClick={handlePrev}
+                      className={styles.stepBtn}
+                      aria-label="Previous capability"
+                    >
+                      <ChevronLeft size={18} />
+                    </button>
+                    <span className={styles.stepIndicator}>
+                      {activeTab + 1} / {AGENCY_SERVICES.length}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleNext}
+                      className={styles.stepBtn}
+                      aria-label="Next capability"
+                    >
+                      <ChevronRight size={18} />
+                    </button>
+                  </div>
+                </div>
               </div>
 
+              {/* Right Column: Visual Preview */}
+              <div className={styles.visualCol}>
+                <div className={styles.imageContainer}>
+                  <Image
+                    src={currentService.image}
+                    alt={currentService.imageAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                    className={styles.previewImage}
+                    priority
+                  />
+                  <div className={styles.imageOverlay} />
+                  <div className={styles.imageBadge}>
+                    <Sparkles size={13} color="#00178D" />
+                    <span>{currentService.imageBadge}</span>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
