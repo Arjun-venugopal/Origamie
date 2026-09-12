@@ -506,28 +506,20 @@ export default function Navbar() {
                     Instagram ↗
                   </a>
                   <a 
-                    href="https://linkedin.com" 
+                    href="https://facebook.com" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className={styles.curtainSocialBtn}
                   >
-                    LinkedIn ↗
+                    Facebook ↗
                   </a>
                   <a 
-                    href="https://behance.net" 
+                    href="https://wa.me/919074749774" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className={styles.curtainSocialBtn}
                   >
-                    Behance ↗
-                  </a>
-                  <a 
-                    href="https://x.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className={styles.curtainSocialBtn}
-                  >
-                    Twitter / X ↗
+                    WhatsApp ↗
                   </a>
                 </div>
 
