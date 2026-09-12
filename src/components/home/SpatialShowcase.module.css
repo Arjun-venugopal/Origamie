@@ -1,6 +1,6 @@
 /* ==========================================================================
    ORIGAMIE — CAPABILITIES SHOWCASE (MINIMAL & USER-FRIENDLY)
-   Clean White Canvas • Refined Segmented Tabs • Fluid Responsive Layout
+   Clean White Canvas • Refined 2x2 Grid • High-Legibility Typography
    ========================================================================== */
 
 .section {
@@ -22,30 +22,28 @@
 }
 
 /* ==========================================================================
-   HEADER SECTION
+   SECTION HEADER
    ========================================================================== */
 .sectionHeader {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 56px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .preTitle {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 18px;
-  border-radius: 999px;
-  background: rgba(0, 23, 141, 0.05);
-  border: 1px solid rgba(0, 23, 141, 0.12);
+  display: inline-block;
   font-family: var(--font-urbanist), sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  color: #00178D;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: #00178D;
+  background: rgba(0, 23, 141, 0.05);
+  border: 1px solid rgba(0, 23, 141, 0.12);
+  padding: 6px 16px;
+  border-radius: 999px;
   margin-bottom: 20px;
 }
 
@@ -55,7 +53,7 @@
   font-weight: 600;
   line-height: var(--section-title-line-height);
   color: #0F172A;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   letter-spacing: var(--section-title-letter-spacing);
   max-width: 860px;
 }
@@ -73,337 +71,268 @@
   font-weight: 400;
   color: #64748B;
   line-height: 1.65;
-  max-width: 680px;
+  max-width: 660px;
   margin: 0 auto;
 }
 
 /* ==========================================================================
-   MINIMAL SEGMENTED TAB BAR
+   CAPABILITIES 2x2 MINIMAL GRID
    ========================================================================== */
-.tabBarWrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
-  overflow-x: auto;
-  padding: 4px 8px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.tabBarWrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.tabBar {
-  display: inline-flex;
-  align-items: center;
-  background: #F1F5F9;
-  padding: 6px;
-  border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  gap: 6px;
-  position: relative;
-}
-
-.tabBtn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 10px 22px;
-  border-radius: 999px;
-  border: none;
-  background: transparent;
-  color: #64748B;
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: color 0.2s ease;
-  white-space: nowrap;
-  outline: none;
-  user-select: none;
-  z-index: 2;
-}
-
-.tabBtn:hover {
-  color: #0F172A;
-}
-
-.tabBtnActive {
-  color: #00178D;
-}
-
-.tabActiveBg {
-  position: absolute;
-  inset: 0;
-  background: #FFFFFF;
-  border-radius: 999px;
-  box-shadow: 0 3px 12px rgba(0, 23, 141, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
-  z-index: -1;
-}
-
-.tabIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tabLabel {
-  letter-spacing: -0.01em;
-}
-
-/* ==========================================================================
-   SHOWCASE CARD LAYOUT
-   ========================================================================== */
-.showcaseCardWrapper {
-  width: 100%;
-  max-width: 1160px;
-}
-
-.showcaseCard {
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 23, 141, 0.08);
-  border-radius: 32px;
-  padding: 56px;
-  box-shadow: 0 20px 50px -15px rgba(0, 23, 141, 0.06);
+.grid {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 56px;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  width: 100%;
+  margin-bottom: 56px;
 }
 
-/* Content Column (Left) */
-.contentCol {
-  display: flex;
-  flex-direction: column;
-}
-
-.tagBadge {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  padding: 6px 14px;
-  background: rgba(0, 23, 141, 0.06);
-  border: 1px solid rgba(0, 23, 141, 0.12);
-  border-radius: 100px;
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #00178D;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-
-.cardTitle {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: clamp(1.6rem, 2.2vw, 2.15rem);
-  font-weight: 700;
-  line-height: 1.25;
-  color: #0F172A;
-  margin-bottom: 16px;
-  letter-spacing: -0.025em;
-}
-
-.cardDesc {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 1.05rem;
-  line-height: 1.65;
-  color: #475569;
-  margin-bottom: 28px;
-}
-
-/* Feature List with Checkmarks */
-.featuresList {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-bottom: 36px;
-}
-
-.featureItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.checkIconWrapper {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: rgba(0, 23, 141, 0.08);
-  color: #00178D;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.featureText {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-.featureName {
-  font-weight: 600;
-  color: #0F172A;
-}
-
-.featureDesc {
-  color: #64748B;
-}
-
-/* Actions in Card Footer */
-.cardFooterActions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.primaryBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 13px 26px;
-  background: #00178D;
-  color: #FFFFFF;
-  border-radius: 999px;
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 4px 14px rgba(0, 23, 141, 0.2);
-}
-
-.primaryBtn:hover {
-  background: #051D96;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(0, 23, 141, 0.28);
-}
-
-.primaryBtn svg {
-  transition: transform 0.25s ease;
-}
-
-.primaryBtn:hover svg {
-  transform: translate(2px, -2px);
-}
-
-.navControls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.stepBtn {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+.card {
   background: #FFFFFF;
-  color: #475569;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 24px;
+  padding: 24px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s ease;
+  position: relative;
 }
 
-.stepBtn:hover {
-  border-color: #00178D;
-  color: #00178D;
-  background: rgba(0, 23, 141, 0.04);
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -15px rgba(0, 23, 141, 0.08);
+  border-color: rgba(0, 23, 141, 0.22);
 }
 
-.stepIndicator {
-  font-family: var(--font-urbanist), sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #94A3B8;
-  padding: 0 6px;
-  user-select: none;
-}
-
-/* Visual Column (Right) */
-.visualCol {
-  width: 100%;
-}
-
-.imageContainer {
+/* Visual Media Container */
+.mediaWrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  border-radius: 24px;
+  height: 240px;
+  border-radius: 16px;
   overflow: hidden;
   background: #F1F5F9;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  margin-bottom: 24px;
 }
 
-.previewImage {
+.cardImage {
   object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.imageContainer:hover .previewImage {
-  transform: scale(1.04);
+.card:hover .cardImage {
+  transform: scale(1.05);
 }
 
-.imageOverlay {
+.mediaOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.25) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.35) 100%);
   pointer-events: none;
 }
 
-.imageBadge {
+.tagBadge {
   position: absolute;
-  bottom: 16px;
-  left: 16px;
+  top: 14px;
+  left: 14px;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 7px 14px;
-  background: rgba(255, 255, 255, 0.92);
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.6);
+  padding: 6px 14px;
   border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 2;
+}
+
+.tagIndex {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #00178D;
+  background: rgba(0, 23, 141, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.tagText {
   font-family: var(--font-urbanist), sans-serif;
   font-size: 0.76rem;
   font-weight: 700;
   color: #0F172A;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+.iconBadge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00178D;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   z-index: 2;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.card:hover .iconBadge {
+  transform: scale(1.08);
+  background: #00178D;
+  color: #FFFFFF;
+}
+
+/* Card Body */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cardTitle {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #0F172A;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.cardDesc {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #64748B;
+  margin-bottom: 22px;
+  flex-grow: 1;
+}
+
+/* Highlights Chips */
+.chipsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.chip {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #334155;
+  background: #F8FAFC;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  padding: 5px 12px;
+  border-radius: 999px;
+  letter-spacing: -0.01em;
+}
+
+/* Card Footer Link */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #00178D;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.linkArrow {
+  transition: transform 0.25s ease;
+}
+
+.card:hover .linkArrow {
+  transform: translateX(4px);
+}
+
+.card:hover .cardLink {
+  color: #051D96;
+}
+
+/* ==========================================================================
+   MINIMAL BOTTOM ASSISTANCE BAR
+   ========================================================================== */
+.bottomBar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px;
+  background: #F8FAFC;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 18px;
+  gap: 20px;
+}
+
+.bottomText {
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #475569;
+}
+
+.bottomBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #00178D;
+  color: #FFFFFF;
+  border-radius: 999px;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.bottomBtn:hover {
+  background: #051D96;
+  transform: translateY(-1px);
 }
 
 /* ==========================================================================
    RESPONSIVE DESIGN
    ========================================================================== */
 @media (max-width: 1024px) {
-  .showcaseCard {
+  .grid {
     grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 40px;
+    gap: 24px;
   }
 
-  .visualCol {
-    order: -1;
+  .mediaWrapper {
+    height: 220px;
   }
 
-  .imageContainer {
-    aspect-ratio: 16 / 10;
+  .bottomBar {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px 20px;
   }
 }
 
@@ -413,66 +342,56 @@
   }
 
   .sectionHeader {
-    margin-bottom: 32px;
+    margin-bottom: 36px;
   }
 
   .subHeading {
     font-size: 1rem;
   }
 
-  .tabBarWrapper {
-    justify-content: flex-start;
-    margin-bottom: 28px;
+  .card {
+    padding: 20px;
+    border-radius: 20px;
   }
 
-  .tabBtn {
-    padding: 8px 16px;
-    font-size: 0.88rem;
+  .mediaWrapper {
+    height: 190px;
+    margin-bottom: 18px;
   }
 
-  .showcaseCard {
-    padding: 28px 20px;
-    border-radius: 24px;
-    gap: 28px;
+  .cardTitle {
+    font-size: 1.3rem;
   }
 
   .cardDesc {
-    font-size: 0.98rem;
-    margin-bottom: 22px;
+    font-size: 0.94rem;
   }
 
-  .cardFooterActions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
-  }
-
-  .primaryBtn {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .navControls {
-    justify-content: center;
+  .bottomText {
+    font-size: 0.94rem;
   }
 }
 
 @media (max-width: 480px) {
+  .section {
+    padding: 60px 14px;
+  }
+
   .preTitle {
     font-size: 0.74rem;
-    padding: 6px 14px;
+    padding: 5px 12px;
   }
 
-  .imageContainer {
-    aspect-ratio: 4 / 3;
-    border-radius: 18px;
+  .mediaWrapper {
+    height: 170px;
   }
 
-  .cardTitle {
-    font-size: 1.45rem;
+  .chipsList {
+    gap: 6px;
   }
 
-  .featureText {
-    font-size: 0.88rem;
+  .chip {
+    font-size: 0.74rem;
+    padding: 4px 10px;
   }
 }
