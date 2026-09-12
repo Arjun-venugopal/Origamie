@@ -17,45 +17,45 @@ const CAPABILITIES = [
   {
     id: '01',
     tag: 'Web & App Development',
-    title: 'High-Performance Web & Mobile Apps',
-    desc: 'From custom Next.js web platforms to cross-platform mobile apps. Engineered for sub-second page loads, conversion velocity, and effortless scaling.',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop',
-    imageAlt: 'Modern Web and App Development Engineering',
+    title: 'Next-Gen Web & Mobile Platforms',
+    desc: 'Engineered with Next.js 16 and React 19 for instantaneous load times, fluid micro-interactions, and conversion-optimized checkout flows.',
+    image: '/images/3d/hologram-ui-3d.jpg',
+    imageAlt: 'Next-Gen Web and Mobile Engineering Holographic Interface',
     icon: Globe,
-    highlights: ['Next.js 16 & React 19', 'iOS & Android Apps', 'Sub-Second Speed'],
+    highlights: ['Next.js 16 Architecture', 'iOS & Android Apps', 'Sub-50ms Response'],
     link: '/services'
   },
   {
     id: '02',
     tag: 'Design & Motion',
-    title: 'Editorial Branding & Motion Graphics',
-    desc: 'Distinctive visual identities, social media design systems, and animated motion ads crafted to capture attention and elevate your brand authority.',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop',
-    imageAlt: 'Geometric Design and Kinetic Motion Art',
+    title: 'Editorial Branding & 3D Motion',
+    desc: 'Bespoke visual identities, kinetic motion ads, and sculptural digital design systems that make your brand unforgettable in crowded markets.',
+    image: '/images/3d/origami-crane-3d.jpg',
+    imageAlt: 'Sculptural Glass Origami Crane Brand Design and 3D Motion',
     icon: PenTool,
-    highlights: ['Brand Identity', 'Motion Ad Creatives', 'Social Media Design'],
+    highlights: ['Visual Brand Systems', 'Kinetic 3D Motion', 'Social Campaign Kits'],
     link: '/services'
   },
   {
     id: '03',
     tag: 'Growth Marketing',
-    title: 'Precision Ads & Search Engine Growth',
-    desc: 'Data-driven paid ad campaigns across Meta and Google, paired with technical SEO to convert high-intent searches into predictable inbound revenue.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop',
-    imageAlt: 'Digital Marketing Performance and Data Analytics',
+    title: 'Precision Ads & Organic Dominance',
+    desc: 'Multi-channel paid acquisition across Meta and Google, aligned with technical SEO to capture buyer intent and generate scalable revenue.',
+    image: '/images/3d/kinetic-core-3d.jpg',
+    imageAlt: 'Kinetic Energy Core Performance and Digital Marketing Analytics',
     icon: Megaphone,
-    highlights: ['Google & Meta Ads', 'Technical SEO', 'Lead Funnel CRO'],
+    highlights: ['Google & Meta Ads', 'Technical SEO Audits', 'Conversion Rate Opt.'],
     link: '/services'
   },
   {
     id: '04',
     tag: 'Managed IT Services',
-    title: 'Computer Maintenance & Technical Support',
-    desc: 'Reliable hardware diagnostics, computer repairs, software configuration, and on-call technical assistance to keep your business operating without disruption.',
-    image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=1200&auto=format&fit=crop',
-    imageAlt: 'Enterprise Computer Maintenance and Hardware Diagnostics',
+    title: 'Managed Hardware & IT Infrastructure',
+    desc: 'Comprehensive hardware diagnostics, performance repairs, software deployment, and dedicated IT assistance to keep your operations running 24/7.',
+    image: '/images/3d/tech-processor-3d.jpg',
+    imageAlt: 'High Performance Computer Hardware Processor and IT Diagnostics',
     icon: Wrench,
-    highlights: ['Hardware Repairs', 'Software & OS Setup', 'On-Demand Support'],
+    highlights: ['Diagnostics & Repairs', 'OS & Cloud Migration', 'Fast Dedicated Support'],
     link: '/contact'
   }
 ];
@@ -70,12 +70,12 @@ export default function SpatialShowcase() {
           <span className={styles.preTitle}>Our Capabilities</span>
 
           <h2 className={styles.mainHeading}>
-            Capabilities engineered for <br />
-            <span className={styles.serifGradient}>modern digital growth.</span>
+            Everything you need to <br />
+            <span className={styles.serifGradient}>build, launch &amp; scale.</span>
           </h2>
 
           <p className={styles.subHeading}>
-            Full-spectrum digital services from initial architecture to ongoing marketing and technical infrastructure.
+            From lightning-fast digital platforms and iconic brand identity to precision marketing funnels and reliable IT infrastructure — all unified under one roof.
           </p>
         </div>
 
@@ -100,6 +100,7 @@ export default function SpatialShowcase() {
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                     className={styles.cardImage}
+                    priority={index < 2}
                   />
                   <div className={styles.mediaOverlay} />
                   
@@ -143,10 +144,10 @@ export default function SpatialShowcase() {
         {/* Minimal User-Friendly Bottom Bar */}
         <div className={styles.bottomBar}>
           <p className={styles.bottomText}>
-            Need a custom combination of creative, engineering, and marketing?
+            Looking for a tailored end-to-end package for your brand?
           </p>
           <Link href="/contact" className={styles.bottomBtn}>
-            <span>Talk to our team</span>
+            <span>Schedule a Discovery Call</span>
             <ArrowRight size={15} />
           </Link>
         </div>
