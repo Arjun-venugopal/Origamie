@@ -498,7 +498,7 @@ export default function Navbar() {
                 {/* Social Networks Footer */}
                 <div className={styles.curtainSocialRow}>
                   <a 
-                    href="https://instagram.com" 
+                    href="https://www.instagram.com/origamie.in?stkn=dmpuMHhxOTlnbzE=" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className={styles.curtainSocialBtn}
@@ -506,7 +506,7 @@ export default function Navbar() {
                     Instagram ↗
                   </a>
                   <a 
-                    href="https://facebook.com" 
+                    href="https://www.facebook.com/origamie.in/?http_ref=eyJ0cyI6MTc4OTIwMzgyODAwMCwiciI6IiJ9" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className={styles.curtainSocialBtn}
