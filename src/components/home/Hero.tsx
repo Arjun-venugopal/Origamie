@@ -104,6 +104,7 @@ export default function Hero() {
           className={styles.interactiveGrid}
           style={{ x: gridX, y: gridY }}
         />
+        <div className={styles.ambientGlowOrb} />
         <motion.div
           className={styles.cursorSpotlight}
           style={{
@@ -154,22 +155,37 @@ export default function Hero() {
           transformPerspective: 1000
         }}
       >
-        <motion.h1
-          className={styles.mainTitle}
+        {/* Top Studio Badge Pill */}
+        <motion.div
+          className={styles.heroTopBadge}
           initial="hidden"
           animate="visible"
           variants={fadeUp}
           custom={0}
         >
-          Folding ideas into <br />
-          digital{' '}
-          <motion.span
-            className={styles.highlightWord}
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 350, damping: 18 }}
-          >
-            #masterpieces.
-          </motion.span>
+          <span className={styles.topBadgePulseDot} />
+          <Sparkles size={13} className={styles.topBadgeIcon} />
+          <span>Digital Design & Growth Studio</span>
+        </motion.div>
+
+        <motion.h1
+          className={styles.mainTitle}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          custom={1}
+        >
+          <span className={styles.titleLineOne}>Folding ideas into</span>
+          <span className={styles.titleLineTwo}>
+            digital{' '}
+            <motion.span
+              className={styles.highlightWord}
+              whileHover={{ scale: 1.04 }}
+              transition={{ type: 'spring', stiffness: 350, damping: 18 }}
+            >
+              #masterpieces.
+            </motion.span>
+          </span>
         </motion.h1>
 
         <motion.p
@@ -177,7 +193,7 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          custom={1}
+          custom={2}
         >
           Origamie blends editorial brand design with conversion engineering for founders and tech teams — typically delivering <strong>2–4x more qualified pipeline in 90 days.</strong>
         </motion.p>
@@ -187,9 +203,10 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          custom={2}
+          custom={3}
         >
           <motion.div
+            className={styles.actionBtnWrapper}
             whileHover={{ scale: 1.03, y: -2 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 400, damping: 20 }}
@@ -200,6 +217,7 @@ export default function Hero() {
             </Link>
           </motion.div>
           <motion.div
+            className={styles.actionBtnWrapper}
             whileHover={{ scale: 1.03, y: -2 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 400, damping: 20 }}

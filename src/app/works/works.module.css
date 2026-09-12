@@ -776,7 +776,8 @@ a.contactMethodValue:hover {
   }
   
   .mainTitle {
-    font-size: 14vw;
+    font-size: clamp(2.8rem, 9.5vw, 4.2rem);
+    line-height: 1.02;
   }
   
   .sectionTitle {
@@ -794,7 +795,12 @@ a.contactMethodValue:hover {
 
 @media (max-width: 480px) {
   .heroWrapper {
+    min-height: 100dvh;
     padding: 100px 16px 60px;
+  }
+  .mainTitle {
+    font-size: clamp(2.25rem, 9.2vw, 2.9rem);
+    line-height: 1.08;
   }
   .gridSection, .contactSection {
     padding: 60px 16px;
