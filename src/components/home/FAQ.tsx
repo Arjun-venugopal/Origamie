@@ -7,33 +7,57 @@ import styles from './FAQ.module.css';
 
 interface FAQItem {
   question: React.ReactNode;
-  answer: string;
+  answer: React.ReactNode;
 }
 
 const faqs: FAQItem[] = [
   {
     question: (
       <>
-        What services does Origamie <span>provide under one roof?</span>
+        What digital marketing services <span>does Origamie offer?</span>
       </>
     ),
-    answer: "Origamie is a full-spectrum digital studio operating across four core disciplines: Next-Gen Web & Mobile App Engineering (Next.js 16, React 19, iOS, Android), Editorial Brand Identity & 3D Motion Graphics, Performance Growth Marketing (Google & Meta Ads, Technical SEO), and Managed IT & Hardware Support. You work with one cohesive senior team without managing four separate disconnected agencies.",
+    answer: (
+      <>
+        Origamie provides end-to-end digital solutions designed to help businesses build, grow, and scale online. Our services include <strong>website development, SEO, social media marketing, paid advertising, branding, content creation, and performance marketing</strong>—all working together as one growth strategy.
+      </>
+    ),
   },
   {
     question: (
       <>
-        How do you ensure our website <span>actually drives revenue?</span>
+        How can Origamie help my business <span>generate more leads and sales?</span>
       </>
     ),
-    answer: "We don't build generic digital brochures. Every project begins with an in-depth audit of your customer acquisition funnel, user journeys, and commercial KPIs. We pair editorial visual prestige with conversion science — sub-50ms TTFB speeds, frictionless user funnels, mobile-first responsiveness, and structured SEO architectures designed to turn passive visitors into qualified pipeline.",
+    answer: (
+      <>
+        We start by understanding your business, audience, and goals. Then we build a strategy that combines <strong>high-converting websites, targeted campaigns, compelling content, SEO, and performance marketing</strong> to attract the right audience and turn attention into measurable leads and customers.
+      </>
+    ),
   },
   {
-    question: <>What does a typical project timeline look like?</>,
-    answer: "Most custom web platforms and brand experiences launch within 3 to 6 weeks. Our sprint framework is engineered for momentum: Week 1 is dedicated to UX wireframing and technical architecture; Weeks 2–3 focus on high-fidelity design systems and 3D visual direction; Weeks 4–5 cover full-stack engineering and custom integrations; and the final sprint is dedicated to rigorous QA, speed audits, and deployment.",
+    question: (
+      <>
+        How do you measure the success <span>of a digital marketing campaign?</span>
+      </>
+    ),
+    answer: (
+      <>
+        We look beyond likes and impressions. We track the metrics that matter to your business—including <strong>reach, engagement, website traffic, leads, conversions, customer acquisition cost, and ROI</strong>. This allows us to understand what is working, continuously optimize campaigns, and focus your budget on what delivers results.
+      </>
+    ),
   },
   {
-    question: <>How does your pricing work, and do you offer fixed quotes?</>,
-    answer: "Yes, 100% transparent and fixed. We never bill ambiguous hourly rates or surprise you with unexpected scope creep. Following an initial 20-minute discovery call, we deliver an exact, fixed-scope proposal detailing every milestone, deliverable, and timeline. You know the exact investment before any work begins.",
+    question: (
+      <>
+        How do you make sure my website <span>converts visitors into customers?</span>
+      </>
+    ),
+    answer: (
+      <>
+        A beautiful website is only the beginning. We combine <strong>strategic UX, clear messaging, strong calls-to-action, fast performance, mobile-first design, SEO, and conversion-focused user journeys</strong> to make it easier for visitors to take action—whether that&apos;s making an enquiry, booking a service, or making a purchase.
+      </>
+    ),
   },
 ];
 
@@ -55,13 +79,13 @@ export default function FAQ() {
             <span>you ask.</span>
           </h2>
           <p className={styles.faqSubtitle}>
-            Everything founders, marketing leads, and technical teams want to know about partnering with Origamie.
+            Everything founders, marketing leads, and businesses want to know about scaling with Origamie.
           </p>
 
           <div className={styles.faqDirectHelp}>
             <span className={styles.helpHeading}>Have a custom question?</span>
             <p className={styles.helpDesc}>
-              Chat with our technical founders directly for quick answers and transparent guidance.
+              Chat with our team directly for transparent advice and strategy guidance.
             </p>
             <a
               href="https://wa.me/919074749774?text=Hi%20Origamie!%20I%20have%20a%20question%20about%20your%20services."

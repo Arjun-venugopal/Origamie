@@ -189,6 +189,11 @@
   max-width: 90%;
 }
 
+.faqAnswerText strong {
+  color: #0F172A;
+  font-weight: 600;
+}
+
 /* ========== RESPONSIVE ========== */
 
 @media (max-width: 1024px) {
