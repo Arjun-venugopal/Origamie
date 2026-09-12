@@ -922,10 +922,10 @@
 
 .footerHugeHeadline {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: clamp(2.8rem, 5vw, 4.8rem);
-  line-height: 1.06;
-  font-weight: 500;
-  letter-spacing: -0.035em;
+  font-size: var(--section-title-size);
+  line-height: var(--section-title-line-height);
+  font-weight: 600;
+  letter-spacing: var(--section-title-letter-spacing);
   color: #ffffff;
   margin-bottom: 24px;
 }
@@ -1293,6 +1293,7 @@
   align-items: center;
   padding: 32px 48px 0;
   gap: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .copyrightText,
@@ -1376,7 +1377,6 @@
   }
 
   .footerHugeHeadline {
-    font-size: clamp(2.2rem, 7vw, 3.4rem);
     margin-bottom: 18px;
   }
 
@@ -1511,11 +1511,7 @@
     gap: 30px;
   }
 
-  .footerHugeHeadline {
-    font-size: 1.95rem;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
+
 
   .footerBioText {
     font-size: 0.94rem;

@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowUpRight, MessageCircle, Sparkles, MapPin, Clock, Send, Check } from 'lucide-react';
+import { ArrowUpRight, MessageCircle, Sparkles, Check } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import styles from './layout.module.css';
 
@@ -213,48 +211,7 @@ export default function GridFooter() {
           </motion.div>
         </motion.div>
 
-        {/* Footer Navigation Columns */}
-        <div className={styles.footerNavGrid}>
-          <div className={styles.footerBrandCol}>
-            <div className={styles.brandLogoRow}>
-              <Image
-                src="/crane-logo.png"
-                alt="Origamie Crane"
-                width={36}
-                height={36}
-                className={styles.footerCraneLogo}
-              />
-              <span className={styles.brandTitle}>Origam<span style={{ color: '#5773FF' }}>ie</span></span>
-            </div>
-            <p className={styles.brandSubText}>
-              Boutique digital studio crafting high-conversion Webflow &amp; Next.js platforms.
-            </p>
-          </div>
 
-          <div className={styles.footerLinkCol}>
-            <h4>Navigation</h4>
-            <Link href="/">Home</Link>
-            <Link href="/about">About Us</Link>
-            <Link href="/works">Selected Works</Link>
-            <Link href="/services">Services</Link>
-            <Link href="/contact">Contact</Link>
-          </div>
-
-          <div className={styles.footerLinkCol}>
-            <h4>Services</h4>
-            <span>Web Applications</span>
-            <span>Brand Engineering</span>
-            <span>E-Commerce Platforms</span>
-            <span>CRO &amp; Conversion</span>
-          </div>
-
-          <div className={styles.footerLinkCol}>
-            <h4>Connect</h4>
-            <a href="mailto:hello@origamie.in">hello@origamie.in</a>
-            <a href="https://wa.me/919074749774" target="_blank" rel="noopener noreferrer">+91 9074749774</a>
-            <span>Kerala, India</span>
-          </div>
-        </div>
 
         {/* Bottom Bar */}
         <div className={styles.footerBottomBar}>

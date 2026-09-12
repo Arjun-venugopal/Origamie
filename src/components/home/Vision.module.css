@@ -41,12 +41,12 @@
 
 .visionTitle {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: clamp(2.6rem, 5vw, 4.5rem);
+  font-size: var(--section-title-size);
   font-weight: 600;
-  line-height: 1.08;
+  line-height: var(--section-title-line-height);
   color: #0F172A;
   margin-bottom: 20px;
-  letter-spacing: -0.035em;
+  letter-spacing: var(--section-title-letter-spacing);
 }
 
 .visionTitle span {
@@ -305,10 +305,6 @@
   .cardLeft {
     min-height: 380px;
   }
-
-  .visionTitle {
-    font-size: 2.3rem;
-  }
 }
 
 @media (max-width: 480px) {
@@ -322,7 +318,6 @@
   }
 
   .visionTitle {
-    font-size: 1.85rem;
     margin-bottom: 14px;
   }
 

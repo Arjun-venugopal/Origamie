@@ -37,12 +37,12 @@
 
 .faqTitle {
   font-family: var(--font-urbanist), sans-serif;
-  font-size: 3.5rem;
+  font-size: var(--section-title-size);
   font-weight: 600; /* Robust weight */
   margin: 0 0 24px;
   color: #051D96; /* Solid Brand Blue */
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  letter-spacing: var(--section-title-letter-spacing);
+  line-height: var(--section-title-line-height);
 }
 
 .faqTitle span {
@@ -149,9 +149,6 @@
     position: static;
     max-width: 100%;
   }
-  .faqTitle {
-    font-size: 3.2rem;
-  }
 }
 
 @media (max-width: 768px) {
@@ -161,9 +158,6 @@
   .faqContainer {
     padding: 0 24px;
     gap: 60px;
-  }
-  .faqTitle {
-    font-size: 2.8rem;
   }
   .faqQuestionBtn {
     padding: 28px 0;
@@ -186,7 +180,6 @@
     gap: 48px;
   }
   .faqTitle {
-    font-size: 2.2rem;
     margin-bottom: 16px;
   }
   .faqQuestionBtn {

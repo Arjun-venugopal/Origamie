@@ -1,7 +1,7 @@
 .main {
   width: 100%;
   overflow-x: clip;
-  background-color: var(--color-bg);
+  background-color: #020617; /* Dark base to blend with hero */
 }
 
 .textGradient {

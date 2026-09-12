@@ -2,139 +2,202 @@
 
 import React, { useRef, useState } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import {
-  ArrowUpRight,
-  Sparkles,
-  ShieldCheck,
-  TrendingUp,
-  Zap,
-  Star
-} from 'lucide-react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { ArrowUpRight, Sparkles, Zap } from 'lucide-react';
 import styles from './Hero.module.css';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+  }),
+};
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Mouse Parallax & Spotlight tracking
-  const [mousePos, setMousePos] = useState({ normX: 0, normY: 0, rawX: 0, rawY: 0 });
+  // Normalized mouse coordinates (-0.5 to 0.5)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Pixel coordinates for the spotlight
+  const mouseRawX = useMotionValue(0);
+  const mouseRawY = useMotionValue(0);
+
+  const [isInside, setIsInside] = useState(false);
+
+  // Smooth springs for fluid, organic motion
+  const smoothX = useSpring(mouseX, { stiffness: 120, damping: 20 });
+  const smoothY = useSpring(mouseY, { stiffness: 120, damping: 20 });
+  const smoothRawX = useSpring(mouseRawX, { stiffness: 180, damping: 24 });
+  const smoothRawY = useSpring(mouseRawY, { stiffness: 180, damping: 24 });
+
+  // 3D Tilt perspective on hero content
+  const tiltRotateX = useTransform(smoothY, [-0.5, 0.5], [5, -5]);
+  const tiltRotateY = useTransform(smoothX, [-0.5, 0.5], [-5, 5]);
+
+  // Subtle grid parallax
+  const gridX = useTransform(smoothX, [-0.5, 0.5], [-16, 16]);
+  const gridY = useTransform(smoothY, [-0.5, 0.5], [-16, 16]);
+
+  // Floating badges opposing parallax
+  const badge1X = useTransform(smoothX, [-0.5, 0.5], [-22, 22]);
+  const badge1Y = useTransform(smoothY, [-0.5, 0.5], [-16, 16]);
+  const badge2X = useTransform(smoothX, [-0.5, 0.5], [26, -26]);
+  const badge2Y = useTransform(smoothY, [-0.5, 0.5], [18, -18]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const rawX = e.clientX - rect.left;
     const rawY = e.clientY - rect.top;
-    const normX = (rawX - rect.width / 2) / (rect.width / 2);
-    const normY = (rawY - rect.height / 2) / (rect.height / 2);
-    setMousePos({ normX, normY, rawX, rawY });
+    const normX = rawX / rect.width - 0.5;
+    const normY = rawY / rect.height - 0.5;
+
+    mouseX.set(normX);
+    mouseY.set(normY);
+    mouseRawX.set(rawX);
+    mouseRawY.set(rawY);
+    if (!isInside) setIsInside(true);
   };
 
   const handleMouseLeave = () => {
-    setMousePos({ normX: 0, normY: 0, rawX: 0, rawY: 0 });
+    mouseX.set(0);
+    mouseY.set(0);
+    setIsInside(false);
   };
-
-  const bgParallaxX = useSpring(mousePos.normX * -25, { stiffness: 100, damping: 30 });
-  const bgParallaxY = useSpring(mousePos.normY * -25, { stiffness: 100, damping: 30 });
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
 
-  const heroScrollY = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const yPos = useTransform(scrollYProgress, [0, 1], [0, 300]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
   return (
-    <section
+    <div
       id="home"
-      className={styles.heroSection}
+      className={styles.heroWrapper}
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Theme-Based Grid Gradient Backdrop */}
-      <div className={styles.minimalBackdrop}>
-        {/* Layer 1: Animated Aurora Color Blobs (Brand Deep Blue, Electric Indigo, Violet) */}
-        <div className={styles.auroraMesh1} />
-        <div className={styles.auroraMesh2} />
-        <div className={styles.auroraMesh3} />
-
-        {/* Layer 2: Geometric Perspective Grid with Radial Gradient Fade */}
+      {/* Interactive Background with Cursor Spotlight & Geometric Grid */}
+      <div className={styles.interactiveBackdrop}>
         <motion.div
-          className={styles.themeGridLines}
-          style={{ x: bgParallaxX, y: bgParallaxY }}
+          className={styles.interactiveGrid}
+          style={{ x: gridX, y: gridY }}
         />
-
-        {/* Layer 3: Micro Alignment Grid */}
-        <div className={styles.themeMicroGrid} />
-
-        {/* Layer 4: Interactive Cursor Spotlight Glow */}
-        {mousePos.rawX > 0 && (
-          <div
-            className={styles.cursorSpotlight}
-            style={{
-              background: `radial-gradient(550px circle at ${mousePos.rawX}px ${mousePos.rawY}px, rgba(59, 82, 255, 0.14), transparent 80%)`
-            }}
-          />
-        )}
-
-        {/* Layer 5: Seamless Bottom Vignette Gradient */}
-        <div className={styles.bottomVignetteGradient} />
+        <motion.div
+          className={styles.cursorSpotlight}
+          style={{
+            x: smoothRawX,
+            y: smoothRawY,
+            opacity: isInside ? 1 : 0.35,
+          }}
+          transition={{ opacity: { duration: 0.4 } }}
+        />
       </div>
 
+      {/* Floating Interactive Badge (Top Left) */}
       <motion.div
-        className={styles.heroContainer}
-        style={{ y: heroScrollY, opacity: heroOpacity }}
+        className={styles.floatingBadgeLeft}
+        style={{ x: badge1X, y: badge1Y }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.4, duration: 0.6 }}
+        whileHover={{ scale: 1.08, rotate: -2 }}
+        whileTap={{ scale: 0.96 }}
       >
+        <Sparkles size={14} className={styles.badgeSparkle} />
+        <span>Bespoke Architecture</span>
+      </motion.div>
 
-        {/* 1. Status Indicator Tag */}
-        <motion.div
-          className={styles.minimalTagPill}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <span className={styles.liveIndicatorDot} />
-          <span>Origamie • Creative Studio &amp; Web Engineering</span>
-        </motion.div>
+      {/* Floating Interactive Badge (Bottom Right) */}
+      <motion.div
+        className={styles.floatingBadgeRight}
+        style={{ x: badge2X, y: badge2Y }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+        whileHover={{ scale: 1.08, rotate: 2 }}
+        whileTap={{ scale: 0.96 }}
+      >
+        <Zap size={14} className={styles.badgeZap} />
+        <span>Ultra-Fast 60fps</span>
+      </motion.div>
 
-        {/* 2. Crystal Clear Headline */}
+      <motion.section
+        className={styles.heroContentMain}
+        style={{
+          y: yPos,
+          opacity,
+          scale,
+          rotateX: tiltRotateX,
+          rotateY: tiltRotateY,
+          transformPerspective: 1000
+        }}
+      >
         <motion.h1
-          className={styles.masterHeadline}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          className={styles.mainTitle}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          custom={0}
         >
           Folding ideas into <br />
-          digital <span className={styles.serifWord}>masterpieces.</span>
+          digital{' '}
+          <motion.span
+            className={styles.highlightWord}
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: 'spring', stiffness: 350, damping: 18 }}
+          >
+            #masterpieces.
+          </motion.span>
         </motion.h1>
 
-        {/* 3. Concise Value Proposition */}
         <motion.p
-          className={styles.leadText}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          className={styles.mainSubtitle}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          custom={1}
         >
           Origamie blends editorial brand design with conversion engineering for founders and tech teams — typically delivering <strong>2–4x more qualified pipeline in 90 days.</strong>
         </motion.p>
 
-        {/* 4. Action Buttons */}
         <motion.div
           className={styles.actionRow}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          custom={2}
         >
-          <Link href="/contact" className={styles.primaryBtn}>
-            <span>Start a Project</span>
-            <ArrowUpRight size={16} className={styles.btnArrow} />
-          </Link>
-          <Link href="/works" className={styles.secondaryBtn}>
-            <span>See Selected Work (4+)</span>
-          </Link>
+          <motion.div
+            whileHover={{ scale: 1.03, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+          >
+            <Link href="/contact" className={styles.primaryBtn}>
+              <span>Start a Project</span>
+              <ArrowUpRight size={16} className={styles.btnArrow} />
+            </Link>
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.03, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+          >
+            <Link href="/works" className={styles.secondaryBtn}>
+              <span>See Selected Work (4+)</span>
+            </Link>
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </section>
+      </motion.section>
+    </div>
   );
 }

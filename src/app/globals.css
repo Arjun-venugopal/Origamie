@@ -18,6 +18,23 @@
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.15);
+
+  /* Unified Section Heading Scale (Landing Page) */
+  --section-title-size: clamp(2.4rem, 4.5vw, 4rem);
+  --section-title-line-height: 1.1;
+  --section-title-letter-spacing: -0.035em;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-title-size: clamp(2.1rem, 6vw, 2.6rem);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-title-size: clamp(1.85rem, 5.5vw, 2.2rem);
+  }
 }
 
 * {
