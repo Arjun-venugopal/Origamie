@@ -5,13 +5,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ArrowUpRight, 
-  Sparkles, 
-  Clock, 
-  MessageCircle, 
-  Mail, 
-  Phone, 
+import {
+  ArrowUpRight,
+  Sparkles,
+  Clock,
+  MessageCircle,
+  Mail,
+  Phone,
   ExternalLink,
   ChevronRight,
   Zap,
@@ -202,7 +202,7 @@ export default function Navbar() {
 
   // Find active item preview on mount or route change
   useEffect(() => {
-    const currentIndex = NAV_ITEMS.findIndex(item => 
+    const currentIndex = NAV_ITEMS.findIndex(item =>
       item.href === '/' ? pathname === '/' : pathname?.startsWith(item.href)
     );
     if (currentIndex !== -1) {
@@ -217,7 +217,7 @@ export default function Navbar() {
       {/* ====================================================================
           1. FLOATING GLASSMORPHIC CAPSULE DOCK
           ==================================================================== */}
-      <header 
+      <header
         className={`${styles.headerWrapper} ${scrolled ? styles.headerWrapperScrolled : ''}`}
       >
         <motion.div
@@ -225,16 +225,16 @@ export default function Navbar() {
           className={`${styles.floatingDock} ${scrolled ? styles.floatingDockScrolled : ''} ${isScrollingDown ? styles.floatingDockCompact : ''} ${menuOpen ? styles.headerHidden : ''}`}
           initial={{ opacity: 0, y: -25, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ 
+          transition={{
             layout: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
-            duration: 0.7, 
-            ease: [0.16, 1, 0.3, 1], 
-            delay: 0.1 
+            duration: 0.7,
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.1
           }}
         >
           {/* Left: Brand Logo & Interactive Crane Badge */}
           <Link href="/" className={styles.logoGroup} aria-label="Origamie Home">
-            <motion.div 
+            <motion.div
               className={styles.logoIconBadge}
               whileHover={{ scale: 1.08, rotate: 6 }}
               whileTap={{ scale: 0.95 }}
@@ -249,7 +249,7 @@ export default function Navbar() {
                 priority
               />
             </motion.div>
-            
+
             <div className={styles.logoTypography}>
               <span className={styles.brandName}>origamie</span>
               <span className={styles.brandDot}>.</span>
@@ -260,21 +260,21 @@ export default function Navbar() {
           {/* Center: Desktop Navigation Dock (Smoothly hidden when scrolling down) */}
           <AnimatePresence mode="wait">
             {!isScrollingDown && (
-              <motion.nav 
-                className={styles.centerDock} 
+              <motion.nav
+                className={styles.centerDock}
                 aria-label="Main Navigation"
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.92 }}
                 transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div 
+                <div
                   className={styles.navPillContainer}
                   onMouseLeave={() => setHoveredNav(null)}
                 >
                   {NAV_ITEMS.map((item) => {
-                    const isActive = item.href === '/' 
-                      ? pathname === '/' 
+                    const isActive = item.href === '/'
+                      ? pathname === '/'
                       : pathname?.startsWith(item.href);
 
                     return (
@@ -319,7 +319,7 @@ export default function Navbar() {
           <div className={styles.rightActions}>
             <AnimatePresence>
               {!isScrollingDown && (
-                <motion.div 
+                <motion.div
                   style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
                   initial={{ opacity: 0, scale: 0.92 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -379,8 +379,8 @@ export default function Navbar() {
 
             {/* Curtain Header */}
             <div className={styles.curtainHeader}>
-              <Link 
-                href="/" 
+              <Link
+                href="/"
                 className={styles.curtainLogo}
                 onClick={() => setMenuOpen(false)}
               >
@@ -412,12 +412,12 @@ export default function Navbar() {
 
             {/* Main Curtain Content (Dual-Pane Kinetic Grid) */}
             <div className={styles.curtainContent}>
-              
+
               {/* Left Pane: Kinetic Nav Links */}
               <nav className={styles.kineticLinksNav} aria-label="Full Screen Navigation">
                 {NAV_ITEMS.map((item, index) => {
-                  const isActive = item.href === '/' 
-                    ? pathname === '/' 
+                  const isActive = item.href === '/'
+                    ? pathname === '/'
                     : pathname?.startsWith(item.href);
 
                   return (
@@ -446,7 +446,7 @@ export default function Navbar() {
 
               {/* Right Pane: Interactive Live Preview & Dispatch Column */}
               <motion.div variants={infoPanelVariants} className={styles.curtainInfoColumn}>
-                
+
                 {/* Dynamic Preview Card reflecting hovered link */}
                 <div className={styles.previewFeatureCard}>
                   <div className={styles.previewTag}>{currentPreview.tag}</div>
@@ -475,10 +475,10 @@ export default function Navbar() {
 
                   <div className={styles.detailBlock}>
                     <span className={styles.detailHeading}>Fast Track</span>
-                    <a 
-                      href="https://wa.me/919074749774" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
+                    <a
+                      href="https://wa.me/919074749774"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={styles.detailLink}
                     >
                       <MessageCircle size={16} />
@@ -497,26 +497,26 @@ export default function Navbar() {
 
                 {/* Social Networks Footer */}
                 <div className={styles.curtainSocialRow}>
-                  <a 
-                    href="https://www.instagram.com/origamie.in?stkn=dmpuMHhxOTlnbzE=" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
+                  <a
+                    href="https://www.instagram.com/origamie.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={styles.curtainSocialBtn}
                   >
                     Instagram ↗
                   </a>
-                  <a 
-                    href="https://www.facebook.com/origamie.in/?http_ref=eyJ0cyI6MTc4OTIwMzgyODAwMCwiciI6IiJ9" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
+                  <a
+                    href="https://www.facebook.com/origamie.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={styles.curtainSocialBtn}
                   >
                     Facebook ↗
                   </a>
-                  <a 
-                    href="https://wa.me/919074749774" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
+                  <a
+                    href="https://wa.me/919074749774"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={styles.curtainSocialBtn}
                   >
                     WhatsApp ↗
