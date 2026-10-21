@@ -8,7 +8,7 @@ import {
   Globe, 
   PenTool, 
   Megaphone, 
-  Wrench, 
+  Film, 
   ArrowRight
 } from 'lucide-react';
 import styles from './SpatialShowcase.module.css';
@@ -49,14 +49,14 @@ const CAPABILITIES = [
   },
   {
     id: '04',
-    tag: 'Managed IT Services',
-    title: 'Managed Hardware & IT Infrastructure',
-    desc: 'Comprehensive hardware diagnostics, performance repairs, software deployment, and dedicated IT assistance to keep your operations running 24/7.',
-    image: '/images/3d/tech-processor-3d.jpg',
-    imageAlt: 'High Performance Computer Hardware Processor and IT Diagnostics',
-    icon: Wrench,
-    highlights: ['Diagnostics & Repairs', 'OS & Cloud Migration', 'Fast Dedicated Support'],
-    link: '/contact'
+    tag: 'Post-Production',
+    title: 'Post-Production / Video Editing',
+    desc: 'High-end video editing, color grading, sound design, and cinematic visual effects engineered to captivate audiences and amplify conversions.',
+    image: '/images/3d/video-editing-3d.jpg',
+    imageAlt: 'Cinematic Post-Production and Video Editing Suite 3D Holographic Timeline',
+    icon: Film,
+    highlights: ['Color Grading & VFX', 'Cinematic Brand Films', 'Sound Design & Mix'],
+    link: '/services'
   }
 ];
 
@@ -75,7 +75,7 @@ export default function SpatialShowcase() {
           </h2>
 
           <p className={styles.subHeading}>
-            From lightning-fast digital platforms and iconic brand identity to precision marketing funnels and reliable IT infrastructure — all unified under one roof.
+            From lightning-fast digital platforms and iconic brand identity to precision marketing funnels and cinematic post-production — all unified under one roof.
           </p>
         </div>
 

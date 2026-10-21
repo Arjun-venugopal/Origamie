@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Megaphone, Search, Infinity as InfinityIcon, MousePointer2, PenTool, Video, Globe, Smartphone, Wrench } from 'lucide-react';
+import { Megaphone, Search, Infinity as InfinityIcon, MousePointer2, PenTool, Video, Globe, Smartphone, Film } from 'lucide-react';
 import styles from '@/app/services/services.module.css';
 
 const services = [
@@ -56,9 +56,9 @@ const services = [
   },
   {
     id: 9,
-    title: 'Computer Services',
-    desc: 'Reliable computer repairs, maintenance, software support, and technical assistance services.',
-    icon: <Wrench size={32} strokeWidth={1.5} />
+    title: 'Post-Production / Video Editing',
+    desc: 'Cinematic video editing, high-end color grading, sound design, and commercial video post-production.',
+    icon: <Film size={32} strokeWidth={1.5} />
   }
 ];
 

@@ -5,8 +5,10 @@
   font-family: var(--font-urbanist), sans-serif;
   overflow: hidden;
   position: relative;
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 800px;
+  margin-top: -1px;
+  border: none;
+  border-top: none;
+  outline: none;
 }
 
 .bentoGrid {

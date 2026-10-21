@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useAnimationFrame, useMotionValueEvent, useInView } from 'framer-motion';
-import { ArrowDownRight, Megaphone, Search, Infinity as InfinityIcon, MousePointer2, PenTool, Video, Globe, Smartphone, Wrench } from 'lucide-react';
+import { ArrowDownRight, Megaphone, Search, Infinity as InfinityIcon, MousePointer2, PenTool, Video, Globe, Smartphone, Film } from 'lucide-react';
 import styles from './Pills.module.css';
 
 const services = [
@@ -64,10 +64,10 @@ const services = [
   },
   {
     id: 9,
-    titleBlack: 'Computer',
-    titleBlue: 'services',
-    desc: 'Reliable computer repairs, maintenance, software support, and technical assistance services.',
-    icon: <Wrench size={48} strokeWidth={1.5} />
+    titleBlack: 'Post-Production /',
+    titleBlue: 'video editing',
+    desc: 'Cinematic video editing, high-end color grading, sound design, and commercial video creation.',
+    icon: <Film size={48} strokeWidth={1.5} />
   }
 ];
 
@@ -166,7 +166,7 @@ export default function Pills() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          A full spectrum of digital craft — from first sketch to live experience, plus on-the-ground tech support.
+          A full spectrum of digital craft — from first sketch to live experience, plus cinematic post-production.
         </motion.p>
       </div>
 
